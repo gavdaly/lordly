@@ -1,0 +1,199 @@
+@import "open-props.scss";
+@import "normalize.scss";
+@import "buttons.scss";
+
+html {
+    font-size: clamp(12px, 1.5vw, 22px);
+}
+
+.content {
+    --gap: clamp(1rem, 6vw, 3rem);
+    --full: minmax(var(--gap), 1fr);
+    --content: min(80ch, 100% - var(--gap) * 2);
+    --popout: minmax(0, 2rem);
+    --feature: minmax(0, 5rem);
+  
+    display: grid;
+    grid-template-columns:
+      [full-start] var(--full)
+      [feature-start] var(--feature)
+      [popout-start] var(--popout)
+      [content-start] var(--content) [content-end]
+      var(--popout) [popout-end]
+      var(--feature) [feature-end]
+      var(--full) [full-end];
+}
+
+.content > :not(.popout, .feature, .full) {
+    grid-column: content;
+}
+.popout {
+    grid-column: popout;
+}
+.feature {
+    grid-column: feature;
+}
+.full {
+    grid-column: full;
+}
+
+figcaption, blockquote {
+    cite {
+        border-inline-start-width: 0;
+    }
+}
+
+div:has(input, textarea, select) {
+    display: flex;
+    flex-direction: column;
+    margin: var(--size-2) 0;
+    label {
+        font-size: var(--font-size-0);
+    }
+}
+
+div:has([type="checkbox"], [type="radio"]) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--size-2);
+}
+
+form {
+    margin: 0 -1rem;
+    padding: var(--size-3);
+}
+
+form[disabled] {
+    opacity: 33%;
+    input, textarea, button, label {
+        pointer-events: none;
+    }
+}
+
+form[data-state="error"] {
+    background-color: rgba(255, 0, 0, .15);
+}
+
+nav {
+    menu {
+        list-style: none;
+        li {
+            padding-inline-start: 0;
+        }
+    }
+}
+
+button~button {
+    margin-inline-start: var(--size-2);
+}
+
+.taglist {
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--size-2);
+    max-inline-size: var(--size-content-2);
+
+    &>legend {
+        margin-block-end: var(--size-2);
+    }
+
+    >.tag-toggle {
+        display: grid;
+        box-shadow: var(--shadow-1);
+
+        >* {
+            grid-area: 1/1;
+        }
+
+        >label {
+            padding-inline: var(--size-3);
+            padding-block: var(--size-1);
+            border-radius: var(--radius-2);
+            cursor: pointer;
+            background: var(--surface-2);
+        }
+
+        >input {
+            appearance: none;
+            background: none;
+            border: none;
+            inline-size: 100%;
+            block-size: 100%;
+
+            &:checked~label {
+                background-color: var(--link);
+                color: var(--surface-1);
+            }
+
+            &:not(:checked):is(:focus-within, :hover)~label {
+                color: var(--link);
+            }
+        }
+    }
+}
+
+.picklist {
+    padding: 0;
+    border: none;
+    display: grid;
+    align-items: flex-start;
+    gap: 1px;
+    max-inline-size: var(--size-content-2);
+
+    >legend {
+        height: 0;
+        width: 0;
+        overflow: clip;
+    }
+
+    >label {
+        --space: var(--size-3);
+
+        display: grid;
+        align-items: center;
+        gap: var(--space);
+        grid-auto-flow: column;
+        grid-template-columns: auto 1fr;
+        padding: var(--space);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        accent-color: var(--link);
+        background: var(--surface-2);
+
+        &:is(:focus-within, :hover) .rich-label--title {
+            color: var(--link);
+        }
+
+        &:first-of-type {
+            border-start-start-radius: var(--radius-3);
+            border-start-end-radius: var(--radius-3);
+        }
+
+        &:last-of-type {
+            border-end-start-radius: var(--radius-3);
+            border-end-end-radius: var(--radius-3);
+        }
+
+        >input {
+            margin-inline: calc(var(--space) * 1.5);
+        }
+
+        >.rich-label {
+            display: grid;
+            padding-inline-end: calc(var(--space) * 2);
+
+            >.rich-label--title {
+                font-weight: var(--font-weight-6);
+                font-size: var(--font-size-2);
+            }
+
+            >.rich-label--desc {
+                color: var(--text-2);
+            }
+        }
+    }
+}
