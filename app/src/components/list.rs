@@ -1,7 +1,7 @@
 use leptos::*;
 
 #[component]
-pub fn PickList(list: Vec<(String, String)>, label: String) -> impl IntoView {
+pub fn PickList(list: Vec<(String, String)>, #[prop(into)] label: String) -> impl IntoView {
     view! {
         <fieldset class="taglist">
             <legend>{label}</legend>
@@ -23,7 +23,7 @@ pub fn PickList(list: Vec<(String, String)>, label: String) -> impl IntoView {
 }
 
 #[component]
-pub fn TagList(list: Vec<(String, String)>, label: String) -> impl IntoView {
+pub fn TagList(list: Vec<(String, String)>, #[prop(into)] label: String) -> impl IntoView {
     view! {
         <fieldset class="taglist">
             <legend>{label}</legend>

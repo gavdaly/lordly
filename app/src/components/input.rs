@@ -6,24 +6,25 @@ use leptos::*;
 // states should be 'valid', 'dirty', 'invalid'
 
 #[component]
-pub fn Input(name: String, label: String, _summary: Option<String>) -> impl IntoView {
-    //<!-- Show summary if there is one -->
-    // <Show when=summary.is_some()>
-    //     <div class="summary">{summary}</div>
-    // </Show>
-
+pub fn Input(
+    #[prop(into)] name: String,
+    #[prop(into)] label: String,
+    #[prop(into, optional)] summary: Option<String>,
+    #[prop(optional)] placeholder: Option<String>,
+) -> impl IntoView {
     //<!-- Show error if there is one -->
     // <div data-type="error">""</div>
     view! {
         <div class="label">
             <label for=name.clone()>{label}</label>
-            <input type="text" name id=name/>
+            <input type="text" name id=name placeholder=placeholder />
         </div>
+        <div class="summary">{summary}</div>
     }
 }
 
 #[component]
-fn InputCheckBoxes(label: String, options: Vec<(String, String)>) -> impl IntoView {
+pub fn InputCheckBoxes(label: String, options: Vec<(String, String)>) -> impl IntoView {
     view! {
         <fieldset>
             <legend>{label}</legend>
@@ -43,7 +44,7 @@ fn InputCheckBoxes(label: String, options: Vec<(String, String)>) -> impl IntoVi
 }
 
 #[component]
-fn InputRadioButtons(label: String, options: Vec<(String, String)>) -> impl IntoView {
+pub fn InputRadioButtons(label: String, options: Vec<(String, String)>) -> impl IntoView {
     view! {
         <fieldset>
             <legend>{label}</legend>

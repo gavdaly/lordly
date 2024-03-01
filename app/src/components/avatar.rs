@@ -1,10 +1,11 @@
 use leptos::*;
 
 #[component]
-pub fn Avatar(image: String) -> impl IntoView {
+pub fn Avatar(#[prop(into)] href: String, #[prop(optional)] name: String) -> impl IntoView {
+    let alt = format!("avatar image for {}", name);
     view! {
         <picture>
-            <img href=image alt="avatar image for "/>
+            <img href=href alt=alt />
         </picture>
     }
 }

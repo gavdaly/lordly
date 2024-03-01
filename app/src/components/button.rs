@@ -1,12 +1,23 @@
 use leptos::*;
 
-// enum ButtonType {
-//     Button = "button",
-//     Submit = "submit",
-//     Reset = "reset",
-// }
-
 #[component]
-pub fn Button(b_type: String, children: Children) -> impl IntoView {
+pub fn Button(#[prop(into, optional)] b_type: Option<String>, children: Children) -> impl IntoView {
+    let b_type = b_type.unwrap_or("button".to_string());
     view! { <button type=b_type>{children()}</button> }
+}
+
+enum ButtonType {
+    Button,
+    Submit,
+    Reset,
+}
+
+impl Into<String> for ButtonType {
+    fn into(self) -> String {
+        match self {
+            ButtonType::Button => "button".to_string(),
+            ButtonType::Submit => "submit".to_string(),
+            ButtonType::Reset => "reset".to_string(),
+        }
+    }
 }

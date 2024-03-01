@@ -3,9 +3,9 @@ use leptos::*;
 #[component]
 pub fn Loading(children: Children) -> impl IntoView {
     view! {
-        <section>
+        <aside>
             <svg use_="#loading"></svg>
             {children()}
-        </section>
+        </aside>
     }
 }

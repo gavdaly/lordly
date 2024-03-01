@@ -2,15 +2,16 @@ mod kitchen_sink;
 
 use crate::error_template::{AppError, ErrorTemplate};
 
+use kitchen_sink::KitchenSink;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
-use kitchen_sink::KitchenSink;
 
 use crate::components::*;
 
-pub mod error_template;
 pub mod components;
+pub mod data_type;
+pub mod error_template;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -29,8 +30,8 @@ pub fn App() -> impl IntoView {
             outside_errors.insert_with_default_key(AppError::NotFound);
             view! { <ErrorTemplate outside_errors/> }.into_view()
         }>
-            
-                <nav>
+
+            <nav>
                 <menu>
                     <li>
                         <A href="/">"Home"</A>
@@ -99,7 +100,7 @@ pub fn App() -> impl IntoView {
                     view=move || {
                         view! {
                             <h1>"Avatar"</h1>
-                            <Avatar image="".into()/>
+                            <Avatar href=""/>
                         }
                     }
                 />
@@ -108,7 +109,6 @@ pub fn App() -> impl IntoView {
                     path="/badge"
                     view=move || {
                         view! {
-                            <h1>"Badge"</h1>
                             <Badge>"Badge"</Badge>
                         }
                     }
@@ -118,8 +118,7 @@ pub fn App() -> impl IntoView {
                     path="/button"
                     view=move || {
                         view! {
-                            <h1>"Button"</h1>
-                            <Button b_type="button".into()>"Button"</Button>
+                            <Button>"Button"</Button>
                         }
                     }
                 />
@@ -128,8 +127,7 @@ pub fn App() -> impl IntoView {
                     path="/dialog"
                     view=move || {
                         view! {
-                            <h1>"Dialog"</h1>
-                            <Dialog id="dialog1".into()>"Dialog"</Dialog>
+                            <Dialog id="dialog1">"Dialog"</Dialog>
                         }
                     }
                 />
@@ -138,8 +136,7 @@ pub fn App() -> impl IntoView {
                     path="/drawer"
                     view=move || {
                         view! {
-                            <h1>"Drawer"</h1>
-                            <Drawer id="drawer1".into()>"test"</Drawer>
+                            <Drawer id="drawer1">"test"</Drawer>
                         }
                     }
                 />
@@ -148,7 +145,6 @@ pub fn App() -> impl IntoView {
                     path="/loading"
                     view=move || {
                         view! {
-                            <h1>"Loading"</h1>
                             <Loading>"Loading..."</Loading>
                         }
                     }
@@ -158,7 +154,6 @@ pub fn App() -> impl IntoView {
                     path="/message"
                     view=move || {
                         view! {
-                            <h1>"Message"</h1>
                             <Message>"Message"</Message>
                         }
                     }
@@ -168,7 +163,6 @@ pub fn App() -> impl IntoView {
                     path="/pagination"
                     view=move || {
                         view! {
-                            <h1>"Pagination"</h1>
                             <Pagination current=1 total=10/>
                         }
                     }
@@ -178,8 +172,7 @@ pub fn App() -> impl IntoView {
                     path="/popover"
                     view=move || {
                         view! {
-                            <h1>"Popover"</h1>
-                            <Popover>"Popover"</Popover>
+                            <Popover id="pop">"Popover"</Popover>
                         }
                     }
                 />
@@ -188,7 +181,6 @@ pub fn App() -> impl IntoView {
                     path="/qrcode"
                     view=move || {
                         view! {
-                            <h1>"Qrcode"</h1>
                             <Qrcode value="Qrcode".into()/>
                         }
                     }
@@ -198,7 +190,6 @@ pub fn App() -> impl IntoView {
                     path="/search"
                     view=move || {
                         view! {
-                            <h1>"Search"</h1>
                             <Search/>
                         }
                     }
@@ -208,8 +199,7 @@ pub fn App() -> impl IntoView {
                     path="/switch"
                     view=move || {
                         view! {
-                            <h1>"Switch"</h1>
-                            <Switch name="switch".into()/>
+                            <Switch name="switch"/>
                         }
                     }
                 />
@@ -218,8 +208,7 @@ pub fn App() -> impl IntoView {
                     path="/table"
                     view=move || {
                         view! {
-                            <h1>"Table"</h1>
-                            <Table body=vec![] _headers=None _footer=None/>
+                            <Table body=vec![vec!["one".into(), "two".into()], vec!["three".into(), "four".into()]] />
                         }
                     }
                 />
@@ -228,8 +217,7 @@ pub fn App() -> impl IntoView {
                     path="/tag"
                     view=move || {
                         view! {
-                            <h1>"Tag"</h1>
-                            <Tag style=None state=None>
+                            <Tag style="warning">
                                 "Tag"
                             </Tag>
                         }
@@ -240,7 +228,6 @@ pub fn App() -> impl IntoView {
                     path="/toast"
                     view=move || {
                         view! {
-                            <h1>"Toast"</h1>
                             <Toast>"Toast"</Toast>
                         }
                     }
@@ -250,7 +237,6 @@ pub fn App() -> impl IntoView {
                     path="/tooltip"
                     view=move || {
                         view! {
-                            <h1>"Tooltip"</h1>
                             <Tooltip>"Tooltip"</Tooltip>
                         }
                     }
@@ -260,8 +246,7 @@ pub fn App() -> impl IntoView {
                     path="/upload"
                     view=move || {
                         view! {
-                            <h1>"Upload"</h1>
-                            <Upload/>
+                            <Upload name="avatar" label="Avatar" />
                         }
                     }
                 />
@@ -271,7 +256,7 @@ pub fn App() -> impl IntoView {
                     view=move || {
                         view! {
                             <h1>"Input"</h1>
-                            <Input name="input".into() label="Input".into() _summary=None/>
+                            <Input name="input" label="Input"/>
                         }
                     }
                 />
@@ -290,8 +275,7 @@ pub fn App() -> impl IntoView {
                     path="/picklist"
                     view=move || {
                         view! {
-                            <h1>"PickList"</h1>
-                            <PickList list=vec![("l".into(), "name".into())] label="label".into()/>
+                            <PickList list=vec![("l".into(), "name".into())] label="label"/>
                         }
                     }
                 />
@@ -300,8 +284,7 @@ pub fn App() -> impl IntoView {
                     path="/taglist"
                     view=move || {
                         view! {
-                            <h1>"TagList"</h1>
-                            <PickList list=vec![("2".into(), "two".into())] label="label".into()/>
+                            <TagList list=vec![("2".into(), "two".into())] label="label"/>
                         }
                     }
                 />
@@ -315,7 +298,7 @@ pub fn App() -> impl IntoView {
                 />
                 </Routes>
                 </main>
-            
+
         </Router>
     }
 }
