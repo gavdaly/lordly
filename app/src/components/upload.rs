@@ -12,7 +12,7 @@ pub fn Upload(
             <div class="dropzone" />
             <div>
                 <label for=name.clone()>{label}</label>
-                <input type="file" id=name.clone() accept multiple />
+                <input type="file" id=name.clone() accept=accept multiple=multiple />
             </div>
         </aside>
     }

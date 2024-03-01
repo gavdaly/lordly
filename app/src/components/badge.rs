@@ -1,9 +1,15 @@
+use crate::data_type::{Shape, Style};
 use leptos::*;
 
 #[component]
 pub fn Badge(
+    /// The style of the badge.
+    #[prop(optional, into)]
+    style: Option<Style>,
+    /// The shape of the badge.
+    #[prop(optional, into)]
+    shape: Option<Shape>,
     children: Children,
-    #[prop(optional, into)] badge_type: Option<String>,
 ) -> impl IntoView {
-    view! { <span class="badge" data-type=badge_type>{children()}</span> }
+    view! { <span class="badge" data-style=style data-shape=shape>{children()}</span> }
 }
