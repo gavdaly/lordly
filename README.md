@@ -1,7 +1,7 @@
 # Lordly
-## Command Your Style, Rule Your Design
+Command Your Style, Rule Your Design
 
-## Running your project
+## Running the project
 
 ```bash
 cargo leptos watch
