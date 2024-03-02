@@ -91,7 +91,7 @@ pub fn App() -> impl IntoView {
                     </li>
                 </menu>
             </nav>
-            <main>
+            <main class="content">
             <Routes>
                 <Route path="/" view=move || view! { <h1>"Home"</h1> }/>
                 <Route

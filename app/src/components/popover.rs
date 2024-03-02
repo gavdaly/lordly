@@ -18,3 +18,10 @@ pub fn PopoverTarget(
     let popoveraction = action.unwrap_or("toggle".to_string());
     view! { <button popovertarget=popovertarget popoveraction=popoveraction>{children()}</button> }
 }
+
+// Need to add this later to suppor the polyfill.
+// <script
+//   src="https://cdn.jsdelivr.net/npm/@oddbird/popover-polyfill@latest"
+//   crossorigin="anonymous"
+//   defer
+// ></script>
