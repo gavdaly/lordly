@@ -1,4 +1,5 @@
 use leptos::*;
+use crate::components::Avatar;
 
 #[component]
 pub fn KitchenSink() -> impl IntoView {
@@ -8,6 +9,7 @@ r#"#header h1 a {
     width: 300px; 
     height: 80px; 
 }"#;
+
     let cite = 
 r#"malesuada
 fames
@@ -15,6 +17,7 @@ ac turpis"#;
     view! {
     <header>
         <a href="./">Home</a>
+        <Avatar href=r#"https://img.freepik.com/premium-vector/product-manager-woman-icon-flat-illustration-product-manager-woman-vector-icon-isolated-white-background_98396-40241.jpg?w=1380"# shape=crate::data_type::shape::Shape::Circular />
     </header>
     <nav>
         <menu>

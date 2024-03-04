@@ -5,6 +5,7 @@ pub enum Shape {
     Pill,
     Rounded,
     Square,
+    Circular,
 }
 
 impl Shape {
@@ -13,6 +14,7 @@ impl Shape {
             Self::Pill => "pill",
             Self::Rounded => "rounded",
             Self::Square => "square",
+            Self::Circular => "circular",
         }
     }
 }
@@ -29,6 +31,7 @@ impl From<&str> for Shape {
             "pill" => Self::Pill,
             "rounded" => Self::Rounded,
             "square" => Self::Square,
+            "circular" => Self::Circular,
             _ => Self::Square,
         }
     }

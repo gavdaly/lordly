@@ -1,0 +1,15 @@
+:has([data-state="circular"]) {
+    border-radius: var(--radius-round);
+}
+
+:has([data-state="square"]) {
+    border-radius: 0;
+}
+
+:has([data-state="pill"]) {
+    border-radius: var(--radius-pill);
+}
+
+:has([data-state="rounded"]) {
+    border-radius: var(--radius-2);
+}
