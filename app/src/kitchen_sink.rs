@@ -1,5 +1,5 @@
 use leptos::*;
-use crate::components::Avatar;
+use crate::components::{Avatar, Button, PickList, TagList, Search};
 
 #[component]
 pub fn KitchenSink() -> impl IntoView {
@@ -29,12 +29,7 @@ ac turpis"#;
             <li><a href="#">"test"</a></li>
         </menu>
     </nav>
-
-        <form action="./search/">
-            <label for="search">"Search"</label>
-            <input type="search" id="search" name="q" />
-            <button type="submit">"find"</button>
-        </form>
+    <Search />
     <section class="content">
     <img class="full"
         src="https://images.unsplash.com/photo-1682686580391-615b1f28e5ee?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -334,47 +329,26 @@ ac turpis"#;
                         <label for="check2">check1</label>
                     </div>
                 </fieldset>
-                <fieldset class="taglist">
-                    <legend>"picklist"</legend>
-                    <div class="tag-toggle">
-                        <input type="radio" id="pick1" value="pick1" name="pick" />
-                        <label for="pick1">"Pick 1"</label>
-                    </div>
-
-                    <div class="tag-toggle">
-                        <input type="radio" name="pick" id="pick2" value="pick2" />
-                        <label for="pick2">"pick2"</label>
-                    </div>
-                </fieldset>
-                <fieldset class="taglist">
-                    <legend>"checks"</legend>
-                    <div class="tag-toggle">
-                        <input type="checkbox" name="tag" id="tag1" value="1" />
-                        <label for="tag1">"check1"</label>
-                    </div>
-                    <div class="tag-toggle">
-                        <input type="checkbox" name="tag" id="tag2" value="2" />
-                        <label for="tag2">"check1"</label>
-                    </div>
-                </fieldset>
-                <button type="submit">"submit"</button>
-                <button type="reset">"reset"</button>
+                <PickList list=vec![("mar".into(), "Marnaria".into()), ("alf".into(), "Alfrado".into())] label="Sauce Type" />
+                <TagList list=vec![("onion".into(), "Onions".into()), ("sun".into(), "Sun Dried Tomatoes".into()), ("pineapple".into(), "Pineapple".into())] label="Toppings" />
+                <Button type_="submit">"Submit"</Button>
+                <Button type_="reset">"Reset"</Button>
             </form>
             <form disabled>
                 <div>
                     <label for="text2">text input</label>
                     <input id="text2" type="text" />
                 </div>
-                <button type="submit">"submit"</button>
-                <button type="reset">"reset"</button>
+                <Button type_="submit">"Submit"</Button>
+                <Button type_="reset">"Reset"</Button>
             </form>
             <form data-state="error">
                 <div>
                     <label for="text3">"text input"</label>
                     <input id="text3" type="text" />
                 </div>
-                <button type="submit" data-state="pending">"submit"</button>
-                <button type="reset" data-state="pending">"reset"</button>
+                <Button type_="submit">"submit"</Button>
+                <Button type_="reset">"reset"</Button>
             </form>
             <aside>
                 <p>"aside information"</p>
@@ -430,7 +404,7 @@ ac turpis"#;
     <dialog id="greeting">
         <p>"Greetings, one and all!"</p>
         <form method="dialog">
-            <button type="submit">"OK"</button>
+            <Button type_="submit">"OK"</Button>
         </form>
     </dialog>
 }}
