@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "-webkit-tap-highlight-color",
+          "accent-color",
+          "overflow: clip",
+          "scrollbar-color",
+          "text-underline-offset"
+        ]
+      }
+    ]
+  }
+}
