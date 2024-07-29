@@ -265,7 +265,7 @@ pub fn App() -> impl IntoView {
                     view=move || {
                         view! {
                             <h1>"Rate"</h1>
-                            <Rate rating=move || 0 max=5 set_rating=move |_| {}/>
+                            <Rate max=5 name="rating" />
                         }
                     }
                 />
