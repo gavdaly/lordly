@@ -1,7 +1,15 @@
 use leptos::*;
 
+/// A component that renders a list of checkboxes.
+///
+/// # Arguments
+/// - `label`: The label of the fieldset.
+/// - `options`: A Vector of tuples with the label and the name of the checkbox.
 #[component]
-pub fn CheckBoxes(label: String, options: Vec<(String, String)>) -> impl IntoView {
+pub fn CheckBoxes(
+    #[prop(into)] label: String,
+    #[prop(into)] options: Vec<(String, String)>,
+) -> impl IntoView {
     view! {
         <fieldset>
             <legend>{label}</legend>

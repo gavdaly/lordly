@@ -3,6 +3,12 @@ use leptos::*;
 
 //_search_action: Action<String, Result<String, ServerFnError>>
 
+/// A search component.
+///
+/// # Arguments
+/// - `search_action`: The action that will be called when the form is submitted.
+/// - `hints`: A callback that will be called when the input changes.
+/// - `button`: The text of the submit button.
 #[component]
 pub fn Search(
     #[prop(optional)] search_action: Option<String>,

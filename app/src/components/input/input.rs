@@ -1,12 +1,15 @@
+use crate::data_type::ValidationState;
 use ev::FocusEvent;
 use leptos::*;
 
-enum ValidationState {
-    Valid,
-    Dirty,
-    Invalid(String),
-}
-
+/// An input component.
+///
+/// # Arguments
+/// - `name`: The name of the input.
+/// - `label`: The label of the input.
+/// - `summary`: A summary of the input.
+/// - `placeholder`: The placeholder of the input.
+/// - `validation`: A callback that validates the input when it is blured.
 #[component]
 pub fn Input(
     #[prop(into)] name: String,
@@ -33,12 +36,11 @@ pub fn Input(
             <label for=name.clone()>{label}</label>
             <input type="text" name id=name placeholder=placeholder on:blur=validate on:focus=focused />
 
-            // {move || match validation_state() {
-            //     ValidationState::Invalid(reason) => view! {<div data-type="error">reason</div>},
-            //     ValidationState::Valid => view! {<div data-type="success"></div>},
-            //     ValidationState::Dirty => view! {<div></div>},
-            // }}.into_view()
+            {move || match validation_state() {
+                ValidationState::Invalid(r) => view! {<div data-type="error">{r}</div>},
+                ValidationState::Valid => view! {<div data-type="success"></div>},
+                ValidationState::Dirty => view! {<div></div>},
+            }}.into_view()
         </div>
-
     }
 }
