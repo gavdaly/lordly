@@ -1,0 +1,15 @@
+:has([data-fill="solid"]) {
+    colour: var(--color);
+    background-color: var(--background_color);
+}
+
+:has([data-fill="ghost"]) {
+    colour: var(--color);
+    background-color: transparent;
+    border-color: var(--color);
+}
+
+:has([data-fill="text"]) {
+    colour: var(--color);
+    background-color: transparent;
+}
