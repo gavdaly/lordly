@@ -99,7 +99,7 @@ pub fn App() -> impl IntoView {
                     view=move || {
                         view! {
                             <h1>"Avatar"</h1>
-                            <Avatar href=""/>
+                            <Avatar image=""/>
                         }
                     }
                 />
@@ -216,7 +216,7 @@ pub fn App() -> impl IntoView {
                     path="/tag"
                     view=move || {
                         view! {
-                            <Tag style="warning">
+                            <Tag color="warning">
                                 "Tag"
                             </Tag>
                         }
@@ -245,7 +245,7 @@ pub fn App() -> impl IntoView {
                     path="/upload"
                     view=move || {
                         view! {
-                            <Upload name="avatar" label="Avatar" />
+                            <File id="avatar".into() drop_area=true />
                         }
                     }
                 />
