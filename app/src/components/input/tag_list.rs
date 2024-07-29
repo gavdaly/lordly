@@ -1,5 +1,9 @@
 use leptos::*;
 
+/// A list of tags with checkboxes.
+/// # Arguments
+/// - `list`: A Vector of tuples with the label and the name of the tag.
+/// - `label`: The label of the fieldset.
 #[component]
 pub fn TagList(
     #[prop(into)] list: Vec<(String, String)>,

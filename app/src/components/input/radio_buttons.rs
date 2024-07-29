@@ -1,5 +1,10 @@
 use leptos::*;
 
+/// A component that renders a list of radio buttons.
+///
+/// # Arguments
+/// - `label`: The label of the fieldset.
+/// - `options`: A Vector of tuples with the label and the name of the radio button.
 #[component]
 pub fn RadioButtons(
     #[prop(into)] label: String,

@@ -1,5 +1,10 @@
 use leptos::*;
 
+/// A textarea component.
+///
+/// # Arguments
+/// - `label`: The label of the textarea.
+/// - `name`: The name of the textarea.
 #[component]
 pub fn TextArea(
     #[prop(optional, into)] label: String,

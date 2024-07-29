@@ -1,5 +1,12 @@
 use leptos::*;
 
+/// A component that allows users to upload files.
+///
+/// # Arguments
+/// - `name` The name of the input field.
+/// - `drop_area` Whether to show a drop area.
+/// - `accept` The file types to accept.
+/// - `multiple` Whether to allow multiple files.
 #[component]
 pub fn Upload(
     name: String,
@@ -9,7 +16,7 @@ pub fn Upload(
 ) -> impl IntoView {
     if drop_area {
         view! {
-            <div>
+            <div class="input drop">
                 <div class="dropzone" />
                 <div>
                     <label for=name.clone()>"Drop files here"</label>
