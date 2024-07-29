@@ -1,7 +1,7 @@
 use leptos::*;
 
 #[component]
-pub fn File(
+pub fn Upload(
     name: String,
     #[prop(default = false)] drop_area: bool,
     #[prop(default = "".into(), into)] accept: String,
