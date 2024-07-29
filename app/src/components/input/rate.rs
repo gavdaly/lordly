@@ -18,7 +18,7 @@ pub fn Rate(#[prop(default = 5)] max: u8, #[prop(into)] name: String) -> impl In
                             class="rate"
                             data-selected=rating() <= i
                             on:click=move |_| { set_rating(i) }
-                        ></i>
+                        >"⭐️"</i>
                     }
                 })
                 .collect_view()}
