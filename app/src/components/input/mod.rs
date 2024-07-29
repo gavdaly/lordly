@@ -1,4 +1,5 @@
 mod check_boxes;
+mod combo_box;
 mod input;
 mod pick_list;
 mod radio_buttons;
@@ -10,6 +11,7 @@ mod textarea;
 mod upload;
 
 pub use check_boxes::CheckBoxes;
+pub use combo_box::ComboBox;
 pub use input::Input;
 pub use pick_list::PickList;
 pub use radio_buttons::RadioButtons;
