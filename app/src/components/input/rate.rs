@@ -1,13 +1,15 @@
 use leptos::*;
 
+/// A rating component.
+/// # Arguments
+/// - `max`: The maximum rating.
+/// - `name`: The name of the input.
 #[component]
-pub fn Rate<R, S>(rating: R, max: u8, set_rating: S) -> impl IntoView
-where
-    R: Fn() -> u8 + 'static,
-    S: Fn(u8) + Clone + Copy + 'static,
-{
+pub fn Rate(#[prop(default = 5)] max: u8, #[prop(into)] name: String) -> impl IntoView {
+    let (rating, set_rating) = create_signal(0);
     view! {
         <div class="rating">
+            <input aria-label="rating" class="visually-hidden" type="number" max=max name=name value=rating() />
             {(0..max)
                 .into_iter()
                 .map(|i| {
