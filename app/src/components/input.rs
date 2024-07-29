@@ -1,13 +1,21 @@
 mod check_boxes;
+mod file;
 mod input;
 mod pick_list;
 mod radio_buttons;
-mod tag_list;
+mod rate;
 mod search;
+mod switch;
+mod tag_list;
+mod textarea;
 
 pub use check_boxes::CheckBoxes;
+pub use file::File;
 pub use input::Input;
 pub use pick_list::PickList;
 pub use radio_buttons::RadioButtons;
-pub use tag_list::TagList;
+pub use rate::Rate;
 pub use search::Search;
+pub use switch::Switch;
+pub use tag_list::TagList;
+pub use textarea::TextArea;

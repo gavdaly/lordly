@@ -3,14 +3,14 @@ use leptos::*;
 #[component]
 pub fn Table(
     body: Vec<Vec<String>>,
-    #[prop(optional)] headers: Option<Vec<String>>,
+    #[prop(optional)] headers: MaybeSignal<Vec<String>>,
     #[prop(optional)] footer: Option<Vec<String>>,
 ) -> impl IntoView {
     view! {
         <table>
-            <Show when=move || headers.clone().is_some()>
-                "headers are present"
-                // <thead>{headers.clone().into_iter().map(|h| move || view! { <th>"h"</th> }).collect_view()}</thead>
+            <Show when=move || !headers().is_empty()>
+                    "header is present"
+            //     {view!{ <thead>{headers().iter().map( |text|   view!{ <th>{text}</th>}).collect_view()}</thead>}}
             </Show>
             <tbody>
                 {body
