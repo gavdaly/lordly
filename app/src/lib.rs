@@ -245,7 +245,7 @@ pub fn App() -> impl IntoView {
                     path="/upload"
                     view=move || {
                         view! {
-                            <File id="avatar".into() drop_area=true />
+                            <File name="avatar".into() drop_area=true />
                         }
                     }
                 />
