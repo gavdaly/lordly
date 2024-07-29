@@ -7,11 +7,11 @@ pub fn CheckBoxes(label: String, options: Vec<(String, String)>) -> impl IntoVie
             <legend>{label}</legend>
             {options
                 .iter()
-                .map(|(name, label)| {
+                .map(|(id, name)| {
                     view! {
                         <div>
-                            <input type="checkbox" name id=name value=name/>
-                            <label for=name>{label}</label>
+                            <input type="checkbox" name id value=id/>
+                            <label for=id>{name}</label>
                         </div>
                     }
                 })

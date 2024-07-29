@@ -1,7 +1,10 @@
 use leptos::*;
 
 #[component]
-pub fn RadioButtons(label: String, options: Vec<(String, String)>) -> impl IntoView {
+pub fn RadioButtons(
+    #[prop(into)] label: String,
+    #[prop(into)] options: Vec<(String, String)>,
+) -> impl IntoView {
     view! {
         <fieldset>
             <legend>{label}</legend>
@@ -9,7 +12,7 @@ pub fn RadioButtons(label: String, options: Vec<(String, String)>) -> impl IntoV
                 .iter()
                 .map(|(name, label)| {
                     view! {
-                        <div>
+                        <div class="input">
                             <input type="radio" name=name id=name vaule=name/>
                             <label for="name">{label}</label>
                         </div>
