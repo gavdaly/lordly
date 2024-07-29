@@ -1,11 +1,13 @@
 use leptos::*;
 
 #[component]
-pub fn TagList(list: Vec<(String, String)>, #[prop(into)] label: String) -> impl IntoView {
+pub fn TagList(
+    #[prop(into)] list: Vec<(String, String)>,
+    #[prop(into)] label: String,
+) -> impl IntoView {
     view! {
         <fieldset class="taglist">
             <legend>{label}</legend>
-            // Fix: Use tuple pattern (l, name)
             {list
                 .iter()
                 .map(|(l, name)| {
