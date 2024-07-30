@@ -135,7 +135,7 @@ pub fn App() -> impl IntoView {
                     path="/drawer"
                     view=move || {
                         view! {
-                            <Drawer id="drawer1">"test"</Drawer>
+                            <Drawer id="drawer1" anchor="left">"test"</Drawer>
                         }
                     }
                 />
@@ -163,6 +163,8 @@ pub fn App() -> impl IntoView {
                     view=move || {
                         view! {
                             <Pagination current=1 total=10/>
+                            <Pagination current=2 total=10/>
+                            <Pagination current=5 total=10/>
                         }
                     }
                 />
