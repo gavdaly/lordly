@@ -26,6 +26,14 @@ pub fn Search(
             <label for="search">"Search"</label>
             <input type="search" id="search" name="q" on:change=changed />
             <button type="submit">{button}</button>
+            {move || match auto_complete() {
+                Some(hints) => view! {
+                    <ul>
+                        {hints.into_iter().map(|hint| view! {<li>{hint}</li>}).collect_view()}
+                    </ul>
+                },
+                None => view! {<ul></ul>},
+            }}.into_view()
         </form>
     }
 }
