@@ -5,8 +5,7 @@ use leptos::*;
 pub fn Pagination(
     current: usize,
     total: usize,
-    #[prop(into, optional)]
-    url_base: String,
+    #[prop(into, optional)] url_base: String,
     #[prop(optional)] max_visible: Option<usize>,
 ) -> impl IntoView {
     let max_visible = max_visible.unwrap_or(5);
@@ -28,7 +27,7 @@ pub fn Pagination(
         start..=end
     };
     view! {
-        <aside>
+        <aside class="pagination">
             {if prev() { view!{
                 <><a href=format!("{}{}", url_base(), current - 1)>"prev"</a></>
             }} else { view!{
