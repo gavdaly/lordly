@@ -10,6 +10,12 @@ use leptos::*;
 /// - `summary`: A summary of the input.
 /// - `placeholder`: The placeholder of the input.
 /// - `validation`: A callback that validates the input when it is blured.
+/// - `wrapper_class`: The class for the wrapper.
+/// - `input_class`: The class for the input.
+/// - `label_class`: The class for the label.
+/// - `summary_class`: The class for the summary.
+/// - `error_class`: The class for the error.
+/// - `validation_children`: The children for the validation.
 #[component]
 pub fn Input(
     #[prop(into)] name: String,
