@@ -7,5 +7,9 @@ pub fn Dialog(
     #[prop(default=(|_|{}).into(), into)] init: Callback<()>,
 ) -> impl IntoView {
     let clicked = move |_| init(());
-    view! { <dialog id=id on:click=clicked >{children()}</dialog> }
+    view! {
+        <dialog id=id on:click=clicked>
+            {children()}
+        </dialog>
+    }
 }

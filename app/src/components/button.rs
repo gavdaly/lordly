@@ -16,5 +16,9 @@ pub fn Button(
     #[prop(into, optional)] fill: Option<Fill>,
     children: Children,
 ) -> impl IntoView {
-    view! { <button type=type_ data-shape=shape data-color=color data-fill=fill>{children()}</button> }
+    view! {
+        <button type=type_ data-shape=shape data-color=color data-fill=fill>
+            {children()}
+        </button>
+    }
 }

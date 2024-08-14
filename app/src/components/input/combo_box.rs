@@ -17,9 +17,7 @@ pub fn ComboBox(
                 {options
                     .iter()
                     .map(|(id, name)| {
-                        view! {
-                            <option value=id>{name}</option>
-                        }
+                        view! { <option value=id>{name}</option> }
                     })
                     .collect_view()}
             </select>

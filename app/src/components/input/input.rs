@@ -40,15 +40,38 @@ pub fn Input(
     view! {
         <div class=format!("input {wrapper_class}")>
             <div class=format!("summary {summary_class}")>{summary}</div>
-            <label class=format!("input_label {label_class}") for=name.clone()>{label}</label>
-            <input class=input_class type="text" name=name.clone() id=name placeholder=placeholder on:blur=validate on:focus=focused />
-            {move ||
-                match validation_state() {
-                    ValidationState::Invalid(r) => view! {<div class=format!("{error_class}") data-type="error">{r}</div>}.into_view(),
-                    ValidationState::Valid => view! {<div class=format!("") data-type="success">{validation_children.clone()}</div>}.into_view(),
-                    ValidationState::Dirty => view! {<></>}.into_view(),
+            <label class=format!("input_label {label_class}") for=name.clone()>
+                {label}
+            </label>
+            <input
+                class=input_class
+                type="text"
+                name=name.clone()
+                id=name
+                placeholder=placeholder
+                on:blur=validate
+                on:focus=focused
+            />
+            {move || match validation_state() {
+                ValidationState::Invalid(r) => {
+                    view! {
+                        <div class=format!("{error_class}") data-type="error">
+                            {r}
+                        </div>
+                    }
+                        .into_view()
                 }
-            }
+                ValidationState::Valid => {
+                    view! {
+                        <div class=format!("") data-type="success">
+                            {validation_children.clone()}
+                        </div>
+                    }
+                        .into_view()
+                }
+                ValidationState::Dirty => view! { <></> }.into_view(),
+            }}
+
         </div>
     }
 }

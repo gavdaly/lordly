@@ -1,5 +1,6 @@
 use ev::Event;
 use leptos::*;
+use leptos_router::ActionForm;
 
 //_search_action: Action<String, Result<String, ServerFnError>>
 
@@ -24,16 +25,20 @@ pub fn Search(
     view! {
         <form action=search_action>
             <label for="search">"Search"</label>
-            <input type="search" id="search" name="q" on:change=changed />
+            <input type="search" id="search" name="q" on:change=changed/>
             <button type="submit">{button}</button>
             {move || match auto_complete() {
-                Some(hints) => view! {
-                    <ul>
-                        {hints.into_iter().map(|hint| view! {<li>{hint}</li>}).collect_view()}
-                    </ul>
-                },
-                None => view! {<ul></ul>},
-            }}.into_view()
+                Some(hints) => {
+                    view! {
+                        <ul>
+                            {hints.into_iter().map(|hint| view! { <li>{hint}</li> }).collect_view()}
+                        </ul>
+                    }
+                        .into_view()
+                }
+                None => view! { <></> }.into_view(),
+            }}
+
         </form>
     }
 }

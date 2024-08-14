@@ -9,7 +9,14 @@ pub fn Rate(#[prop(default = 5)] max: u8, #[prop(into)] name: String) -> impl In
     let (rating, set_rating) = create_signal(0);
     view! {
         <div class="rating">
-            <input aria-label="rating" class="visually-hidden" type="number" max=max name=name value=rating() />
+            <input
+                aria-label="rating"
+                class="visually-hidden"
+                type="number"
+                max=max
+                name=name
+                value=rating()
+            />
             {(0..max)
                 .into_iter()
                 .map(|i| {
@@ -18,7 +25,9 @@ pub fn Rate(#[prop(default = 5)] max: u8, #[prop(into)] name: String) -> impl In
                             class="rate"
                             data-selected=rating() <= i
                             on:click=move |_| { set_rating(i) }
-                        >"⭐️"</i>
+                        >
+                            "⭐️"
+                        </i>
                     }
                 })
                 .collect_view()}

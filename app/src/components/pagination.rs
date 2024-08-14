@@ -28,25 +28,48 @@ pub fn Pagination(
     };
     view! {
         <aside class="pagination">
-            {if prev() { view!{
-                <><a href=format!("{}{}", url_base(), current - 1)>"prev"</a></>
-            }} else { view!{
-                <><i>"prev"</i></>
-            }}}
+            {if prev() {
+                view! {
+                    <>
+                        <a href=format!("{}{}", url_base(), current - 1)>"prev"</a>
+                    </>
+                }
+            } else {
+                view! {
+                    <>
+                        <i>"prev"</i>
+                    </>
+                }
+            }}
             <ul>
-               { window().map(|i| {
-                    if i == current {
-                        view! { <li data-active=true>{i}</li> }
-                    } else {
-                        view! { <li data-active=false><a href=format!("{}{}", url_base(), i)>{i}</a></li> }
-                    }
-                }).collect_view()}
+                {window()
+                    .map(|i| {
+                        if i == current {
+                            view! { <li data-active=true>{i}</li> }
+                        } else {
+                            view! {
+                                <li data-active=false>
+                                    <a href=format!("{}{}", url_base(), i)>{i}</a>
+                                </li>
+                            }
+                        }
+                    })
+                    .collect_view()}
             </ul>
-            {if next() { view!{
-                <><a href=format!("{}{}", url_base(), current + 1)>"next"</a></>
-            }} else { view!{
-                <><i>"next"</i></>
-            }}}
+            {if next() {
+                view! {
+                    <>
+                        <a href=format!("{}{}", url_base(), current + 1)>"next"</a>
+                    </>
+                }
+            } else {
+                view! {
+                    <>
+                        <i>"next"</i>
+                    </>
+                }
+            }}
+
         </aside>
     }
 }

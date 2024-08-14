@@ -8,9 +8,11 @@ pub fn Table(
 ) -> impl IntoView {
     view! {
         <table>
-            <Show when=move || !headers().is_empty()>
-                    "header is present"
-            //     {view!{ <thead>{headers().iter().map( |text|   view!{ <th>{text}</th>}).collect_view()}</thead>}}
+            <Show when=move || {
+                !headers().is_empty()
+            }>
+                "header is present"
+            // {view!{ <thead>{headers().iter().map( |text|   view!{ <th>{text}</th>}).collect_view()}</thead>}}
             </Show>
             <tbody>
                 {body
@@ -20,10 +22,12 @@ pub fn Table(
                     })
                     .collect_view()}
             </tbody>
-        <Show when=move || footer.clone().is_some()>
-            "footer is present"
-        // <tfoot>{footer.iter().map(|f| view! { <th>{f}</th> }).collect_view()}</tfoot>
-        </Show>
+            <Show when=move || {
+                footer.clone().is_some()
+            }>
+                "footer is present"
+            // <tfoot>{footer.iter().map(|f| view! { <th>{f}</th> }).collect_view()}</tfoot>
+            </Show>
         </table>
     }
 }

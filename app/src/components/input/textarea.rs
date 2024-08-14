@@ -13,7 +13,7 @@ pub fn TextArea(
     view! {
         <div class="textarea">
             <label for=name.clone()>{label}</label>
-            <textarea id=name.clone() name=name />
+            <textarea id=name.clone() name=name></textarea>
         </div>
     }
 }

@@ -22,12 +22,12 @@ pub fn Avatar(
     #[prop(optional, into)] shape: Option<Shape>,
 ) -> impl IntoView {
     let alt = match name {
-        Some(name) => format!("avatar image for {}", name),
+        Some(name) => format!("avatar image for {name}",),
         None => format!("avatar image for unknown user"),
     };
     view! {
         <picture data-shape=shape>
-            <img href=image alt=alt />
+            <img href=image alt=alt/>
         </picture>
     }
 }
