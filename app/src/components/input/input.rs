@@ -17,6 +17,12 @@ pub fn Input(
     #[prop(into, optional)] summary: Option<String>,
     #[prop(optional)] placeholder: Option<String>,
     #[prop(default=(|_|{true}).into(), into)] validation: Callback<String, bool>,
+    #[prop(default="".into(), into)] wrapper_class: String,
+    #[prop(default="".into(), into)] input_class: String,
+    #[prop(default="".into(), into)] label_class: String,
+    #[prop(default="".into(), into)] summary_class: String,
+    #[prop(default="".into(), into)] error_class: String,
+    #[prop(default="✅".into_view(), into)] validation_children: View,
 ) -> impl IntoView {
     let (validation_state, set_validation_state) =
         create_signal::<ValidationState>(ValidationState::Dirty);
@@ -30,17 +36,19 @@ pub fn Input(
         };
     };
     let focused = move |_| set_validation_state(ValidationState::Dirty);
-    view! {
-        <div class="input">
-            <div class="summary">{summary}</div>
-            <label for=name.clone()>{label}</label>
-            <input type="text" name id=name placeholder=placeholder on:blur=validate on:focus=focused />
 
-            {move || match validation_state() {
-                ValidationState::Invalid(r) => view! {<div data-type="error">{r}</div>},
-                ValidationState::Valid => view! {<div data-type="success"></div>},
-                ValidationState::Dirty => view! {<div></div>},
-            }}.into_view()
+    view! {
+        <div class=format!("input {wrapper_class}")>
+            <div class=format!("summary {summary_class}")>{summary}</div>
+            <label class=format!("input_label {label_class}") for=name.clone()>{label}</label>
+            <input class=input_class type="text" name=name.clone() id=name placeholder=placeholder on:blur=validate on:focus=focused />
+            {move ||
+                match validation_state() {
+                    ValidationState::Invalid(r) => view! {<div class=format!("{error_class}") data-type="error">{r}</div>}.into_view(),
+                    ValidationState::Valid => view! {<div class=format!("") data-type="success">{validation_children.clone()}</div>}.into_view(),
+                    ValidationState::Dirty => view! {<></>}.into_view(),
+                }
+            }
         </div>
     }
 }
