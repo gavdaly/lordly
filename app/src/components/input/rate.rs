@@ -18,7 +18,6 @@ pub fn Rate(#[prop(default = 5)] max: u8, #[prop(into)] name: String) -> impl In
                 value=rating()
             />
             {(0..max)
-                .into_iter()
                 .map(|i| {
                     view! {
                         <i

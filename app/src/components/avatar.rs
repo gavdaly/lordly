@@ -23,7 +23,7 @@ pub fn Avatar(
 ) -> impl IntoView {
     let alt = match name {
         Some(name) => format!("avatar image for {name}",),
-        None => format!("avatar image for unknown user"),
+        None => "avatar image for unknown user".to_string(),
     };
     view! {
         <picture data-shape=shape>
