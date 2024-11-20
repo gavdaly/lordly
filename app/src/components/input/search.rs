@@ -2,20 +2,14 @@ use ev::Event;
 use leptos::*;
 use leptos_router::ActionForm;
 
-//_search_action: Action<String, Result<String, ServerFnError>>
-
 /// A search component.
 ///
-/// # Arguments
-/// - `search_action`: The action that will be called when the form is submitted.
-/// - `hints`: A callback that will be called when the input changes.
-/// - `button`: The text of the submit button.
 #[component]
 pub fn Search(
-    #[prop(optional)] search_action: Option<String>,
     #[prop(default=(|_|{vec![]}).into(), into)] hints: Callback<String, Vec<String>>,
     #[prop(default="find".into(), into)] button: String,
 ) -> impl IntoView {
+    let submit = Action::<Search, _>::server();
     let (auto_complete, set_auto_complete) = create_signal(None);
     let changed = move |input: Event| {
         let value = input.value_of().as_string().unwrap();
@@ -23,7 +17,7 @@ pub fn Search(
     };
 
     view! {
-        <form action=search_action>
+        <ActionForm action=submit>
             <label for="search">"Search"</label>
             <input type="search" id="search" name="q" on:change=changed/>
             <button type="submit">{button}</button>
@@ -39,6 +33,12 @@ pub fn Search(
                 None => view! { <></> }.into_view(),
             }}
 
-        </form>
+        </ActionForm>
     }
+}
+
+#[server]
+async fn search(query: String) -> Result<(), ServerFnError> {
+    println!("{query}");
+    Ok(())
 }
