@@ -1,17 +1,9 @@
-mod kitchen_sink;
-
+use crate::components::*;
 use crate::error_template::{AppError, ErrorTemplate};
-
-use kitchen_sink::KitchenSink;
+use crate::kitchen_sink::KitchenSink;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
-
-use crate::components::*;
-
-pub mod components;
-pub mod data_type;
-pub mod error_template;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -19,7 +11,7 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <Stylesheet id="leptos" href="/pkg/start-axum-workspace.css"/>
+        <Stylesheet id="leptos" href="/pkg/lordly.css"/>
 
         // sets the document title
         <Title text="Welcome to Leptos"/>
@@ -276,18 +268,5 @@ pub fn App() -> impl IntoView {
             </main>
 
         </Router>
-    }
-}
-
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let (count, set_count) = create_signal(0);
-    let on_click = move |_| set_count.update(|count| *count += 1);
-
-    view! {
-        <h1>"Welcome to Leptos!"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
     }
 }
