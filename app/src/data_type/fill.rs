@@ -1,8 +1,9 @@
 use leptos::{Attribute, IntoAttribute};
 use std::fmt::Display;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Default)]
 pub enum Fill {
+    #[default]
     Solid,
     Ghost,
     Text,
@@ -18,9 +19,9 @@ impl Fill {
     }
 }
 
-impl Into<String> for Fill {
-    fn into(self) -> String {
-        self.as_str().to_string()
+impl From<Fill> for String {
+    fn from(val: Fill) -> Self {
+        val.as_str().to_string()
     }
 }
 
@@ -47,11 +48,5 @@ impl IntoAttribute for Fill {
     }
     fn into_attribute_boxed(self: Box<Self>) -> Attribute {
         Box::new(self).into_attribute()
-    }
-}
-
-impl Default for Fill {
-    fn default() -> Self {
-        Self::Solid
     }
 }

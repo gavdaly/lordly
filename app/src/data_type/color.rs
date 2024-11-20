@@ -1,12 +1,14 @@
 use leptos::{Attribute, IntoAttribute};
 use std::fmt::Display;
 
+#[derive(Debug, Clone, PartialEq, Default)]
 pub enum Color {
     Primary,
     Secondary,
     Success,
     Danger,
     Warning,
+    #[default]
     Info,
 }
 
@@ -23,9 +25,9 @@ impl Color {
     }
 }
 
-impl Into<String> for Color {
-    fn into(self) -> String {
-        self.as_str().to_string()
+impl From<Color> for String {
+    fn from(val: Color) -> Self {
+        val.as_str().to_string()
     }
 }
 
@@ -55,11 +57,5 @@ impl IntoAttribute for Color {
     }
     fn into_attribute_boxed(self: Box<Self>) -> Attribute {
         Box::new(self).into_attribute()
-    }
-}
-
-impl Default for Color {
-    fn default() -> Self {
-        Color::Info
     }
 }

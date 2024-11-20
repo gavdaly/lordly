@@ -1,8 +1,10 @@
 use leptos::{Attribute, IntoAttribute};
 use std::fmt::Display;
 
+#[derive(Debug, Clone, PartialEq, Default)]
 pub enum Position {
     TopLeft,
+    #[default]
     TopCenter,
     TopRight,
     MiddleLeft,
@@ -29,9 +31,9 @@ impl Position {
 }
 
 /// Converts a `Position` to a string.
-impl Into<String> for Position {
-    fn into(self) -> String {
-        self.as_str().to_string()
+impl From<Position> for String {
+    fn from(val: Position) -> Self {
+        val.as_str().to_string()
     }
 }
 
@@ -66,12 +68,5 @@ impl IntoAttribute for Position {
     }
     fn into_attribute_boxed(self: Box<Self>) -> Attribute {
         Box::new(self).into_attribute()
-    }
-}
-
-/// Implements the default value for `Position`.
-impl Default for Position {
-    fn default() -> Self {
-        Position::TopRight
     }
 }

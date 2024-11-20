@@ -1,7 +1,9 @@
 use leptos::{Attribute, IntoAttribute};
 use std::fmt::Display;
 
+#[derive(Debug, Clone, PartialEq, Default)]
 pub enum ButtonType {
+    #[default]
     Button,
     Submit,
     Reset,
@@ -17,9 +19,9 @@ impl ButtonType {
     }
 }
 
-impl Into<String> for ButtonType {
-    fn into(self) -> String {
-        self.as_str().to_string()
+impl From<ButtonType> for String {
+    fn from(val: ButtonType) -> Self {
+        val.as_str().to_string()
     }
 }
 
@@ -46,11 +48,5 @@ impl IntoAttribute for ButtonType {
     }
     fn into_attribute_boxed(self: Box<Self>) -> Attribute {
         Box::new(self).into_attribute()
-    }
-}
-
-impl Default for ButtonType {
-    fn default() -> Self {
-        ButtonType::Button
     }
 }

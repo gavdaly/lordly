@@ -1,8 +1,10 @@
 use leptos::{Attribute, IntoAttribute};
 use std::fmt::Display;
 
+#[derive(Debug, Clone, PartialEq, Default)]
 pub enum Anchor {
     Top,
+    #[default]
     Right,
     Bottom,
     Left,
@@ -19,9 +21,9 @@ impl Anchor {
     }
 }
 
-impl Into<String> for Anchor {
-    fn into(self) -> String {
-        self.as_str().to_string()
+impl From<Anchor> for String {
+    fn from(val: Anchor) -> Self {
+        val.as_str().to_string()
     }
 }
 
@@ -49,11 +51,5 @@ impl IntoAttribute for Anchor {
     }
     fn into_attribute_boxed(self: Box<Self>) -> Attribute {
         Box::new(self).into_attribute()
-    }
-}
-
-impl Default for Anchor {
-    fn default() -> Self {
-        Anchor::Right
     }
 }

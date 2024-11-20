@@ -18,7 +18,7 @@ pub fn Table(
                 {body
                     .iter()
                     .map(|row| {
-                        view! { <tr>{row.iter().map(|cell| cell).collect_view()}</tr> }
+                        view! { <tr>{row.iter().collect_view()}</tr> }
                     })
                     .collect_view()}
             </tbody>
