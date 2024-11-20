@@ -45,10 +45,7 @@ pub fn Input(
     };
 
     let focused = move |_| set_state(ValidationState::Dirty);
-    let is_invalid = move |state| match state {
-        ValidationState::Invalid(_) => true,
-        _ => false,
-    };
+    let is_invalid = move |state| matches!(state, ValidationState::Invalid(_));
     let error_message_view = move || match state() {
         ValidationState::Invalid(message) => view! { <span class="error-message">{message}</span> },
         ValidationState::Valid => {
@@ -67,7 +64,7 @@ pub fn Input(
                 placeholder=placeholder
                 on:blur=validate
                 on:focus=focused
-                class={format!("input-field {} {}", state().to_string(), input_class)}
+                class={format!("input-field {} {}", state(), input_class)}
                 aria-invalid={is_invalid(state()).to_string()}
                 aria-describedby={format!("{name}-error")}
             />
