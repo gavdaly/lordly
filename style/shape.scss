@@ -1,15 +1,15 @@
-:has([data-shape="circular"]) {
+[data-shape="circular"] {
     border-radius: var(--radius-round);
 }
 
-:has([data-shape="square"]) {
+[data-shape="square"] {
     border-radius: 0;
 }
 
-:has([data-shape="pill"]) {
+[data-shape="pill"] {
     border-radius: var(--radius-pill);
 }
 
-:has([data-shape="rounded"]) {
+[data-shape="rounded"] {
     border-radius: var(--radius-2);
 }
