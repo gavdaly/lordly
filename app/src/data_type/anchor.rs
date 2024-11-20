@@ -2,47 +2,50 @@ use leptos::{Attribute, IntoAttribute};
 use std::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub enum ButtonType {
+pub enum Anchor {
+    Top,
     #[default]
-    Button,
-    Submit,
-    Reset,
+    Right,
+    Bottom,
+    Left,
 }
 
-impl ButtonType {
+impl Anchor {
     fn as_str(&self) -> &str {
         match self {
-            Self::Button => "button",
-            Self::Submit => "submit",
-            Self::Reset => "reset",
+            Self::Top => "top",
+            Self::Right => "right",
+            Self::Bottom => "bottom",
+            Self::Left => "left",
         }
     }
 }
 
-impl From<ButtonType> for String {
-    fn from(val: ButtonType) -> Self {
+impl From<Anchor> for String {
+    fn from(val: Anchor) -> Self {
         val.as_str().to_string()
     }
 }
 
-impl From<&str> for ButtonType {
+impl From<&str> for Anchor {
     fn from(s: &str) -> Self {
         match s {
-            "button" => Self::Button,
-            "subit" => Self::Submit,
-            "reset" => Self::Reset,
-            _ => Self::Button,
+            "top" => Self::Top,
+            "right" => Self::Right,
+            "bottom" => Self::Bottom,
+            "left" => Self::Left,
+            _ => panic!("Invalid `Anchor`"),
         }
     }
 }
 
-impl Display for ButtonType {
+impl Display for Anchor {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }
 }
 
-impl IntoAttribute for ButtonType {
+impl IntoAttribute for Anchor {
     fn into_attribute(self) -> Attribute {
         Attribute::String(self.as_str().to_string().into())
     }

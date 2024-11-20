@@ -92,211 +92,188 @@ pub fn App() -> impl IntoView {
                 </menu>
             </nav>
             <main class="content">
-            <Routes>
-                <Route path="/" view=move || view! { <h1>"Home"</h1> }/>
-                <Route
-                    path="/avatar"
-                    view=move || {
-                        view! {
-                            <h1>"Avatar"</h1>
-                            <Avatar href=""/>
+                <Routes>
+                    <Route path="/" view=move || view! { <h1>"Home"</h1> }/>
+                    <Route
+                        path="/avatar"
+                        view=move || {
+                            view! {
+                                <h1>"Avatar"</h1>
+                                <Avatar image=""/>
+                            }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/badge"
-                    view=move || {
-                        view! {
-                            <Badge>"Badge"</Badge>
+                    <Route
+                        path="/badge"
+                        view=move || {
+                            view! { <Badge>"Badge"</Badge> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/button"
-                    view=move || {
-                        view! {
-                            <Button>"Button"</Button>
+                    <Route
+                        path="/button"
+                        view=move || {
+                            view! { <Button>"Button"</Button> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/dialog"
-                    view=move || {
-                        view! {
-                            <Dialog id="dialog1">"Dialog"</Dialog>
+                    <Route
+                        path="/dialog"
+                        view=move || {
+                            view! { <Dialog id="dialog1">"Dialog"</Dialog> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/drawer"
-                    view=move || {
-                        view! {
-                            <Drawer id="drawer1">"test"</Drawer>
+                    <Route
+                        path="/drawer"
+                        view=move || {
+                            view! {
+                                <Drawer id="drawer1" anchor="left">
+                                    "test"
+                                </Drawer>
+                            }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/loading"
-                    view=move || {
-                        view! {
-                            <Loading>"Loading..."</Loading>
+                    <Route
+                        path="/loading"
+                        view=move || {
+                            view! { <Loading>"Loading..."</Loading> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/message"
-                    view=move || {
-                        view! {
-                            <Message>"Message"</Message>
+                    <Route
+                        path="/message"
+                        view=move || {
+                            view! { <Message>"Message"</Message> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/pagination"
-                    view=move || {
-                        view! {
-                            <Pagination current=1 total=10/>
+                    <Route
+                        path="/pagination"
+                        view=move || {
+                            view! {
+                                <Pagination current=1 total=10/>
+                                <Pagination current=2 total=10/>
+                                <Pagination current=5 total=10/>
+                            }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/popover"
-                    view=move || {
-                        view! {
-                            <Popover id="pop">"Popover"</Popover>
+                    <Route
+                        path="/popover"
+                        view=move || {
+                            view! { <Popover id="pop">"Popover"</Popover> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/qrcode"
-                    view=move || {
-                        view! {
-                            <Qrcode value="Qrcode".into()/>
+                    <Route
+                        path="/qrcode"
+                        view=move || {
+                            view! { <Qrcode value="Qrcode".into()/> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/search"
-                    view=move || {
-                        view! {
-                            <Search/>
+                    <Route
+                        path="/search"
+                        view=move || {
+                            view! { <Search/> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/switch"
-                    view=move || {
-                        view! {
-                            <Switch name="switch"/>
+                    <Route
+                        path="/switch"
+                        view=move || {
+                            view! { <Switch name="switch"/> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/table"
-                    view=move || {
-                        view! {
-                            <Table body=vec![vec!["one".into(), "two".into()], vec!["three".into(), "four".into()]] />
+                    <Route
+                        path="/table"
+                        view=move || {
+                            view! {
+                                <Table body=vec![
+                                    vec!["one".into(), "two".into()],
+                                    vec!["three".into(), "four".into()],
+                                ]/>
+                            }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/tag"
-                    view=move || {
-                        view! {
-                            <Tag style="warning">
-                                "Tag"
-                            </Tag>
+                    <Route
+                        path="/tag"
+                        view=move || {
+                            view! { <Tag color="warning">"Tag"</Tag> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/toast"
-                    view=move || {
-                        view! {
-                            <Toast>"Toast"</Toast>
+                    <Route
+                        path="/toast"
+                        view=move || {
+                            view! { <Toast>"Toast"</Toast> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/tooltip"
-                    view=move || {
-                        view! {
-                            <Tooltip>"Tooltip"</Tooltip>
+                    <Route
+                        path="/tooltip"
+                        view=move || {
+                            view! { <Tooltip>"Tooltip"</Tooltip> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/upload"
-                    view=move || {
-                        view! {
-                            <Upload name="avatar" label="Avatar" />
+                    <Route
+                        path="/upload"
+                        view=move || {
+                            view! { <Upload name="avatar".into() drop_area=true/> }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/input"
-                    view=move || {
-                        view! {
-                            <h1>"Input"</h1>
-                            <Input name="input" label="Input"/>
+                    <Route
+                        path="/input"
+                        view=move || {
+                            view! {
+                                <h1>"Input"</h1>
+                                <Input name="input" label="Input"/>
+                            }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/rate"
-                    view=move || {
-                        view! {
-                            <h1>"Rate"</h1>
-                            <Rate rating=move || 0 max=5 set_rating=move |_| {}/>
+                    <Route
+                        path="/rate"
+                        view=move || {
+                            view! {
+                                <h1>"Rate"</h1>
+                                <Rate max=5 name="rating"/>
+                            }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/picklist"
-                    view=move || {
-                        view! {
-                            <PickList list=vec![("l".into(), "name".into())] label="label"/>
+                    <Route
+                        path="/picklist"
+                        view=move || {
+                            view! {
+                                <PickList list=vec![("l".into(), "name".into())] label="label"/>
+                            }
                         }
-                    }
-                />
+                    />
 
-                <Route
-                    path="/taglist"
-                    view=move || {
-                        view! {
-                            <TagList list=vec![("2".into(), "two".into())] label="label"/>
+                    <Route
+                        path="/taglist"
+                        view=move || {
+                            view! { <TagList list=vec![("2".into(), "two".into())] label="label"/> }
                         }
-                    }
-                />
-                <Route
-                    path="/kitchen_sink"
-                    view=move || {
-                        view! {
-                            <KitchenSink/>
+                    />
+
+                    <Route
+                        path="/kitchen_sink"
+                        view=move || {
+                            view! { <KitchenSink/> }
                         }
-                    }
-                />
+                    />
+
                 </Routes>
-                </main>
+            </main>
 
         </Router>
     }

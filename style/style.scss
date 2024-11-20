@@ -1,29 +1,29 @@
-:has([data-style="primary"]) {
+:has([data-color="primary"]) {
     background-color: var(--jungle-4);
     color: var(--gray-11);
 }
 
-:has([data-style="secondary"]) {
+:has([data-color="secondary"]) {
     background-color: var(--stone-6);
     color: var(--gray-11);
 }
 
-:has([data-style="warning"]) {
+:has([data-color="warning"]) {
     background-color: var(--orange-8);
     color: var(--gray-11);
 }
 
-:has([data-style="success"]) {
+:has([data-color="success"]) {
     background-color: var(--green-8);
     color: var(--gray-11);
 }
 
-:has([data-style="danger"]) {
+:has([data-color="danger"]) {
     background-color: var(--red-8);
     color: var(--gray-11);
 }
 
-:has([data-style="info"]) {
+:has([data-color="info"]) {
     background-color: var(--blue-8);
     color: var(--gray-11);
 }

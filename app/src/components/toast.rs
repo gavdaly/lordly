@@ -1,7 +1,7 @@
-use crate::data_type::Style;
+use crate::data_type::Color;
 use leptos::*;
 
 #[component]
-pub fn Toast(children: Children, #[prop(into, optional)] style: Option<Style>) -> impl IntoView {
-    view! { <div data-style=style>{children()}</div> }
+pub fn Toast(children: Children, #[prop(into, optional)] color: Option<Color>) -> impl IntoView {
+    view! { <div data-color=color>{children()}</div> }
 }

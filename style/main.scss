@@ -12,16 +12,16 @@ html {
     --content: min(80ch, 100% - var(--gap) * 2);
     --popout: minmax(0, 2rem);
     --feature: minmax(0, 5rem);
-  
+
     display: grid;
     grid-template-columns:
-      [full-start] var(--full)
-      [feature-start] var(--feature)
-      [popout-start] var(--popout)
-      [content-start] var(--content) [content-end]
-      var(--popout) [popout-end]
-      var(--feature) [feature-end]
-      var(--full) [full-end];
+        [full-start] var(--full)
+        [feature-start] var(--feature)
+        [popout-start] var(--popout)
+        [content-start] var(--content) [content-end]
+        var(--popout) [popout-end]
+        var(--feature) [feature-end]
+        var(--full) [full-end];
 }
 
 .content > :not(.popout, .feature, .full) {
@@ -37,7 +37,8 @@ html {
     grid-column: full;
 }
 
-figcaption, blockquote {
+figcaption,
+blockquote {
     cite {
         border-inline-start-width: 0;
     }
@@ -66,13 +67,16 @@ form {
 
 form[disabled] {
     opacity: 33%;
-    input, textarea, button, label {
+    input,
+    textarea,
+    button,
+    label {
         pointer-events: none;
     }
 }
 
 form[data-state="error"] {
-    background-color: rgba(255, 0, 0, .15);
+    background-color: rgba(255, 0, 0, 0.15);
 }
 
 nav {
@@ -84,7 +88,7 @@ nav {
     }
 }
 
-button~button {
+button ~ button {
     margin-inline-start: var(--size-2);
 }
 
@@ -97,19 +101,19 @@ button~button {
     gap: var(--size-2);
     max-inline-size: var(--size-content-2);
 
-    &>legend {
+    & > legend {
         margin-block-end: var(--size-2);
     }
 
-    >.tag-toggle {
+    > .tag-toggle {
         display: grid;
         box-shadow: var(--shadow-1);
 
-        >* {
+        > * {
             grid-area: 1/1;
         }
 
-        >label {
+        > label {
             padding-inline: var(--size-3);
             padding-block: var(--size-1);
             border-radius: var(--radius-2);
@@ -117,19 +121,19 @@ button~button {
             background: var(--surface-2);
         }
 
-        >input {
+        > input {
             appearance: none;
             background: none;
             border: none;
             inline-size: 100%;
             block-size: 100%;
 
-            &:checked~label {
+            &:checked ~ label {
                 background-color: var(--link);
                 color: var(--surface-1);
             }
 
-            &:not(:checked):is(:focus-within, :hover)~label {
+            &:not(:checked):is(:focus-within, :hover) ~ label {
                 color: var(--link);
             }
         }
@@ -144,13 +148,13 @@ button~button {
     gap: 1px;
     max-inline-size: var(--size-content-2);
 
-    >legend {
+    > legend {
         height: 0;
         width: 0;
         overflow: clip;
     }
 
-    >label {
+    > label {
         --space: var(--size-3);
 
         display: grid;
@@ -178,20 +182,20 @@ button~button {
             border-end-end-radius: var(--radius-3);
         }
 
-        >input {
+        > input {
             margin-inline: calc(var(--space) * 1.5);
         }
 
-        >.rich-label {
+        > .rich-label {
             display: grid;
             padding-inline-end: calc(var(--space) * 2);
 
-            >.rich-label--title {
+            > .rich-label--title {
                 font-weight: var(--font-weight-6);
                 font-size: var(--font-size-2);
             }
 
-            >.rich-label--desc {
+            > .rich-label--desc {
                 color: var(--text-2);
             }
         }
@@ -200,3 +204,5 @@ button~button {
 
 @import "shape.scss";
 @import "style.scss";
+@import "fill.scss";
+@import "pagination.scss";

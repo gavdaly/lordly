@@ -5,8 +5,7 @@ use leptos::*;
 pub fn Pagination(
     current: usize,
     total: usize,
-    #[prop(into, optional)]
-    url_base: String,
+    #[prop(into, optional)] url_base: String,
     #[prop(optional)] max_visible: Option<usize>,
 ) -> impl IntoView {
     let max_visible = max_visible.unwrap_or(5);
@@ -28,26 +27,49 @@ pub fn Pagination(
         start..=end
     };
     view! {
-        <aside>
-            {if prev() { view!{
-                <><a href=format!("{}{}", url_base(), current - 1)>"prev"</a></>
-            }} else { view!{
-                <><i>"prev"</i></>
-            }}}
+        <aside class="pagination">
+            {if prev() {
+                view! {
+                    <>
+                        <a href=format!("{}{}", url_base(), current - 1)>"prev"</a>
+                    </>
+                }
+            } else {
+                view! {
+                    <>
+                        <i>"prev"</i>
+                    </>
+                }
+            }}
             <ul>
-               { window().map(|i| {
-                    if i == current {
-                        view! { <li data-active=true>{i}</li> }
-                    } else {
-                        view! { <li data-active=false><a href=format!("{}{}", url_base(), i)>{i}</a></li> }
-                    }
-                }).collect_view()}
+                {window()
+                    .map(|i| {
+                        if i == current {
+                            view! { <li data-active=true>{i}</li> }
+                        } else {
+                            view! {
+                                <li data-active=false>
+                                    <a href=format!("{}{}", url_base(), i)>{i}</a>
+                                </li>
+                            }
+                        }
+                    })
+                    .collect_view()}
             </ul>
-            {if next() { view!{
-                <><a href=format!("{}{}", url_base(), current + 1)>"next"</a></>
-            }} else { view!{
-                <><i>"next"</i></>
-            }}}
+            {if next() {
+                view! {
+                    <>
+                        <a href=format!("{}{}", url_base(), current + 1)>"next"</a>
+                    </>
+                }
+            } else {
+                view! {
+                    <>
+                        <i>"next"</i>
+                    </>
+                }
+            }}
+
         </aside>
     }
 }
