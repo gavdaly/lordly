@@ -91,7 +91,21 @@ pub fn App() -> impl IntoView {
                         view=move || {
                             view! {
                                 <h1>"Avatar"</h1>
-                                <Avatar image=""/>
+                                <main>
+                                    <Avatar name="Gav" src="https://gavdaly.com/profile.jpg"/>
+                                    <Avatar
+                                        name="Gav"
+                                        src="https://gavdaly.com/profile.jpg"
+                                        width="200"
+                                        shape="rounded"
+                                    />
+                                    <Avatar
+                                        name="Gav"
+                                        src="https://gavdaly.com/profile.jpg"
+                                        width="300"
+                                        shape="circular"
+                                    />
+                                </main>
                             }
                         }
                     />
