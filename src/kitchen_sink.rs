@@ -1,4 +1,8 @@
-use crate::components::{Avatar, Button, PickList, Search, TagList};
+use crate::components::{
+    Accordion, AccordionItem, Avatar, Breadcrumb, BreadcrumbItem, Button, Card, PickList,
+    ProgressBar, Search, Spinner, Tab, Tabs, TagList, Timeline, TimelineItem,
+};
+use leptos::create_signal;
 use leptos::*;
 
 #[component]
@@ -446,6 +450,114 @@ ac turpis"#;
                 <small>&copy; now</small>
             </footer>
         </section>
+
+        <section class="component-showcase">
+            <h2>"Component Showcase"</h2>
+
+            <div class="showcase-item">
+                <h3>"Card Component"</h3>
+                <Card
+                    color="primary"
+                    shape="rounded"
+                >
+                    <p>"This is an example of the Card component with header and footer sections."</p>
+                    <p>"Cards are useful for grouping related content and actions."</p>
+                </Card>
+            </div>
+
+            <div class="showcase-item">
+                <h3>"Tabs Component"</h3>
+                <Tabs default_tab="tab1">
+                    <Tab id="tab1" label="First Tab" active=true>
+                        <p>"Content for the first tab. This is visible by default."</p>
+                    </Tab>
+                    <Tab id="tab2" label="Second Tab">
+                        <p>"Content for the second tab. Click on the tab to see this content."</p>
+                    </Tab>
+                    <Tab id="tab3" label="Third Tab">
+                        <p>"Content for the third tab. Each tab can contain different content."</p>
+                    </Tab>
+                </Tabs>
+            </div>
+
+            <div class="showcase-item">
+                <h3>"Accordion Component"</h3>
+                <Accordion>
+                    <AccordionItem title="Section 1" open=true>
+                        <p>"This is the content for section 1. It's expanded by default."</p>
+                        <p>"Accordions are useful for showing collapsible content."</p>
+                    </AccordionItem>
+                    <AccordionItem title="Section 2">
+                        <p>"This is the content for section 2. Click on the header to expand it."</p>
+                    </AccordionItem>
+                    <AccordionItem title="Section 3">
+                        <p>"This is the content for section 3. Accordions help organize content into collapsible sections."</p>
+                    </AccordionItem>
+                </Accordion>
+            </div>
+
+            <div class="showcase-item">
+                <h3>"Progress Components"</h3>
+                {
+                    let (progress, _) = Signal::derive(65.0);
+                    view! {
+                        <div>
+                            <h4>"Progress Bar"</h4>
+                            <ProgressBar
+                                value=progress
+                                color="primary"
+                                striped=true
+                                animated=true
+                                label="65%".to_string()
+                            />
+
+                            <h4>"Spinner"</h4>
+                            <div style="display: flex; gap: 20px;">
+                                <Spinner value=Some(progress) color="primary" size=50 />
+                                <Spinner color="secondary" size=50 /> // Indeterminate spinner
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+            <div class="showcase-item">
+                <h3>"Breadcrumb Component"</h3>
+                <Breadcrumb separator=">">
+                    <BreadcrumbItem href="/">"Home"</BreadcrumbItem>
+                    <BreadcrumbItem href="/products">"Products"</BreadcrumbItem>
+                    <BreadcrumbItem href="/products/electronics">"Electronics"</BreadcrumbItem>
+                    <BreadcrumbItem active=true>"Smartphones"</BreadcrumbItem>
+                </Breadcrumb>
+            </div>
+
+            <div class="showcase-item">
+                <h3>"Timeline Component"</h3>
+                <Timeline alternate=true>
+                    <TimelineItem
+                        date="January 2023"
+                    >
+                        <h4>"Project Started"</h4>
+                        <p>"Initial development of the Leptos component library began."</p>
+                    </TimelineItem>
+                    <TimelineItem
+                        date="March 2023"
+                        color="success"
+                    >
+                        <h4>"Core Components Released"</h4>
+                        <p>"The first set of components was completed and released."</p>
+                    </TimelineItem>
+                    <TimelineItem
+                        date="June 2023"
+                        color="info"
+                    >
+                        <h4>"Continuous Improvements"</h4>
+                        <p>"Regular updates and new components were added to the library."</p>
+                    </TimelineItem>
+                </Timeline>
+            </div>
+        </section>
+
         <dialog id="greeting">
             <p>"Greetings, one and all!"</p>
             <form method="dialog">

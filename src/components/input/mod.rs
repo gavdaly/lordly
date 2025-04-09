@@ -1,5 +1,7 @@
 mod check_boxes;
 mod combo_box;
+mod input;
+mod input_spec;
 mod pick_list;
 mod radio_buttons;
 mod rate;
@@ -12,6 +14,7 @@ mod upload;
 
 pub use check_boxes::CheckBoxes;
 pub use combo_box::ComboBox;
+pub use input::*;
 pub use pick_list::PickList;
 pub use radio_buttons::RadioButtons;
 pub use rate::Rate;

@@ -1,4 +1,5 @@
 pub mod app;
+pub mod check;
 pub mod components;
 pub mod data_type;
 pub mod error_template;
