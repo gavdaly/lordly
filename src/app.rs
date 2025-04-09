@@ -89,7 +89,16 @@ pub fn App() -> impl IntoView {
             <main class="content">
                 <Routes>
                     <Route path="/" view=move || view! { <h1>"Home"</h1> }/>
-                        <Route path="/alert" view=move || view! { <Alert title="Success" has_closer={true}>"You Seccessifully did something"</Alert> }/>
+                    <Route
+                        path="/alert"
+                        view=move || {
+                            view! {
+                                <Alert title="Success" has_closer=true>
+                                    "You Seccessifully did something"
+                                </Alert>
+                            }
+                        }
+                    />
                     <Route
                         path="/avatar"
                         view=move || {
