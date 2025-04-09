@@ -1,0 +1,15 @@
+.alert {
+    padding: var(--size-3);
+    display: grid;
+    grid-template: "title closer" "message message";
+    grid-template-columns: 1fr auto;
+    .alert_body {
+        grid-area: message;
+    }
+    .alert_title {
+        grid-area: title;
+    }
+    .alert_close {
+        grid-area: closer;
+    }
+}
