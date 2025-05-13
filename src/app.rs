@@ -84,6 +84,9 @@ pub fn App() -> impl IntoView {
                     <li>
                         <A href="upload">"upload"</A>
                     </li>
+                    <li>
+                        <A href="/kitchen_sink">"kitchen sink"</A>
+                    </li>
                 </menu>
             </nav>
             <main class="content">
@@ -241,12 +244,12 @@ pub fn App() -> impl IntoView {
                         }
                     />
 
-                    <Route
-                        path="/upload"
-                        view=move || {
-                            view! { <Upload name="avatar".into() drop_area=true/> }
-                        }
-                    />
+                    // <Route
+                    //     path="/upload"
+                    //     view=move || {
+                    //         view! { <Upload name="avatar".into() drop_area=true/> }
+                    //     }
+                    // />
 
                     <Route
                         path="/input"
