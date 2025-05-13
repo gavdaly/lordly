@@ -32,7 +32,7 @@ impl InputSpec for Sex {
     fn minlength() -> Option<u32> {
         None
     }
-    fn validation() -> Option<Callback<String, Check<Sex>>> {
+    fn validation() -> Option<Callback<String, Check<String>>> {
         None
     }
 }

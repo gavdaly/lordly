@@ -9,7 +9,7 @@ use leptos::*;
 /// - `label`: Optional text label to show inside the progress bar
 #[component]
 pub fn ProgressBar(
-    #[prop(into)] value: ReadSignal<f64>,
+    #[prop(into)] value: Signal<f64>,
     #[prop(into, optional)] color: Option<Color>,
     #[prop(optional)] striped: bool,
     #[prop(optional)] animated: bool,

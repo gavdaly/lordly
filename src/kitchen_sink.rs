@@ -1,8 +1,7 @@
 use crate::components::{
     Accordion, AccordionItem, Avatar, Breadcrumb, BreadcrumbItem, Button, Card, PickList,
-    ProgressBar, Search, Spinner, Tab, Tabs, TagList, Timeline, TimelineItem,
+    ProgressBar, Search, Spinner, TagList, Timeline, TimelineItem,
 };
-use leptos::create_signal;
 use leptos::*;
 
 #[component]
@@ -467,17 +466,17 @@ ac turpis"#;
 
             <div class="showcase-item">
                 <h3>"Tabs Component"</h3>
-                <Tabs default_tab="tab1">
-                    <Tab id="tab1" label="First Tab" active=true>
-                        <p>"Content for the first tab. This is visible by default."</p>
-                    </Tab>
-                    <Tab id="tab2" label="Second Tab">
-                        <p>"Content for the second tab. Click on the tab to see this content."</p>
-                    </Tab>
-                    <Tab id="tab3" label="Third Tab">
-                        <p>"Content for the third tab. Each tab can contain different content."</p>
-                    </Tab>
-                </Tabs>
+                // <Tabs default_tab="tab1">
+                //     <Tab id="tab1" label="First Tab" active=true>
+                //         <p>"Content for the first tab. This is visible by default."</p>
+                    // </Tab>
+                    // <Tab id="tab2" label="Second Tab">
+                    //     <p>"Content for the second tab. Click on the tab to see this content."</p>
+                    // </Tab>
+                    // <Tab id="tab3" label="Third Tab">
+                //         <p>"Content for the third tab. Each tab can contain different content."</p>
+                //     </Tab>
+                // </Tabs>
             </div>
 
             <div class="showcase-item">
@@ -499,7 +498,7 @@ ac turpis"#;
             <div class="showcase-item">
                 <h3>"Progress Components"</h3>
                 {
-                    let (progress, _) = Signal::derive(65.0);
+                    let progress = Signal::derive(move || 65.0f64);
                     view! {
                         <div>
                             <h4>"Progress Bar"</h4>
@@ -513,7 +512,7 @@ ac turpis"#;
 
                             <h4>"Spinner"</h4>
                             <div style="display: flex; gap: 20px;">
-                                <Spinner value=Some(progress) color="primary" size=50 />
+                                <Spinner value=progress color="primary" size=50 />
                                 <Spinner color="secondary" size=50 /> // Indeterminate spinner
                             </div>
                         </div>

@@ -5,9 +5,6 @@
 {
   "lsp": {
     "rust-analyzer": {
-      "cargo": {
-        "features": ["ssr"]
-      },
       "procMacro": {
         "ignored": ["server", "component"]
       },

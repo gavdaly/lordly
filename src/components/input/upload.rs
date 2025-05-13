@@ -1,3 +1,4 @@
+use leptos::wasm_bindgen::JsCast;
 use leptos::*;
 
 /// A component that allows users to upload files.
@@ -29,14 +30,14 @@ pub fn Upload(
 
             let input_element = document()
                 .get_element_by_id(&input_id)
-                .and_then(|el| el.dyn_into::<web_sys::HtmlInputElement>().ok());
+                .and_then(|el| el.unchecked_into::<web_sys::HtmlInputElement>());
 
             if let Some(files) = ev.data_transfer().and_then(|dt| dt.files()) {
                 if let Some(input) = input_element {
                     let dt = web_sys::DataTransfer::new().unwrap();
                     for i in 0..files.length() {
                         if let Some(file) = files.get(i) {
-                            dt.items().add_file_with_str(&file.name());
+                            dt.add_file(&file);
                         }
                     }
                 }
@@ -48,10 +49,10 @@ pub fn Upload(
                 <div
                     class="dropzone"
                     id=drop_zone_id
-                    ondragenter=prevent_default.clone()
-                    ondragover=prevent_default.clone()
-                    ondragleave=prevent_default.clone()
-                    ondrop=move |ev| on_drop(ev)
+                    on:dragenter=prevent_default.clone()
+                    on:dragover=prevent_default.clone()
+                    on:dragleave=prevent_default.clone()
+                    on:drop=move |ev| on_drop(ev)
                 >
                     <div>
                         <label for=input_id>"Drop files here"</label>

@@ -35,7 +35,7 @@ impl InputSpec for CreditCardNumber {
     fn minlength() -> Option<u32> {
         Some(13)
     }
-    fn validation() -> Option<Callback<String, Check<CreditCardNumber>>> {
+    fn validation() -> Option<Callback<String, Check<String>>> {
         None
     }
 }

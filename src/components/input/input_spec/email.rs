@@ -35,7 +35,13 @@ impl InputSpec for Email {
     fn minlength() -> Option<u32> {
         Some(5)
     }
-    fn validation() -> Option<Callback<String, Check<Email>>> {
-        None
+    fn validation() -> Option<Callback<String, Check<String>>> {
+        Some(Callback::from(|value: String| {
+            if value.contains('@') {
+                Check::Valid
+            } else {
+                Check::Invalid("Invalid email address".into())
+            }
+        }))
     }
 }

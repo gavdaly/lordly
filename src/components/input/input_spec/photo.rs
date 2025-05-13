@@ -33,7 +33,7 @@ impl InputSpec for Photo {
     fn minlength() -> Option<u32> {
         None // Not applicable for file inputs
     }
-    fn validation() -> Option<Callback<String, Check<Photo>>> {
+    fn validation() -> Option<Callback<String, Check<String>>> {
         Some(Callback::from(|_value| {
             // File validation would typically be done differently
             // This is a placeholder for actual file validation logic

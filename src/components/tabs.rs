@@ -49,36 +49,23 @@ pub fn Tabs(
     // This will collect tab information from all children and return the actual tab panels
     let tabs_with_state = move || {
         let mut rendered_tabs = Vec::new();
+        let children = children();
 
-        // First pass: collect all tab information
-        let mut children_fns = children().nodes.into_iter();
-        while let Some(child) = children_fns.next() {
-            if let Some(child_view) = child.into_view() {
-                // We need to extract metadata from each Tab component
-                // This is a simplified version - in reality, you would need more complex logic
-                // to collect tab metadata from actual components
-                if let Some(tab_el) = child_view
-                    .into_any()
-                    .downcast_ref::<HtmlElement<html::AnyElement>>()
-                {
-                    if let Some(id) = tab_el.attribute("data-tab-id") {
-                        if let Some(id_str) = id.as_str() {
-                            let label = id_str; // In a real implementation, get the label property
-                            register_tab(id_str, label);
-                        }
+        // Process each child tab
+        for child in children.nodes.into_iter() {
+            let child_view = child.into_view();
+            // Extract tab metadata and register it
+            if let Some(tab_el) =
+                child_view.and_then(|v| v.into_any().downcast_ref::<HtmlElement<html::Div>>())
+            {
+                if let Some(id) = tab_el.attribute("data-tab-id") {
+                    if let Some(label) = tab_el.attribute("data-label") {
+                        register_tab(&id, &label);
                     }
                 }
             }
-        }
-
-        // Second pass: render tabs with correct active state
-        let active_id = active_tab.get();
-        let children_fns = children().clone();
-        for child in children_fns.nodes.into_iter() {
-            if let Some(view) = child.into_view() {
-                // You would need to set the active property based on active_tab
-                rendered_tabs.push(view);
-            }
+            // Add the view to rendered tabs
+            rendered_tabs.push(child_view);
         }
 
         rendered_tabs
@@ -112,7 +99,7 @@ pub fn Tabs(
                 }}
             </div>
             <div class="tabs-content">
-                {tabs_with_state}
+                {move || tabs_with_state()}
             </div>
         </div>
     }

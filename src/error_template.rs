@@ -40,17 +40,6 @@ pub fn ErrorTemplate(
         .collect();
     println!("Errors: {errors:#?}");
 
-    // Only the response code for the first error is actually sent from the server
-    // this may be customized by the specific application
-    #[cfg(feature = "ssr")]
-    {
-        use leptos_axum::ResponseOptions;
-        let response = use_context::<ResponseOptions>();
-        if let Some(response) = response {
-            response.set_status(errors[0].status_code());
-        }
-    }
-
     view! {
         <h1>{if errors.len() > 1 { "Errors" } else { "Error" }}</h1>
         <For

@@ -30,7 +30,11 @@ pub fn ComboBox(
         format!(
             "combo-box {} {}",
             size.clone().unwrap_or_default(),
-            if error.is_some() { "has-error" } else { "" }
+            if error.clone().is_some() {
+                "has-error"
+            } else {
+                ""
+            }
         )
     };
 
@@ -58,7 +62,7 @@ pub fn ComboBox(
                     })
                     .collect_view()}
             </select>
-            {error.map(|err| view! { <div class="error-message">{err}</div> })}
+            // {error.map(|err| view! { <div class="error-message">{err}</div> })}
         </fieldset>
     }
 }

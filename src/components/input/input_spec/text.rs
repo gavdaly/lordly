@@ -33,7 +33,7 @@ impl InputSpec for Text {
     fn minlength() -> Option<u32> {
         None
     }
-    fn validation() -> Option<Callback<String, Check<Text>>> {
+    fn validation() -> Option<Callback<String, Check<String>>> {
         Some(Callback::from(|_value| {
             // Basic validation - could be customized per use case
             Check::Valid

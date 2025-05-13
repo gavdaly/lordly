@@ -33,7 +33,7 @@ impl InputSpec for OrganizationTitle {
     fn minlength() -> Option<u32> {
         Some(2)
     }
-    fn validation() -> Option<Callback<String, Check<OrganizationTitle>>> {
+    fn validation() -> Option<Callback<String, Check<String>>> {
         None
     }
 }

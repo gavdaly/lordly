@@ -34,7 +34,7 @@ impl InputSpec for Birthday {
         None // Date input handles this
     }
     fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::from(|value: String| {
+        Some(Callback::from(|_value: String| {
             if true {
                 Check::Valid
             } else {
