@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::components::input::input_spec::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A credit card expiration date.
 struct CreditCardExpiration;
@@ -35,7 +35,7 @@ impl InputSpec for CreditCardExpiration {
         Some(5)
     }
     fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::from(|value: String| {
+        Some(Callback::new(|value: String| {
             // Basic MM/YY validation - more complex validation would check against current date
             if value.len() == 5 && value.chars().nth(2) == Some('/') {
                 let parts: Vec<&str> = value.split('/').collect();

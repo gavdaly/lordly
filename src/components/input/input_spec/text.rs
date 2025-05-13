@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A generic text input.
 struct Text;
@@ -34,7 +34,7 @@ impl InputSpec for Text {
         None
     }
     fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::from(|_value| {
+        Some(Callback::new(|_value| {
             // Basic validation - could be customized per use case
             Check::Valid
         }))

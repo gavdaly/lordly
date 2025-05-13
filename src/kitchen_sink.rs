@@ -1,8 +1,20 @@
 use crate::components::{
-    Accordion, AccordionItem, Avatar, Breadcrumb, BreadcrumbItem, Button, Card, PickList,
-    ProgressBar, Search, Spinner, TagList, Timeline, TimelineItem,
+    Accordion,
+    AccordionItem,
+    Avatar,
+    Breadcrumb,
+    BreadcrumbItem,
+    Button,
+    Card,
+    PickList,
+    ProgressBar,
+    //Search,
+    Spinner,
+    TagList,
+    Timeline,
+    TimelineItem,
 };
-use leptos::*;
+use leptos::prelude::*;
 
 #[component]
 pub fn KitchenSink() -> impl IntoView {
@@ -45,7 +57,7 @@ ac turpis"#;
                 </li>
             </menu>
         </nav>
-        <Search/>
+        // <Search/>
         <section class="content">
             <img
                 class="full"
@@ -186,7 +198,7 @@ ac turpis"#;
                     </p>
                     <blockquote cite="http://example.com">
                         <p>
-                            "“Ooh - a blockquote! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.”"
+                            ""Ooh - a blockquote! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.""
                         </p>
                         <footer>"someone " <cite>"material"</cite></footer>
                     </blockquote>
@@ -342,7 +354,7 @@ ac turpis"#;
                         <fieldset>
                             <legend>"data"</legend>
                             <div>
-                                <input type="radio" name="radio" id="radio1" vaule="radio1"/>
+                                <input type="radio" name="radio" id="radio1" value="radio1"/>
                                 <label for="radio1">"radio1"</label>
                             </div>
                             <div>
@@ -366,7 +378,6 @@ ac turpis"#;
                                 ("mar".into(), "Marnaria".into()),
                                 ("alf".into(), "Alfrado".into()),
                             ]
-
                             label="Sauce Type"
                         />
                         <TagList
@@ -375,13 +386,12 @@ ac turpis"#;
                                 ("sun".into(), "Sun Dried Tomatoes".into()),
                                 ("pineapple".into(), "Pineapple".into()),
                             ]
-
                             label="Toppings"
                         />
                         <Button type_="submit">"Submit"</Button>
                         <Button type_="reset">"Reset"</Button>
                     </form>
-                    <form disabled>
+                    <form>
                         <div>
                             <label for="text2">text input</label>
                             <input id="text2" type="text"/>
@@ -455,10 +465,7 @@ ac turpis"#;
 
             <div class="showcase-item">
                 <h3>"Card Component"</h3>
-                <Card
-                    color="primary"
-                    shape="rounded"
-                >
+                <Card color="primary" shape="rounded">
                     <p>"This is an example of the Card component with header and footer sections."</p>
                     <p>"Cards are useful for grouping related content and actions."</p>
                 </Card>
@@ -533,23 +540,15 @@ ac turpis"#;
             <div class="showcase-item">
                 <h3>"Timeline Component"</h3>
                 <Timeline alternate=true>
-                    <TimelineItem
-                        date="January 2023"
-                    >
+                    <TimelineItem date="January 2023">
                         <h4>"Project Started"</h4>
                         <p>"Initial development of the Leptos component library began."</p>
                     </TimelineItem>
-                    <TimelineItem
-                        date="March 2023"
-                        color="success"
-                    >
+                    <TimelineItem date="March 2023" color="success">
                         <h4>"Core Components Released"</h4>
                         <p>"The first set of components was completed and released."</p>
                     </TimelineItem>
-                    <TimelineItem
-                        date="June 2023"
-                        color="info"
-                    >
+                    <TimelineItem date="June 2023" color="info">
                         <h4>"Continuous Improvements"</h4>
                         <p>"Regular updates and new components were added to the library."</p>
                     </TimelineItem>

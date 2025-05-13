@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A credit card security code (CVV/CVC).
 struct CreditCardSecurityCode;

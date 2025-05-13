@@ -1,5 +1,5 @@
 use crate::data_type::Color;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A Progress Bar component for showing completion status
 /// - `value`: Current progress value (0-100)
@@ -24,16 +24,16 @@ pub fn ProgressBar(
     view! {
         <div
             class="progress"
-            role="progressbar"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow={move || bounded_value.get().to_string()}
+            // aria_role="progressbar"
+            // aria-valuemin="0"
+            // aria-valuemax="100"
+            // aria-valuenow={move || bounded_value.get().to_string()}
         >
             <div
                 class="progress-bar"
-                data-color=color
-                data-striped={striped.to_string()}
-                data-animated={animated.to_string()}
+                // data-color=color
+                // data-striped={striped.to_string()}
+                // data-animated={animated.to_string()}
                 style:width={move || format!("{:.1}%", bounded_value.get())}
             >
                 {move || label.clone().map(|l| view! { <span class="progress-label">{l}</span> })}
@@ -79,7 +79,7 @@ pub fn Spinner(
             width={size.to_string()}
             height={size.to_string()}
             viewBox="0 0 100 100"
-            data-color=color
+            // data-color=color
             data-indeterminate={bounded_value().is_none().to_string()}
         >
             <circle

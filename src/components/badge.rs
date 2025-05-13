@@ -1,5 +1,5 @@
-use crate::data_type::{Color, Shape, Fill, Position};
-use leptos::*;
+use crate::data_type::{Color, Fill, Position, Shape};
+use leptos::prelude::*;
 
 /// A badge is a small status descriptor for UI elements.
 ///
@@ -17,7 +17,9 @@ pub fn Badge(
     #[prop(optional, into)] position: Option<Position>,
 ) -> impl IntoView {
     view! {
-        <span class="badge" data-color=color data-shape=shape data-fill=fill data-position=position>
+        <span class="badge" //data-color=color data-shape=shape data-fill=fill
+        //data-position=position
+        >
             {children()}
         </span>
     }

@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A gender identity (such as "Female", "Fa'afafine", "Hijra", "Male", "Nonbinary"), as freeform text without newlines.
 struct Sex;

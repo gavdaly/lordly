@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A photo or image upload.
 struct Photo;
@@ -34,7 +34,7 @@ impl InputSpec for Photo {
         None // Not applicable for file inputs
     }
     fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::from(|_value| {
+        Some(Callback::new(|_value| {
             // File validation would typically be done differently
             // This is a placeholder for actual file validation logic
             Check::Valid

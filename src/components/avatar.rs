@@ -1,12 +1,12 @@
 use crate::data_type::Shape;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A component to display an avatar image.
 ///
 /// # Example
 ///
 /// ```rust
-/// use leptos::*;
+/// use leptos::prelude::*;
 /// #[component]
 /// fn Example() -> impl IntoView {
 ///     view! {
@@ -32,5 +32,6 @@ pub fn Avatar(
         Some(name) => format!("Avatar for {name}",),
         None => "avatar image for unknown user".to_string(),
     };
-    view! { <img data-shape=shape src=src alt=alt width=width/> }
+    view! { <img //data-shape=shape
+    src=src alt=alt width=width/> }
 }

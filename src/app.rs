@@ -1,9 +1,10 @@
 use crate::components::*;
 use crate::error_template::{AppError, ErrorTemplate};
 use crate::kitchen_sink::KitchenSink;
-use leptos::*;
+use leptos::prelude::*;
 use leptos_meta::*;
-use leptos_router::*;
+use leptos_router::components::*;
+use leptos_router::path;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -17,11 +18,7 @@ pub fn App() -> impl IntoView {
         <Title text="Welcome to Leptos"/>
 
         // content for this welcome page
-        <Router fallback=|| {
-            let mut outside_errors = Errors::default();
-            outside_errors.insert_with_default_key(AppError::NotFound);
-            view! { <ErrorTemplate outside_errors/> }.into_view()
-        }>
+        <Router>
             <nav>
                 <menu>
                     <li>
@@ -90,10 +87,10 @@ pub fn App() -> impl IntoView {
                 </menu>
             </nav>
             <main class="content">
-                <Routes>
-                    <Route path="/" view=move || view! { <h1>"Home"</h1> }/>
+            <Routes fallback=move || view!{<div>"fallback"</div>}>
+                    <Route path=path!("/") view=move || view! { <h1>"Home"</h1> }/>
                     <Route
-                        path="/alert"
+                        path=path!("/alert")
                         view=move || {
                             view! {
                                 <Alert title="Success" has_closer=true>
@@ -103,7 +100,7 @@ pub fn App() -> impl IntoView {
                         }
                     />
                     <Route
-                        path="/avatar"
+                        path=path!("/avatar")
                         view=move || {
                             view! {
                                 <h1>"Avatar"</h1>
@@ -127,28 +124,28 @@ pub fn App() -> impl IntoView {
                     />
 
                     <Route
-                        path="/badge"
+                        path=path!("/badge")
                         view=move || {
                             view! { <Badge>"Badge"</Badge> }
                         }
                     />
 
                     <Route
-                        path="/button"
+                        path=path!("/button")
                         view=move || {
                             view! { <Button>"Button"</Button> }
                         }
                     />
 
                     <Route
-                        path="/dialog"
+                        path=path!("/dialog")
                         view=move || {
                             view! { <Dialog id="dialog1">"Dialog"</Dialog> }
                         }
                     />
 
                     <Route
-                        path="/drawer"
+                        path=path!("/drawer")
                         view=move || {
                             view! {
                                 <Drawer id="drawer1" anchor="left">
@@ -159,21 +156,21 @@ pub fn App() -> impl IntoView {
                     />
 
                     <Route
-                        path="/loading"
+                        path=path!("/loading")
                         view=move || {
                             view! { <Loading>"Loading..."</Loading> }
                         }
                     />
 
                     <Route
-                        path="/message"
+                        path=path!("/message")
                         view=move || {
                             view! { <Message>"Message"</Message> }
                         }
                     />
 
                     <Route
-                        path="/pagination"
+                        path=path!("/pagination")
                         view=move || {
                             view! {
                                 <Pagination current=1 total=10/>
@@ -184,35 +181,35 @@ pub fn App() -> impl IntoView {
                     />
 
                     <Route
-                        path="/popover"
+                        path=path!("/popover")
                         view=move || {
                             view! { <Popover id="pop">"Popover"</Popover> }
                         }
                     />
 
                     <Route
-                        path="/qrcode"
+                        path=path!("/qrcode")
                         view=move || {
                             view! { <Qrcode value="Qrcode".into()/> }
                         }
                     />
 
-                    <Route
-                        path="/search"
-                        view=move || {
-                            view! { <Search/> }
-                        }
-                    />
+                    // <Route
+                    //     path=path!("/search")
+                    //     view=move || {
+                    //         view! { <Search/> }
+                    //     }
+                    // />
 
                     <Route
-                        path="/switch"
+                        path=path!("/switch")
                         view=move || {
                             view! { <Switch name="switch"/> }
                         }
                     />
 
                     <Route
-                        path="/table"
+                        path=path!("/table")
                         view=move || {
                             view! {
                                 <Table body=vec![
@@ -224,21 +221,21 @@ pub fn App() -> impl IntoView {
                     />
 
                     <Route
-                        path="/tag"
+                        path=path!("/tag")
                         view=move || {
                             view! { <Tag color="warning">"Tag"</Tag> }
                         }
                     />
 
                     <Route
-                        path="/toast"
+                        path=path!("/toast")
                         view=move || {
                             view! { <Toast>"Toast"</Toast> }
                         }
                     />
 
                     <Route
-                        path="/tooltip"
+                        path=path!("/tooltip")
                         view=move || {
                             view! { <Tooltip>"Tooltip"</Tooltip> }
                         }
@@ -252,7 +249,7 @@ pub fn App() -> impl IntoView {
                     // />
 
                     <Route
-                        path="/input"
+                        path=path!("/input")
                         view=move || {
                             view! {
                                 <h1>"Input"</h1>
@@ -262,7 +259,7 @@ pub fn App() -> impl IntoView {
                     />
 
                     <Route
-                        path="/rate"
+                        path=path!("/rate")
                         view=move || {
                             view! {
                                 <h1>"Rate"</h1>
@@ -272,7 +269,7 @@ pub fn App() -> impl IntoView {
                     />
 
                     <Route
-                        path="/picklist"
+                        path=path!("/picklist")
                         view=move || {
                             view! {
                                 <PickList list=vec![("l".into(), "name".into())] label="label"/>
@@ -281,14 +278,14 @@ pub fn App() -> impl IntoView {
                     />
 
                     <Route
-                        path="/taglist"
+                        path=path!("/taglist")
                         view=move || {
                             view! { <TagList list=vec![("2".into(), "two".into())] label="label"/> }
                         }
                     />
 
                     <Route
-                        path="/kitchen_sink"
+                        path=path!("/kitchen_sink")
                         view=move || {
                             view! { <KitchenSink/> }
                         }

@@ -1,6 +1,7 @@
 use crate::data_type::ValidationState;
-use ev::FocusEvent;
-use leptos::*;
+
+use leptos::ev::FocusEvent;
+use leptos::prelude::*;
 
 /// A reusable input component that provides validation, error handling, and accessibility features.
 /// Includes support for custom validation, styling classes, and error/success states.
@@ -10,36 +11,41 @@ pub fn Input(
     #[prop(into)] label: String,
     #[prop(into, optional)] summary: Option<String>,
     #[prop(into, optional)] placeholder: Option<String>,
-    #[prop(default=(|_|{Ok(())}).into(), into)] validation: Callback<String, Result<(), String>>,
+    #[prop(default=Callback::new(|_|{Ok(())}), into)] validation: Callback<
+        String,
+        Result<(), String>,
+    >,
     #[prop(default="".into(), into)] wrapper_class: String,
     #[prop(default="".into(), into)] input_class: String,
     #[prop(default="".into(), into)] label_class: String,
     #[prop(default="".into(), into)] summary_class: String,
     #[prop(default="".into(), into)] error_class: String,
-    #[prop(default="✅".into_view(), into)] validation_children: View,
+    #[prop(default="✅".into_any(), into)] validation_children: AnyView,
 ) -> impl IntoView {
-    let (state, set_state) = create_signal::<ValidationState>(ValidationState::Empty);
+    let (state, set_state) = signal(ValidationState::Empty);
 
     let validate = move |ev: FocusEvent| {
         if let Some(target) = ev.target() {
             match target.value_of().as_string() {
-                Some(v) => match validation(v) {
-                    Ok(_) => set_state(ValidationState::Valid),
-                    Err(err) => set_state(ValidationState::Invalid(err)),
+                Some(v) => match validation.run(v) {
+                    Ok(_) => set_state.set(ValidationState::Valid),
+                    Err(err) => set_state.set(ValidationState::Invalid(err)),
                 },
-                None => set_state(ValidationState::Invalid("Failed to get value".into())),
+                None => set_state.set(ValidationState::Invalid("Failed to get value".into())),
             }
         }
     };
 
-    let focused = move |_| set_state(ValidationState::Dirty);
+    let focused = move |_| set_state.set(ValidationState::Dirty);
     let is_invalid = move |state| matches!(state, ValidationState::Invalid(_));
-    let error_message_view = move || match state() {
-        ValidationState::Invalid(message) => view! { <span class="error-message">{message}</span> },
-        ValidationState::Valid => {
-            view! { <span class="success-message">{validation_children}</span> }
+    let error_message_view = move || match state.get() {
+        ValidationState::Invalid(message) => {
+            view! { <span class="error-message">{message}</span> }.into_any()
         }
-        _ => view! { <span></span> },
+        ValidationState::Valid => {
+            view! { <span class="success-message">{validation_children}</span> }.into_any()
+        }
+        _ => view! { <span></span> }.into_any(),
     };
 
     view! {
@@ -54,13 +60,13 @@ pub fn Input(
                 placeholder=placeholder
                 on:blur=validate
                 on:focus=focused
-                class=format!("input-field {} {}", state(), input_class)
-                aria-invalid=is_invalid(state()).to_string()
+                class=format!("input-field {} {}", state.get(), input_class)
+                aria-invalid=is_invalid(state.get()).to_string()
                 aria-describedby=format!("{name}-error")
             />
             <div
                 id=format!("{name}-error error {error_class}")
-                data-state=move || state().to_string()
+                data-state=move || state.get().to_string()
             >
                 |_|
                 {error_message_view()}

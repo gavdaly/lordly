@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A monetary transaction amount.
 struct TransactionAmount;

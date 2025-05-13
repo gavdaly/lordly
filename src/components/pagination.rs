@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 
 /// Created a pagination component with the current page's property set to `data-active='true'`
 #[component]
@@ -33,25 +33,25 @@ pub fn Pagination(
                     <>
                         <a href=format!("{}{}", url_base(), current - 1)>"prev"</a>
                     </>
-                }
+                }.into_any()
             } else {
                 view! {
                     <>
                         <i>"prev"</i>
                     </>
-                }
+                }.into_any()
             }}
             <ul>
                 {window()
                     .map(|i| {
                         if i == current {
-                            view! { <li data-active=true>{i}</li> }
+                            view! { <li data-active=true>{i}</li> }.into_any()
                         } else {
                             view! {
                                 <li data-active=false>
                                     <a href=format!("{}{}", url_base(), i)>{i}</a>
                                 </li>
-                            }
+                            }.into_any()
                         }
                     })
                     .collect_view()}
@@ -61,15 +61,14 @@ pub fn Pagination(
                     <>
                         <a href=format!("{}{}", url_base(), current + 1)>"next"</a>
                     </>
-                }
+                }.into_any()
             } else {
                 view! {
                     <>
                         <i>"next"</i>
                     </>
-                }
+                }.into_any()
             }}
-
         </aside>
     }
 }

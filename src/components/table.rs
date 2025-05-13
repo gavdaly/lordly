@@ -1,15 +1,15 @@
-use leptos::*;
+use leptos::prelude::*;
 
 #[component]
-pub fn Table(
-    body: Vec<Vec<String>>,
-    #[prop(optional)] headers: MaybeSignal<Vec<String>>,
+pub fn Table<'a>(
+    body: Vec<Vec<&'a str>>,
+    #[prop(optional)] headers: Signal<Vec<String>>,
     #[prop(optional)] footer: Option<Vec<String>>,
 ) -> impl IntoView {
     view! {
         <table>
             <Show when=move || {
-                !headers().is_empty()
+                !headers.get().is_empty()
             }>
                 "header is present"
             // {view!{ <thead>{headers().iter().map( |text|   view!{ <th>{text}</th>}).collect_view()}</thead>}}
@@ -18,7 +18,7 @@ pub fn Table(
                 {body
                     .iter()
                     .map(|row| {
-                        view! { <tr>{row.iter().collect_view()}</tr> }
+                        view! { <tr>{row.into_iter().map(|f| view!{ <td>{f.into_any()}</td>}).collect_view()}</tr> }
                     })
                     .collect_view()}
             </tbody>

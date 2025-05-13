@@ -1,4 +1,4 @@
-use leptos::{Attribute, IntoAttribute};
+use leptos::prelude::*;
 use std::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -13,7 +13,7 @@ pub enum Color {
 }
 
 impl Color {
-    fn as_str(&self) -> &str {
+    pub fn as_str(&self) -> &str {
         match self {
             Color::Primary => "primary",
             Color::Secondary => "secondary",
@@ -51,11 +51,8 @@ impl Display for Color {
     }
 }
 
-impl IntoAttribute for Color {
-    fn into_attribute(self) -> Attribute {
-        Attribute::String(self.as_str().to_string().into())
-    }
-    fn into_attribute_boxed(self: Box<Self>) -> Attribute {
-        Box::new(self).into_attribute()
-    }
-}
+// impl IntoAnyAttribute for Color {
+//     fn into_any_attr(self) -> leptos::attr::any_attribute::AnyAttribute {
+//         self.as_str()
+//     }
+// }

@@ -1,5 +1,5 @@
 use crate::data_type::{Color, Fill, Shape};
-use leptos::*;
+use leptos::prelude::*;
 
 #[component]
 pub fn Tag(
@@ -10,7 +10,8 @@ pub fn Tag(
 ) -> impl IntoView {
     view! {
         <div class="space-item">
-            <span data-color=color data-shape=shape data-fill=fill class="tag">
+            <span //data-color=color data-shape=shape data-fill=fill
+                class="tag">
                 {children()}
             </span>
         </div>

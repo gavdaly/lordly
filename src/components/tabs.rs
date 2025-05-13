@@ -1,5 +1,5 @@
 use crate::data_type::{Color, Shape};
-use leptos::*;
+use leptos::prelude::*;
 use std::collections::HashMap;
 
 /// A tab that should be used with the Tabs component

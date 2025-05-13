@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A URL, such as a home page or company website address as appropriate given the context of the other fields in the form.
 struct Url;

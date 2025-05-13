@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 
 /// A list of tags with checkboxes.
 /// # Arguments
@@ -12,17 +12,14 @@ pub fn TagList(
     view! {
         <fieldset class="taglist">
             <legend>{label}</legend>
-            {list
-                .iter()
-                .map(|(l, name)| {
-                    view! {
-                        <div class="tag-toggle">
-                            <input type="checkbox" name id=name value=name/>
-                            <label for=name>{l}</label>
-                        </div>
-                    }
-                })
-                .collect_view()}
+            <For each=move || list.clone() key=|k| k.1.clone() children=move |(l, name)| {
+                view!{
+                    <div class="tag-toggle">
+                        <input type="checkbox" name=name.clone() id=name.clone() value=name.clone()/>
+                        <label for=name>{l}</label>
+                    </div>
+                }
+            }/>
         </fieldset>
     }
 }

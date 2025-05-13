@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 use std::fmt;
 
 /// Defines the type of address (Standard, Billing, Shipping)
@@ -677,7 +677,7 @@ impl InputSpec for BillingPostalCode {
         Some(3)
     }
     fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::from(|value: String| {
+        Some(Callback::new(|value: String| {
             if value.trim().len() >= 3 {
                 Check::Valid
             } else {

@@ -1,6 +1,6 @@
-use crate::data_type::ValidationState;
-use ev::FocusEvent;
-use leptos::*;
+use crate::data_type::{validation, ValidationState};
+use leptos::ev::FocusEvent;
+use leptos::prelude::*;
 
 #[component]
 pub fn TextArea(
@@ -13,20 +13,25 @@ pub fn TextArea(
     #[prop(optional, into)] label_class: Option<String>,
     #[prop(optional, into)] summary_class: Option<String>,
     #[prop(optional, into)] error_class: Option<String>,
-    #[prop(optional, into)] validation_children: Option<View>,
+    #[prop(optional, into)] validation_children: Option<AnyView>,
     #[prop(optional, into)] validation: Option<Callback<String, Result<(), String>>>,
 ) -> impl IntoView {
-    let (state, set_state) = create_signal(ValidationState::Empty);
+    let (state, set_state) = signal(ValidationState::Empty);
     let validate = move |ev: FocusEvent| {
-        if let Some(target) = ev.target() {
-            match target.value_of().as_string() {
-                Some(value) => match validation.as_ref().map(|valid| valid(value)) {
-                    Some(Ok(_)) => set_state(ValidationState::Valid),
-                    Some(Err(err)) => set_state(ValidationState::Invalid(err)),
-                    None => set_state(ValidationState::Invalid("Failed to validate".into())),
-                },
-                None => set_state(ValidationState::Invalid("Failed to get value".into())),
-            }
+        let Some(valid) = validation else {
+            return;
+        };
+
+        let Some(target) = ev.target() else {
+            return;
+        };
+        let Some(value) = target.value_of().as_string() else {
+            set_state.set(ValidationState::Invalid("Failed to validate".into()));
+            return;
+        };
+        match valid.run(value) {
+            Ok(_) => set_state.set(ValidationState::Valid),
+            Err(err) => set_state.set(ValidationState::Invalid(err)),
         }
     };
     view! {
@@ -37,7 +42,7 @@ pub fn TextArea(
                 id=name.clone()
                 name=name
                 on:blur=validate
-                on:focus=move |_| set_state(ValidationState::Dirty)
+                on:focus=move |_| set_state.set(ValidationState::Dirty)
                 placeholder=placeholder
             ></textarea>
         </div>

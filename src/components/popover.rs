@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 
 #[component]
 pub fn Popover(
@@ -7,7 +7,8 @@ pub fn Popover(
     #[prop(into, optional)] anchor: Option<String>,
 ) -> impl IntoView {
     view! {
-        <div id=id popover anchor=anchor>
+        <div id=id popover //anchor=anchor
+        >
             {children()}
         </div>
     }
@@ -21,7 +22,7 @@ pub fn PopoverTarget(
 ) -> impl IntoView {
     let popoveraction = action.unwrap_or("toggle".to_string());
     view! {
-        <button popovertarget=popovertarget popoveraction=popoveraction>
+        <button popovertarget=popovertarget popover=popoveraction>
             {children()}
         </button>
     }

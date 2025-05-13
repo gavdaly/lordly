@@ -1,5 +1,5 @@
-use ev::FocusEvent;
-use leptos::*;
+use leptos::ev::FocusEvent;
+use leptos::prelude::*;
 
 /// A switch component.
 ///
@@ -12,13 +12,16 @@ use leptos::*;
 #[component]
 pub fn Switch(
     #[prop(into)] name: String,
-    #[prop(default = "".into())] wrapper_class: String,
-    #[prop(default = "".into())] label_class: String,
-    #[prop(default = "".into())] class: String,
-    #[prop(default =(|_|{true}).into(), into)] validation: Callback<String, bool>,
+    #[prop(default = String::from(""))] wrapper_class: String,
+    #[prop(default = String::from(""))] label_class: String,
+    #[prop(default = String::from(""))] class: String,
+    #[prop(default=Callback::new(|_|{true}), into)] validation: Callback<String, bool>,
 ) -> impl IntoView {
     let blured = move |value: FocusEvent| {
-        validation(value.value_of().as_string().unwrap().clone());
+        let Some(value) = value.value_of().as_string() else {
+            return;
+        };
+        validation.run(value);
     };
     view! {
         <div class=format!("input #{wrapper_class}")>

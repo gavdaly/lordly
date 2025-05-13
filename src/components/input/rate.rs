@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 
 /// A rating component.
 /// # Arguments
@@ -6,7 +6,7 @@ use leptos::*;
 /// - `name`: The name of the input.
 #[component]
 pub fn Rate(#[prop(default = 5)] max: u8, #[prop(into)] name: String) -> impl IntoView {
-    let (rating, set_rating) = create_signal(0);
+    let (rating, set_rating) = signal(0);
     view! {
         <div class="rating">
             <input
@@ -15,15 +15,15 @@ pub fn Rate(#[prop(default = 5)] max: u8, #[prop(into)] name: String) -> impl In
                 type="number"
                 max=max
                 name=name
-                value=rating()
+                value=rating.get()
             />
             {(0..max)
                 .map(|i| {
                     view! {
                         <i
                             class="rate"
-                            data-selected=rating() <= i
-                            on:click=move |_| { set_rating(i) }
+                            data-selected=rating.get() <= i
+                            on:click=move |_| { set_rating.set(i) }
                         >
                             "⭐️"
                         </i>

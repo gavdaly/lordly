@@ -1,4 +1,4 @@
-use leptos::{Attribute, IntoAttribute};
+use leptos::prelude::*;
 use std::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -45,11 +45,8 @@ impl Display for Shape {
     }
 }
 
-impl IntoAttribute for Shape {
-    fn into_attribute(self) -> Attribute {
-        Attribute::String(self.as_str().to_string().into())
-    }
-    fn into_attribute_boxed(self: Box<Self>) -> Attribute {
-        Box::new(self).into_attribute()
-    }
-}
+// impl IntoAnyAttribute for Shape {
+//     fn into_any_attr(self) -> leptos::attr::any_attribute::AnyAttribute {
+//         self.as_str()
+//     }
+// }

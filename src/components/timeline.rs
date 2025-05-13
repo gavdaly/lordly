@@ -1,5 +1,5 @@
 use crate::data_type::Color;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A timeline item representing a single event
 /// - `date`: Date or time information for this event
@@ -14,7 +14,8 @@ pub fn TimelineItem(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <li class="timeline-item" data-color=color>
+        //data-color=color
+        <li class="timeline-item" >
             <div class="timeline-point">
                 {icon.map(|icon| view! { <div class="timeline-icon">{icon()}</div> })}
             </div>
@@ -39,9 +40,9 @@ pub fn Timeline(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <ul 
-            class="timeline" 
-            data-color=color 
+        //data-color=color
+        <ul
+            class="timeline"
             data-alternate={alternate.to_string()}
         >
             {children()}

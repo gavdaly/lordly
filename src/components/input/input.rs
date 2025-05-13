@@ -3,7 +3,7 @@ use crate::check::Check;
 use crate::data_type::ValidationState;
 use core::marker::PhantomData;
 use leptos::ev::FocusEvent;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A reusable input component that provides validation, error handling, and accessibility features.
 /// Includes support for custom validation, styling classes, and error/success states.
@@ -21,9 +21,9 @@ pub fn Input<T: InputSpec + 'static>(
     #[prop(default="".into(), into)] label_class: String,
     #[prop(default="".into(), into)] summary_class: String,
     #[prop(default="".into(), into)] error_class: String,
-    #[prop(default="✅".into_view(), into)] validation_children: View,
+    #[prop(default="✅".into_any(), into)] validation_children: AnyView,
 ) -> impl IntoView {
-    let (state, set_state) = create_signal::<ValidationState>(ValidationState::Empty);
+    let (state, set_state) = signal(ValidationState::Empty);
     let type_override = type_override.unwrap_or_else(|| T::input_type().to_string());
 
     // let validate = move |ev: FocusEvent| {
@@ -40,14 +40,16 @@ pub fn Input<T: InputSpec + 'static>(
     //
     let autocomplete = T::autocomplete();
 
-    let focused = move |_| set_state(ValidationState::Dirty);
+    let focused = move |_| set_state.set(ValidationState::Dirty);
     let is_invalid = move |state| matches!(state, ValidationState::Invalid(_));
-    let error_message_view = move || match state() {
-        ValidationState::Invalid(message) => view! { <span class="error-message">{message}</span> },
-        ValidationState::Valid => {
-            view! { <span class="success-message">{validation_children}</span> }
+    let error_message_view = move || match state.get() {
+        ValidationState::Invalid(message) => {
+            view! { <span class="error-message">{message}</span> }.into_any()
         }
-        _ => view! { <span></span> },
+        ValidationState::Valid => {
+            view! { <span class="success-message">{validation_children}</span> }.into_any()
+        }
+        _ => view! { <span></span> }.into_any(),
     };
 
     view! {
@@ -63,13 +65,13 @@ pub fn Input<T: InputSpec + 'static>(
                 placeholder=placeholder
                 // on:blur=validate
                 on:focus=focused
-                class=format!("input-field {} {}", state(), input_class)
-                aria-invalid=is_invalid(state()).to_string()
+                class=format!("input-field {} {}", state.get(), input_class)
+                aria-invalid=is_invalid(state.get()).to_string()
                 aria-describedby=format!("{name}-error")
             />
             <div
                 id=format!("{name}-error error {error_class}")
-                data-state=move || state().to_string()
+                data-state=move || state.get().to_string()
             >
                 |_|
                 {error_message_view()}

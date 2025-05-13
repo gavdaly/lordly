@@ -1,5 +1,5 @@
+use leptos::prelude::*;
 use leptos::wasm_bindgen::JsCast;
-use leptos::*;
 
 /// A component that allows users to upload files.
 ///

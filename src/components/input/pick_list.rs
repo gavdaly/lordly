@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 
 /// A list of tags with radio buttons.
 ///
@@ -13,18 +13,17 @@ pub fn PickList(
     view! {
         <fieldset class="taglist">
             <legend>{label}</legend>
-
-            {list
-                .iter()
-                .map(|(l, name)| {
-                    view! {
+            <For
+                each=move || list.clone()
+                key=|item| item.1.clone()
+                    children=|(name, label)| { view!{
                         <div class="tag-toggle">
-                            <input type="radio" name id=name value=name/>
-                            <label for=name>{l}</label>
+                            <input type="radio" name id=name.clone() value=name.clone()/>
+                            <label for=name.clone()>{label}</label>
                         </div>
-                    }
-                })
-                .collect_view()}
+                    }}
+            >
+            </For>
 
         </fieldset>
     }

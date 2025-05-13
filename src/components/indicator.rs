@@ -1,5 +1,5 @@
 use crate::data_type::{Color, Fill, Position, Shape};
-use leptos::*;
+use leptos::prelude::*;
 
 /// A higher order component that wraps its children in an `span` tag, it shows a colored dot, empty or with a number.
 /// - `number`: The number to display in the indicator.
@@ -10,7 +10,7 @@ use leptos::*;
 #[component]
 pub fn Indicator(
     children: Children,
-    #[prop(optional)] number: MaybeSignal<Option<u8>>,
+    #[prop(optional)] number: Signal<Option<u8>>,
     #[prop(default="round".into(), into)] shape: Shape,
     #[prop(default="solid".into(), into)] fill: Fill,
     #[prop(default="primary".into(), into)] color: Color,
@@ -20,10 +20,10 @@ pub fn Indicator(
         <span class="indicator-container">
             <i
                 class="indicator"
-                data-position=position
-                data-shape=shape
-                data-fill=fill
-                data-color=color
+                //data-position=position
+                //data-shape=shape
+                //data-fill=fill
+                //data-color=color
                 data-number=number
             >
                 {number}

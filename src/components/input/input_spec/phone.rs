@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 use std::fmt;
 
 /// Defines different components of a telephone number
@@ -123,7 +123,7 @@ impl InputSpec for TelNational {
         Some(7) // Minimum for standard formats without country code
     }
     fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::from(|value: String| {
+        Some(Callback::new(|value: String| {
             // This validation focuses on finding sufficient digits
             let digits: String = value.chars().filter(|c| c.is_ascii_digit()).collect();
             if digits.len() >= 7 {

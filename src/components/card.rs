@@ -1,5 +1,5 @@
 use crate::data_type::{Color, Shape};
-use leptos::*;
+use leptos::prelude::*;
 
 /// A Card is a container component that groups related content and actions.
 /// - `color`: The color scheme of the card.
@@ -16,7 +16,10 @@ pub fn Card(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div class="card" data-color=color data-shape=shape>
+        <div class="card"
+            //  data-color=color
+        //    data-shape=shape
+        >
             {header.map(|header| view! {
                 <div class="card-header">
                     {header()}

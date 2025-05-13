@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 
 /// A component that renders an enhanced combobox.
 ///
@@ -49,18 +49,14 @@ pub fn ComboBox(
                     let selected = event_target_value(&ev);
                     value.set(selected.clone());
                     if let Some(callback) = on_change.as_ref() {
-                        callback.call(selected);
+                        callback.run(selected);
                     }
                 }
                 prop:value=move || value.get()
             >
                 {placeholder.map(|p| view! { <option value="" disabled selected=move || value.get().is_empty()>{p}</option> })}
-                {options
-                    .iter()
-                    .map(|(id, name)| {
-                        view! { <option value=id>{name}</option> }
-                    })
-                    .collect_view()}
+                <For each=move || options.clone() key=|k| k.0.clone() children=move |(id, name)| {view!{<option value=id>{name}</option> }} />
+
             </select>
             // {error.map(|err| view! { <div class="error-message">{err}</div> })}
         </fieldset>

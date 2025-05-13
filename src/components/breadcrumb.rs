@@ -1,5 +1,5 @@
 use crate::data_type::{Color, Shape};
-use leptos::*;
+use leptos::prelude::*;
 
 /// A breadcrumb item representing a navigation step
 /// - `href`: The URL this breadcrumb item links to
@@ -43,8 +43,8 @@ pub fn Breadcrumb(
         <nav aria-label="Breadcrumb navigation">
             <ol
                 class="breadcrumb"
-                data-color=color
-                data-shape=shape
+                //data-color=color
+                //data-shape=shape
                 data-separator={separator}
             >
                 {children()}

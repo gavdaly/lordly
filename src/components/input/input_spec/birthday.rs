@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A complete birth date.
 struct Birthday;
@@ -34,7 +34,7 @@ impl InputSpec for Birthday {
         None // Date input handles this
     }
     fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::from(|_value: String| {
+        Some(Callback::new(|value: String| {
             if true {
                 Check::Valid
             } else {

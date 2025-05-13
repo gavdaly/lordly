@@ -1,5 +1,5 @@
 use crate::data_type::{ButtonType, Color, Fill, Shape};
-use leptos::*;
+use leptos::prelude::*;
 
 /// A button is a clickable element that can be used to trigger actions.
 /// - `type_`: The type of the button.
@@ -17,7 +17,8 @@ pub fn Button(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <button type=type_ data-shape=shape data-color=color data-fill=fill>
+        <button //type=type_ //data-shape=shape data-color=color data-fill=fill
+        >
             {children()}
         </button>
     }

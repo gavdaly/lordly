@@ -1,6 +1,6 @@
 use super::InputSpec;
 use crate::check::Check;
-use leptos::*;
+use leptos::prelude::*;
 
 /// A birthday day component.
 struct BirthdayDay;
@@ -35,7 +35,7 @@ impl InputSpec for BirthdayDay {
         Some(1)
     }
     fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::from(|value: String| {
+        Some(Callback::new(|value: String| {
             if let Ok(day) = value.parse::<u8>() {
                 if day >= 1 && day <= 31 {
                     return Check::Valid;

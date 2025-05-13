@@ -1,5 +1,5 @@
+use leptos::prelude::*;
 use std::collections::HashSet;
-use leptos::*;
 
 /// A component that renders a customizable group of checkboxes.
 ///
@@ -19,10 +19,10 @@ pub fn CheckBoxes(
     #[prop(default = false)] disabled: bool,
     #[prop(optional, into)] class: Option<String>,
 ) -> impl IntoView {
-    let selected_values = create_rw_signal(selected);
+    let (selected_values, set_selected_values) = signal(selected);
 
     let handle_change = move |id: String, checked: bool| {
-        selected_values.update(|selected| {
+        set_selected_values.update(|selected| {
             if checked {
                 selected.insert(id);
             } else {
@@ -31,38 +31,42 @@ pub fn CheckBoxes(
         });
 
         if let Some(callback) = on_change {
-            callback(selected_values.get_untracked());
+            callback.run(selected_values.get());
         }
     };
 
     view! {
         <fieldset class=class disabled=disabled aria-disabled=disabled>
             <legend>{label}</legend>
-            {options
-                .iter()
-                .map(|(id, display_text)| {
-                    let id_clone = id.clone();
-                    let is_checked = selected_values.with(|s| s.contains(id));
+            <For
+                each=move || options.clone()
+                key=|item| item.0.clone()
+                children=move |(id, display_text)| {
+                    let id = Memo::new(move|_| id.clone());
+                    let is_checked = Memo::new(move |_| {
+                        let values = selected_values.get();
+                        values.contains(&id.get())
+                    });
 
                     view! {
                         <div class="checkbox-item">
                             <input
                                 type="checkbox"
                                 id=id
-                                name=id
-                                value=id
-                                checked=is_checked
+                                name=id.clone()
+                                value=id.clone()
+                                checked=is_checked.get()
                                 disabled=disabled
                                 on:change=move |ev| {
                                     let checked = event_target_checked(&ev);
-                                    handle_change(id_clone.clone(), checked);
+                                    handle_change(id.get(), checked);
                                 }
                             />
                             <label for=id>{display_text}</label>
                         </div>
                     }
-                })
-                .collect_view()}
+                }
+            />
         </fieldset>
     }
 }
