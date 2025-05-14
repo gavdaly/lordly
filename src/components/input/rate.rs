@@ -5,31 +5,70 @@ use leptos::prelude::*;
 /// - `max`: The maximum rating.
 /// - `name`: The name of the input.
 #[component]
-pub fn Rate(#[prop(default = 5)] max: u8, #[prop(into)] name: String) -> impl IntoView {
-    let (rating, set_rating) = signal(0);
+pub fn Rate(
+    #[prop(default = 5)] max: u8,
+    #[prop(into)] name: String,
+    #[prop(into, optional)] label: Option<String>,
+    #[prop(default={"⭐️".into_any()})] unchecked: AnyView,
+    #[prop(default={"🌟".into_any()})] checked: AnyView,
+) -> impl IntoView {
+    let name = Signal::derive(move || name.clone());
+    let label = Signal::derive(move || label.clone());
+    let (selected, set_selected) = signal(0u8);
+
     view! {
-        <div class="rating">
-            <input
-                aria-label="rating"
-                class="visually-hidden"
-                type="number"
-                max=max
-                name=name
-                value=rating.get()
-            />
-            {(0..max)
-                .map(|i| {
-                    view! {
-                        <i
-                            class="rate"
-                            data-selected=rating.get() <= i
-                            on:click=move |_| { set_rating.set(i) }
-                        >
-                            "⭐️"
-                        </i>
+        <fieldset class="rating">
+            <Show when=move || label.get().is_some()>
+                <legend>{move || label.get()}</legend>
+            </Show>
+            <aside class="rating-container">
+                <For
+                    each=move || (1..=max)
+                    key=|index| *index
+                    children=move |index| {
+                        let input_id = format!("{}-{}", name.get(), index);
+                        view! {
+                            <div class="rating-item">
+                                <input
+                                    type="radio"
+                                    name=name.get()
+                                    id=input_id.clone()
+                                    value=index
+                                    on:input=move |_| set_selected.set(index)
+                                    class="rating-input"
+                                />
+                                <label
+                                    for=input_id
+                                    class="rating-label"
+                                    class:selected=move || index <= selected.get()
+                                >
+                                    <Show when=move || {index <= selected.get()} fallback=move || {view!{ "⭐️" }}>
+                                        {"🌟"}
+                                    </Show>
+                                </label>
+                            </div>
+                        }
                     }
-                })
-                .collect_view()}
-        </div>
+                />
+            </aside>
+            <style>
+                ".rating-input {
+                    position: absolute;
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+                .rating-container {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0.5rem;
+                }
+                .rating-label {
+                    cursor: pointer;
+                    color: #ccc;
+                    transition: color 0.2s ease-in-out;
+                }"
+            </style>
+        </fieldset>
     }
 }
