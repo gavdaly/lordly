@@ -25,13 +25,13 @@ pub fn Avatar(
     /// The name of the person the avatar represents.
     #[prop(into, optional)]
     name: Option<String>,
-    #[prop(optional, into)] shape: Option<Shape>,
+    #[prop(default={Shape::Circular}, into)] shape: Shape,
     #[prop(default={"100".into()}, into)] width: String,
 ) -> impl IntoView {
     let alt = match name {
         Some(name) => format!("Avatar for {name}",),
         None => "avatar image for unknown user".to_string(),
     };
-    view! { <img //data-shape=shape
+    view! { <img data-shape=shape
     src=src alt=alt width=width/> }
 }
