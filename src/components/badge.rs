@@ -11,14 +11,14 @@ use leptos::prelude::*;
 #[component]
 pub fn Badge(
     children: Children,
-    #[prop(optional, into)] shape: Option<Shape>,
-    #[prop(optional, into)] color: Option<Color>,
-    #[prop(optional, into)] fill: Option<Fill>,
-    #[prop(optional, into)] position: Option<Position>,
+    #[prop(default={Shape::Pill}, into)] shape: Shape,
+    #[prop(default={Color::Primary}, into)] color: Color,
+    #[prop(default={Fill::Solid}, into)] fill: Fill,
+    #[prop(default={Position::TopRight}, into)] position: Position,
 ) -> impl IntoView {
     view! {
-        <span class="badge" //data-color=color data-shape=shape data-fill=fill
-        //data-position=position
+        <span class="badge" data-color=color data-shape=shape data-fill=fill
+        data-position=position
         >
             {children()}
         </span>
