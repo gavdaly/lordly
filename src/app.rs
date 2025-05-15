@@ -58,7 +58,7 @@ pub fn App() -> impl IntoView {
                         <A href="qrcode">"qrcode"</A>
                     </li>
                     <li>
-                        <A href="rate">"rate " <Badge>comming soon</Badge></A>
+                        <A href="rate">"rate"</A>
                     </li>
                     <li>
                         <A href="search">"search"</A>
