@@ -1,14 +1,17 @@
-use leptos::prelude::*;
+use leptos::{
+    attr::{any_attribute::*, custom::*, *},
+    prelude::*,
+};
 use std::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub enum Color {
+    #[default]
     Primary,
     Secondary,
     Success,
     Danger,
     Warning,
-    #[default]
     Info,
 }
 
@@ -51,8 +54,15 @@ impl Display for Color {
     }
 }
 
-// impl IntoAnyAttribute for Color {
-//     fn into_any_attr(self) -> leptos::attr::any_attribute::AnyAttribute {
-//         self.as_str()
-//     }
-// }
+impl IntoAnyAttribute for Color {
+    fn into_any_attr(self) -> AnyAttribute {
+        custom_attribute("data-color", self.as_str()).into_any_attr()
+    }
+}
+
+impl IntoAttributeValue for Color {
+    type Output = String;
+    fn into_attribute_value(self) -> Self::Output {
+        self.to_string()
+    }
+}

@@ -1,4 +1,7 @@
-use leptos::prelude::*;
+use leptos::{
+    attr::{any_attribute::*, custom::*, *},
+    prelude::*,
+};
 use std::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -61,9 +64,15 @@ impl Display for Position {
     }
 }
 
-// Converts a `Position` to an attribute.
-// impl IntoAnyAttribute for Position {
-//     fn into_any_attr(self) -> leptos::attr::any_attribute::AnyAttribute {
-//         self.as_str()
-//     }
-// }
+impl IntoAnyAttribute for Position {
+    fn into_any_attr(self) -> AnyAttribute {
+        custom_attribute("data-position", self.as_str()).into_any_attr()
+    }
+}
+
+impl IntoAttributeValue for Position {
+    type Output = String;
+    fn into_attribute_value(self) -> Self::Output {
+        self.to_string()
+    }
+}

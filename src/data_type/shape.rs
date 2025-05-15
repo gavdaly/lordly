@@ -1,4 +1,7 @@
-use leptos::prelude::*;
+use leptos::{
+    attr::{any_attribute::*, custom::*, *},
+    prelude::*,
+};
 use std::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -45,8 +48,15 @@ impl Display for Shape {
     }
 }
 
-// impl IntoAnyAttribute for Shape {
-//     fn into_any_attr(self) -> leptos::attr::any_attribute::AnyAttribute {
-//         self.as_str()
-//     }
-// }
+impl IntoAnyAttribute for Shape {
+    fn into_any_attr(self) -> AnyAttribute {
+        custom_attribute("data-shape", self.as_str()).into_any_attr()
+    }
+}
+
+impl IntoAttributeValue for Shape {
+    type Output = String;
+    fn into_attribute_value(self) -> Self::Output {
+        self.to_string()
+    }
+}
