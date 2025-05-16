@@ -28,8 +28,8 @@ pub fn Tab(
 /// - `children`: The Tab components to display
 #[component]
 pub fn Tabs(
-    #[prop(into, optional)] color: Option<Color>,
-    #[prop(into, optional)] shape: Option<Shape>,
+    #[prop(default={Color::Primary}, into)] color: Color,
+    #[prop(default={Shape::Square}, into)] shape: Shape,
     #[prop(optional)] default_tab: Option<&'static str>,
     children: Children,
 ) -> impl IntoView {

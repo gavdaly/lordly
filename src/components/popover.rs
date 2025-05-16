@@ -1,13 +1,15 @@
 use leptos::prelude::*;
 
+use crate::data_type::Anchor;
+
 #[component]
 pub fn Popover(
     children: Children,
     #[prop(into)] id: String,
-    #[prop(into, optional)] anchor: Option<String>,
+    #[prop(default={Anchor::Top}, into)] anchor: Anchor,
 ) -> impl IntoView {
     view! {
-        <div id=id popover //anchor=anchor
+        <div id=id popover data-anchor=anchor
         >
             {children()}
         </div>

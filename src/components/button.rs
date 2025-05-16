@@ -10,14 +10,14 @@ use leptos::prelude::*;
 /// - `fill`: options are solid, ghost, text.
 #[component]
 pub fn Button(
-    #[prop(into, optional)] type_: Option<ButtonType>,
-    #[prop(into, optional)] shape: Option<Shape>,
-    #[prop(into, optional)] color: Option<Color>,
-    #[prop(into, optional)] fill: Option<Fill>,
+    #[prop(default={ButtonType::Button}, into)] type_: ButtonType,
+    #[prop(default={Shape::Rounded}, into)] shape: Shape,
+    #[prop(default={Color::Primary}, into)] color: Color,
+    #[prop(default={Fill::Solid}, into)] fill: Fill,
     children: Children,
 ) -> impl IntoView {
     view! {
-        <button //type=type_ //data-shape=shape data-color=color data-fill=fill
+        <button type=type_ data-shape=shape data-color=color data-fill=fill
         >
             {children()}
         </button>

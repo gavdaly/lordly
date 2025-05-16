@@ -9,18 +9,24 @@ use leptos::prelude::*;
 #[component]
 pub fn TimelineItem(
     #[prop(into, optional)] date: Option<String>,
-    #[prop(into, optional)] color: Option<Color>,
-    #[prop(into, optional)] icon: Option<Children>,
+    #[prop(default={Color::Primary}, into)] color: Color,
+    // #[prop(into, optional)] icon: Option<View>,
     children: Children,
 ) -> impl IntoView {
+    let date_clone = date.clone();
+    let date_memo = Memo::new(move |_| date.clone());
+    let has_date = Memo::new(move |_| date_clone.is_some());
     view! {
-        //data-color=color
-        <li class="timeline-item" >
+        <li data-color=color class="timeline-item" >
             <div class="timeline-point">
-                {icon.map(|icon| view! { <div class="timeline-icon">{icon()}</div> })}
+            // <Show when=move || icon.is_some()>
+            //     <div class="timeline-icon">{icon}</div>
+            // </Show>
             </div>
             <div class="timeline-content">
-                {date.map(|d| view! { <div class="timeline-date">{d}</div> })}
+                <Show when=move || has_date.get()>
+                    <div class="timeline-date">{date_memo.get()}</div>
+                </Show>
                 <div class="timeline-body">
                     {children()}
                 </div>
@@ -35,14 +41,14 @@ pub fn TimelineItem(
 /// - `children`: The TimelineItem components
 #[component]
 pub fn Timeline(
-    #[prop(into, optional)] color: Option<Color>,
+    #[prop(default={Color::Primary}, into)] color: Color,
     #[prop(optional)] alternate: bool,
     children: Children,
 ) -> impl IntoView {
     view! {
-        //data-color=color
         <ul
             class="timeline"
+            data-color=color
             data-alternate={alternate.to_string()}
         >
             {children()}

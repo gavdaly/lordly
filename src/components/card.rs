@@ -9,16 +9,16 @@ use leptos::prelude::*;
 /// - `children`: The main content of the card.
 #[component]
 pub fn Card(
-    #[prop(into, optional)] color: Option<Color>,
-    #[prop(into, optional)] shape: Option<Shape>,
+    #[prop(default={Color::Primary}, into)] color: Color,
+    #[prop(default={Shape::Square}, into)] shape: Shape,
     #[prop(into, optional)] header: Option<Children>,
     #[prop(into, optional)] footer: Option<Children>,
     children: Children,
 ) -> impl IntoView {
     view! {
         <div class="card"
-            //  data-color=color
-        //    data-shape=shape
+            data-color=color
+            data-shape=shape
         >
             {header.map(|header| view! {
                 <div class="card-header">

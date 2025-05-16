@@ -10,7 +10,7 @@ use leptos::prelude::*;
 #[component]
 pub fn ProgressBar(
     #[prop(into)] value: Signal<f64>,
-    #[prop(into, optional)] color: Option<Color>,
+    #[prop(default={Color::Primary}, into)] color: Color,
     #[prop(optional)] striped: bool,
     #[prop(optional)] animated: bool,
     #[prop(into, optional)] label: Option<String>,
@@ -31,9 +31,9 @@ pub fn ProgressBar(
         >
             <div
                 class="progress-bar"
-                // data-color=color
-                // data-striped={striped.to_string()}
-                // data-animated={animated.to_string()}
+                data-color=color
+                data-striped={striped.to_string()}
+                data-animated={animated.to_string()}
                 style:width={move || format!("{:.1}%", bounded_value.get())}
             >
                 {move || label.clone().map(|l| view! { <span class="progress-label">{l}</span> })}
@@ -49,7 +49,7 @@ pub fn ProgressBar(
 #[component]
 pub fn Spinner(
     #[prop(into, optional)] value: Option<Signal<f64>>,
-    #[prop(into, optional)] color: Option<Color>,
+    #[prop(default={Color::Primary}, into)] color: Color,
     #[prop(optional, default = 32)] size: u32,
 ) -> impl IntoView {
     // For determinate progress, ensure value stays between 0-100
@@ -79,7 +79,7 @@ pub fn Spinner(
             width={size.to_string()}
             height={size.to_string()}
             viewBox="0 0 100 100"
-            // data-color=color
+            data-color=color
             data-indeterminate={bounded_value().is_none().to_string()}
         >
             <circle

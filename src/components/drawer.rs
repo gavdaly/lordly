@@ -11,10 +11,10 @@ use leptos::prelude::*;
 pub fn Drawer(
     children: Children,
     #[prop(into)] id: String,
-    #[prop(into)] anchor: Anchor,
+    #[prop(default={Anchor::Left}, into)] anchor: Anchor,
 ) -> impl IntoView {
     view! {
-        <dialog id=id //data-anchor=anchor
+        <dialog id=id data-anchor=anchor
         >
             {children()}
         </dialog>

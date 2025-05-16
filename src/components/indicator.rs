@@ -20,10 +20,10 @@ pub fn Indicator(
         <span class="indicator-container">
             <i
                 class="indicator"
-                //data-position=position
-                //data-shape=shape
-                //data-fill=fill
-                //data-color=color
+                data-position=position
+                data-shape=shape
+                data-fill=fill
+                data-color=color
                 data-number=number
             >
                 {number}
