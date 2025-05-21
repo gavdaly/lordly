@@ -2,19 +2,24 @@ use leptos::prelude::*;
 use leptos::tachys::html::event::DragEvent;
 use web_sys::{DataTransfer, File};
 
-/// A component that allows users to upload files.
+/// A component that allows users to upload files through drag and drop or file input.
 ///
 /// # Arguments
-/// - `name` The name of the input field.
-/// - `accept` The file types to accept.
-/// - `multiple` Whether to allow multiple files.
+/// - `name` - The name of the input field that uniquely identifies this component
+/// - `accept` - The allowed file types to accept (e.g. "image/*", ".pdf", etc.)
+/// - `disabled` - Whether the upload functionality is disabled
+/// - `multiple` - Whether to allow multiple file uploads
+/// - `on_files_change` - Callback triggered when files are added/removed
+/// - `on_error` - Callback triggered when an error occurs during file upload
 #[component]
 pub fn DropArea(
-    #[prop(into)] name: String,
-    #[prop(default = "".into(), into)] accept: String,
+    #[prop(into)] name: Signal<String>,
+    #[prop(default = "".into(), into)] accept: Signal<String>,
+    #[prop(default= false.into(), into)] disabled: Signal<bool>,
     #[prop(default = true)] multiple: bool,
+    #[prop(optional)] on_files_change: Option<Callback<Vec<FileInfo>>>,
+    #[prop(optional)] on_error: Option<Callback<&'static str>>,
 ) -> impl IntoView {
-    let name = Signal::derive(move || name.clone());
     let (error, set_error) = signal::<Option<&str>>(None);
     let (files, set_files) = signal::<Vec<FileInfo>>(vec![]);
 
@@ -27,22 +32,31 @@ pub fn DropArea(
         ev.stop_propagation();
 
         let Some(dt) = ev.data_transfer() else {
-            // TODO: Log error
+            if let Some(on_error) = on_error {
+                on_error.run("Failed to get data transfer");
+            }
             return;
         };
 
         let Some(file_list) = dt.files() else {
-            // TODO: Log error
+            if let Some(on_error) = on_error {
+                on_error.run("Failed to get file list");
+            }
             return;
         };
 
         let Some(input_elem) = input_ref.get() else {
-            // TODO: Log error
+            if let Some(on_error) = on_error {
+                on_error.run("Failed to get input element reference");
+            }
             return;
         };
 
         if !multiple && file_list.length() > 1 {
             set_error.set(Some("Can only upload one file!"));
+            if let Some(on_error) = on_error {
+                on_error.run("Can only upload one file!");
+            }
             return;
         }
 
@@ -57,9 +71,21 @@ pub fn DropArea(
                 });
             }
         }
-        set_files.set(new_files);
+        set_files.set(new_files.clone());
         input_elem.set_files(Some(&file_list));
+
+        if let Some(on_files_change) = on_files_change {
+            on_files_change.run(new_files);
+        }
     };
+
+    Effect::new(move |_| {
+        if let Some(err) = error.get() {
+            if let Some(on_error) = on_error {
+                on_error.run(err);
+            }
+        }
+    });
 
     view! {
         <div class="input drop">
