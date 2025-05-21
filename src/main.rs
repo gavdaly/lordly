@@ -1,5 +1,4 @@
 use leptos::prelude::*;
-use leptos::prelude::*;
 use lordly::app::App;
 
 pub fn main() {
