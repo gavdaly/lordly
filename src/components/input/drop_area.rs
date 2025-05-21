@@ -1,6 +1,8 @@
+use std::collections::VecDeque;
+
 use leptos::prelude::*;
 use leptos::tachys::html::event::DragEvent;
-use web_sys::{DataTransfer, File};
+use web_sys::{DataTransfer, File, FileList};
 
 /// A component that allows users to upload files through drag and drop or file input.
 ///
@@ -27,6 +29,37 @@ pub fn DropArea(
 
     let input_ref: NodeRef<leptos::html::Input> = NodeRef::new();
 
+    let on_files_selected = move |file_list: FileList| {
+        let mut files = Vec::new();
+        for i in 0..file_list.length() {
+            if let Some(file) = file_list.get(i) {
+                files.push(file);
+            }
+        }
+
+        if !multiple && files.len() > 1 {
+            set_error.set(Some("Can only upload one file!"));
+            if let Some(on_error) = on_error {
+                on_error.run("Can only upload one file!");
+            }
+            return;
+        }
+
+        let new_files: Vec<FileInfo> = files
+            .into_iter()
+            .map(|file| FileInfo {
+                name: file.name(),
+                size: file.size(),
+                type_: file.type_(),
+            })
+            .collect();
+
+        set_files.set(new_files.clone());
+        if let Some(on_files_change) = on_files_change {
+            on_files_change.run(new_files);
+        }
+    };
+
     let on_drop = move |ev: DragEvent| {
         ev.prevent_default();
         ev.stop_propagation();
@@ -52,31 +85,16 @@ pub fn DropArea(
             return;
         };
 
-        if !multiple && file_list.length() > 1 {
-            set_error.set(Some("Can only upload one file!"));
-            if let Some(on_error) = on_error {
-                on_error.run("Can only upload one file!");
-            }
+        on_files_selected(file_list);
+    };
+
+    let on_input_change = move |ev| {
+        let input: web_sys::HtmlInputElement = event_target(&ev);
+        let Some(file_list) = input.files() else {
             return;
-        }
+        };
 
-        // Convert FileList to Vec<FileInfo>
-        let mut new_files = vec![];
-        for i in 0..file_list.length() {
-            if let Some(file) = file_list.get(i) {
-                new_files.push(FileInfo {
-                    name: file.name(),
-                    size: file.size(),
-                    type_: file.type_(),
-                });
-            }
-        }
-        set_files.set(new_files.clone());
-        input_elem.set_files(Some(&file_list));
-
-        if let Some(on_files_change) = on_files_change {
-            on_files_change.run(new_files);
-        }
+        on_files_selected(file_list);
     };
 
     Effect::new(move |_| {
@@ -96,7 +114,7 @@ pub fn DropArea(
             >
                 <div>
                     <label for=name.get()>"Drop files here"</label>
-                    <input type="file" id=name.get() name=name.get() accept multiple=multiple node_ref=input_ref/>
+                    <input type="file" id=name.get() name=name.get() accept multiple=multiple on:change=on_input_change node_ref=input_ref/>
                 </div>
             </div>
             {move || {
@@ -126,7 +144,7 @@ pub fn DropArea(
 }
 
 #[derive(Clone)]
-struct FileInfo {
+pub struct FileInfo {
     name: String,
     size: f64,
     type_: String,
