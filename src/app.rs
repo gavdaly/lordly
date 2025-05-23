@@ -241,12 +241,18 @@ pub fn App() -> impl IntoView {
                         }
                     />
 
-                    // <Route
-                    //     path="/upload"
-                    //     view=move || {
-                    //         view! { <Upload name="avatar".into() drop_area=true/> }
-                    //     }
-                    // />
+                    <Route
+                        path=path!("/drop_area")
+                        view=move || {
+                            view! { <DropArea name="avatar" /> }
+                        }
+                    />
+
+                    <Route path=path!("/file")
+                        view=move || {
+                            view! { <File name="file" /> }
+                        }
+                    />
 
                     <Route
                         path=path!("/input")

@@ -1,19 +1,4 @@
-use crate::components::{
-    Accordion,
-    AccordionItem,
-    Avatar,
-    Breadcrumb,
-    BreadcrumbItem,
-    Button,
-    Card,
-    PickList,
-    ProgressBar,
-    //Search,
-    Spinner,
-    TagList,
-    Timeline,
-    TimelineItem,
-};
+use crate::components::*;
 use leptos::prelude::*;
 
 #[component]
@@ -27,6 +12,25 @@ pub fn KitchenSink() -> impl IntoView {
     let cite = r#"malesuada
 fames
 ac turpis"#;
+
+    let tabs = vec![
+        TabMeta {
+            id: "tab1",
+            label: "Tab 1",
+        },
+        TabMeta {
+            id: "tab2",
+            label: "Tab 2",
+        },
+    ];
+
+    fn tab_content(id: &'static str) -> AnyView {
+        match id {
+            "tab1" => view! { <div>"Tab 1 Content"</div> }.into_any(),
+            "tab2" => view! { <div>"Tab 2 Content"</div> }.into_any(),
+            _ => view! { <div>"No Active Tab"</div> }.into_any(),
+        }
+    }
     view! {
         <header>
             <a href="./">Home</a>
@@ -57,7 +61,9 @@ ac turpis"#;
                 </li>
             </menu>
         </nav>
-        // <Search/>
+        <form>
+            <SearchBody />
+        </form>
         <section class="content">
             <img
                 class="full"
@@ -473,17 +479,7 @@ ac turpis"#;
 
             <div class="showcase-item">
                 <h3>"Tabs Component"</h3>
-                // <Tabs default_tab="tab1">
-                //     <Tab id="tab1" label="First Tab" active=true>
-                //         <p>"Content for the first tab. This is visible by default."</p>
-                    // </Tab>
-                    // <Tab id="tab2" label="Second Tab">
-                    //     <p>"Content for the second tab. Click on the tab to see this content."</p>
-                    // </Tab>
-                    // <Tab id="tab3" label="Third Tab">
-                //         <p>"Content for the third tab. Each tab can contain different content."</p>
-                //     </Tab>
-                // </Tabs>
+                <Tabs tabs tab_content />
             </div>
 
             <div class="showcase-item">
