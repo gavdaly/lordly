@@ -516,7 +516,7 @@ ac turpis"#;
                             <h4>"Spinner"</h4>
                             <div style="display: flex; gap: 20px;">
                                 <Spinner value=progress color="primary" size=50 />
-                                <Spinner color="secondary" size=50 /> // Indeterminate spinner
+                                <Spinner color="secondary" size=50 />
                             </div>
                         </div>
                     }
