@@ -1,14 +1,21 @@
-use leptos::prelude::*;
+use leptos::{html::Dialog, prelude::*};
 
 #[component]
-pub fn Dialog(
-    children: Children,
-    #[prop(into)] id: String,
-    #[prop(default=(||{}).into(), into)] init: Callback<()>,
-) -> impl IntoView {
-    let clicked = move |_| init.run(());
+pub fn Dia(children: Children, open: ReadSignal<bool>) -> impl IntoView {
+    let d: NodeRef<Dialog> = NodeRef::new();
+
+    Effect::new(move |_| {
+        if let Some(dialog) = d.get() {
+            if open.get() {
+                let _ = dialog.show_modal();
+            } else {
+                let _ = dialog.close();
+            }
+        }
+    });
+
     view! {
-        <dialog id=id on:click=clicked>
+        <dialog node_ref=d>
             {children()}
         </dialog>
     }

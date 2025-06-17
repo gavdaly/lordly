@@ -11,6 +11,8 @@ pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
 
+    let (dialog_open, set_dialog_open) = signal(false);
+
     view! {
         <Stylesheet id="leptos" href="/pkg/lordly.css"/>
 
@@ -19,73 +21,77 @@ pub fn App() -> impl IntoView {
 
         // content for this welcome page
         <Router>
-            <nav>
-                <menu>
-                    <li>
-                        <A href="/">"Home"</A>
-                    </li>
-                    <li>
-                        <A href="/alert">"Alert"</A>
-                    </li>
-                    <li>
-                        <A href="/avatar">"avatar"</A>
-                    </li>
-                    <li>
-                        <A href="/badge">"badge"</A>
-                    </li>
-                    <li>
-                        <A href="/button">"button"</A>
-                    </li>
-                    <li>
-                        <A href="/dialog">"dialog"</A>
-                    </li>
-                    <li>
-                        <A href="drawer">"drawer"</A>
-                    </li>
-                    <li>
-                        <A href="loading">"loading"</A>
-                    </li>
-                    <li>
-                        <A href="message">"message"</A>
-                    </li>
-                    <li>
-                        <A href="pagination">"pagination"</A>
-                    </li>
-                    <li>
-                        <A href="popover">"popover"</A>
-                    </li>
-                    <li>
-                        <A href="qrcode">"qrcode"</A>
-                    </li>
-                    <li>
-                        <A href="rate">"rate"</A>
-                    </li>
-                    <li>
-                        <A href="search">"search"</A>
-                    </li>
-                    <li>
-                        <A href="switch">"switch"</A>
-                    </li>
-                    <li>
-                        <A href="table">"table"</A>
-                    </li>
-                    <li>
-                        <A href="tag">"tag"</A>
-                    </li>
-                    <li>
-                        <A href="toast">"toast"</A>
-                    </li>
-                    <li>
-                        <A href="tooltip">"tooltip"</A>
-                    </li>
-                    <li>
-                        <A href="upload">"upload"</A>
-                    </li>
-                    <li>
-                        <A href="/kitchen_sink">"kitchen sink"</A>
-                    </li>
-                </menu>
-            </nav>
+            <button on:click=move |_| {set_dialog_open.set(true)}>"+"</button>
+            <Dia open=dialog_open>
+                <nav>
+                    <button on:click=move |_| {set_dialog_open.set(false)}>"X"</button>
+                    <menu>
+                        <li>
+                            <A href="/">"Home"</A>
+                        </li>
+                        <li>
+                            <A href="/alert">"Alert"</A>
+                        </li>
+                        <li>
+                            <A href="/avatar">"avatar"</A>
+                        </li>
+                        <li>
+                            <A href="/badge">"badge"</A>
+                        </li>
+                        <li>
+                            <A href="/button">"button"</A>
+                        </li>
+                        <li>
+                            <A href="/dialog">"dialog"</A>
+                        </li>
+                        <li>
+                            <A href="/drawer">"drawer"</A>
+                        </li>
+                        <li>
+                            <A href="/loading">"loading"</A>
+                        </li>
+                        <li>
+                            <A href="/message">"message"</A>
+                        </li>
+                        <li>
+                            <A href="/pagination">"pagination"</A>
+                        </li>
+                        <li>
+                            <A href="/popover">"popover"</A>
+                        </li>
+                        <li>
+                            <A href="/qrcode">"qrcode"</A>
+                        </li>
+                        <li>
+                            <A href="/rate">"rate"</A>
+                        </li>
+                        <li>
+                            <A href="/search">"search"</A>
+                        </li>
+                        <li>
+                            <A href="/switch">"switch"</A>
+                        </li>
+                        <li>
+                            <A href="/table">"table"</A>
+                        </li>
+                        <li>
+                            <A href="/tag">"tag"</A>
+                        </li>
+                        <li>
+                            <A href="/toast">"toast"</A>
+                        </li>
+                        <li>
+                            <A href="/tooltip">"tooltip"</A>
+                        </li>
+                        <li>
+                            <A href="/upload">"upload"</A>
+                        </li>
+                        <li>
+                            <A href="/kitchen_sink">"kitchen sink"</A>
+                        </li>
+                    </menu>
+                </nav>
+            </Dia>
             <main class="content">
             <Routes fallback=move || view!{<div>"fallback"</div>}>
                     <Route path=path!("/") view=move || view! { <h1>"Home"</h1> }/>
@@ -140,7 +146,8 @@ pub fn App() -> impl IntoView {
                     <Route
                         path=path!("/dialog")
                         view=move || {
-                            view! { <Dialog id="dialog1">"Dialog"</Dialog> }
+                            let (d, set_d) = signal(false);
+                            view! { <Dia open=d>"Dialog"</Dia> }
                         }
                     />
 
