@@ -1,29 +1,21 @@
-use crate::components::*;
-use crate::error_template::{AppError, ErrorTemplate};
-use crate::kitchen_sink::KitchenSink;
 use leptos::prelude::*;
 use leptos_meta::*;
 use leptos_router::components::*;
 use leptos_router::path;
+use lordly::*;
 
 #[component]
 pub fn App() -> impl IntoView {
-    // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
-
     let (dialog_open, set_dialog_open) = signal(false);
-
     view! {
         <Stylesheet id="leptos" href="/pkg/lordly.css"/>
-
-        // sets the document title
         <Title text="Welcome to Leptos"/>
 
-        // content for this welcome page
         <Router>
             <button on:click=move |_| {set_dialog_open.set(true)}>"+"</button>
             <Dia open=dialog_open>
-                <nav>
+                <nav on:click=move |_| {set_dialog_open.set(false)}>
                     <button on:click=move |_| {set_dialog_open.set(false)}>"X"</button>
                     <menu>
                         <li>
@@ -85,9 +77,6 @@ pub fn App() -> impl IntoView {
                         </li>
                         <li>
                             <A href="/upload">"upload"</A>
-                        </li>
-                        <li>
-                            <A href="/kitchen_sink">"kitchen sink"</A>
                         </li>
                     </menu>
                 </nav>
@@ -294,13 +283,6 @@ pub fn App() -> impl IntoView {
                         path=path!("/taglist")
                         view=move || {
                             view! { <TagList list=vec![("2".into(), "two".into())] label="label"/> }
-                        }
-                    />
-
-                    <Route
-                        path=path!("/kitchen_sink")
-                        view=move || {
-                            view! { <KitchenSink/> }
                         }
                     />
 

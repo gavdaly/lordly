@@ -1,5 +1,7 @@
+mod app;
+
+use app::App;
 use leptos::prelude::*;
-use lordly::app::App;
 
 pub fn main() {
     _ = console_log::init_with_level(log::Level::Debug);

@@ -1,5 +1,5 @@
-use crate::components::*;
 use leptos::prelude::*;
+use lordly::*;
 
 #[component]
 pub fn KitchenSink() -> impl IntoView {
