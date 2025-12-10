@@ -1,3 +1,9 @@
+
+
+use alloc::format;
+
+use alloc::string::String;
+
 use crate::data_type::Color;
 use leptos::prelude::*;
 
@@ -14,7 +20,7 @@ pub fn Alert(
     ttl: Option<u32>,
     /// The color of the alert.
     #[prop(default={Color::Primary}, into)]
-    color: Color,
+    _color: Color,
     /// Whether the alert can be closed by the user.
     #[prop(default = false, into)]
     has_closer: bool,

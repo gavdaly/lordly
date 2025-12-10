@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A photo or image upload.
-struct Photo;
+pub struct Photo;
 
 /// Implementation of `InputSpec` for `Photo` type.
 ///
@@ -33,11 +35,11 @@ impl InputSpec for Photo {
     fn minlength() -> Option<u32> {
         None // Not applicable for file inputs
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|_value| {
             // File validation would typically be done differently
             // This is a placeholder for actual file validation logic
-            Check::Valid
+            ValidationState::Valid
         }))
     }
 }

@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A credit card security code (CVV/CVC).
-struct CreditCardSecurityCode;
+pub struct CreditCardSecurityCode;
 
 /// Implementation of `InputSpec` for `CreditCardSecurityCode` type.
 ///
@@ -34,7 +36,7 @@ impl InputSpec for CreditCardSecurityCode {
     fn minlength() -> Option<u32> {
         Some(3)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

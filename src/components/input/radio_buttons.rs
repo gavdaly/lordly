@@ -1,3 +1,7 @@
+use alloc::vec::Vec;
+
+use alloc::string::String;
+
 use leptos::prelude::*;
 
 /// A component that renders a list of radio buttons.

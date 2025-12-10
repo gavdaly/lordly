@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A birthday day component.
-struct BirthdayDay;
+pub struct BirthdayDay;
 
 /// Implementation of `InputSpec` for `BirthdayDay` type.
 ///
@@ -34,14 +36,14 @@ impl InputSpec for BirthdayDay {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
             if let Ok(day) = value.parse::<u8>() {
                 if day >= 1 && day <= 31 {
-                    return Check::Valid;
+                    return ValidationState::Valid;
                 }
             }
-            Check::Invalid("Day must be between 1-31".into())
+            ValidationState::Invalid("Day must be between 1-31".into())
         }))
     }
 }

@@ -1,3 +1,7 @@
+use alloc::format;
+
+use alloc::string::String;
+
 use leptos::prelude::*;
 
 /// A rating component.
@@ -9,8 +13,8 @@ pub fn Rate(
     #[prop(default = 5)] max: u8,
     #[prop(into)] name: String,
     #[prop(into, optional)] label: Option<String>,
-    #[prop(default={"⭐️".into_any()})] unchecked: AnyView,
-    #[prop(default={"🌟".into_any()})] checked: AnyView,
+    #[prop(default={"⭐️".into_any()})] _unchecked: AnyView,
+    #[prop(default={"🌟".into_any()})] _checked: AnyView,
 ) -> impl IntoView {
     let name = Signal::derive(move || name.clone());
     let label = Signal::derive(move || label.clone());
@@ -23,7 +27,7 @@ pub fn Rate(
             </Show>
             <aside class="rating-container">
                 <For
-                    each=move || (1..=max)
+                    each=move || 1..=max 
                     key=|index| *index
                     children=move |index| {
                         let input_id = format!("{}-{}", name.get(), index);

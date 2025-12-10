@@ -1,3 +1,7 @@
+use alloc::format;
+
+use alloc::string::String;
+
 use leptos::prelude::*;
 
 /// Created a pagination component with the current page's property set to `data-active='true'`

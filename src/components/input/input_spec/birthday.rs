@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A complete birth date.
-struct Birthday;
+pub struct Birthday;
 
 /// Implementation of `InputSpec` for `Birthday` type.
 ///
@@ -33,12 +35,12 @@ impl InputSpec for Birthday {
     fn minlength() -> Option<u32> {
         None // Date input handles this
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
-        Some(Callback::new(|value: String| {
+    fn validation() -> Option<Callback<String, ValidationState>> {
+        Some(Callback::new(|_value: String| {
             if true {
-                Check::Valid
+                ValidationState::Valid
             } else {
-                Check::Invalid("Invalid birth date".into())
+                ValidationState::Invalid("Invalid birth date".into())
             }
         }))
     }

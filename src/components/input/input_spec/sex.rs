@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A gender identity (such as "Female", "Fa'afafine", "Hijra", "Male", "Nonbinary"), as freeform text without newlines.
-struct Sex;
+pub struct Sex;
 
 /// Implementation of `InputSpec` for `Sex` type.
 ///
@@ -32,7 +34,7 @@ impl InputSpec for Sex {
     fn minlength() -> Option<u32> {
         None
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

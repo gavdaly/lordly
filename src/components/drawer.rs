@@ -1,3 +1,5 @@
+use alloc::string::String;
+
 use crate::data_type::Anchor;
 use leptos::prelude::*;
 

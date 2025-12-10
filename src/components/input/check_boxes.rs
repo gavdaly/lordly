@@ -1,5 +1,11 @@
+
+
+use alloc::vec::Vec;
+
+use alloc::string::String;
+
 use leptos::prelude::*;
-use std::collections::HashSet;
+use alloc::collections::BTreeSet;
 
 /// A component that renders a customizable group of checkboxes.
 ///
@@ -14,8 +20,8 @@ use std::collections::HashSet;
 pub fn CheckBoxes(
     #[prop(into)] label: String,
     #[prop(into)] options: Vec<(String, String)>,
-    #[prop(default = HashSet::new(), into)] selected: HashSet<String>,
-    #[prop(optional)] on_change: Option<Callback<HashSet<String>>>,
+    #[prop(default = BTreeSet::new(), into)] selected: BTreeSet<String>,
+    #[prop(optional)] on_change: Option<Callback<BTreeSet<String>>>,
     #[prop(default = false)] disabled: bool,
     #[prop(optional, into)] class: Option<String>,
 ) -> impl IntoView {

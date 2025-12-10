@@ -1,3 +1,11 @@
+use alloc::string::ToString;
+
+use alloc::format;
+
+
+
+use alloc::string::String;
+
 use crate::data_type::Color;
 use leptos::prelude::*;
 
@@ -62,7 +70,7 @@ pub fn Spinner(
 
     // Calculate SVG parameters for circular progress
     let radius = 42;
-    let circumference = 2.0 * std::f64::consts::PI * radius as f64;
+    let circumference = 2.0 * core::f64::consts::PI * radius as f64;
 
     let stroke_dashoffset = move || {
         if let Some(val) = bounded_value() {

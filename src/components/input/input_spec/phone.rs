@@ -1,7 +1,9 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
-use std::fmt;
+use core::fmt;
 
 /// Defines different components of a telephone number
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -60,7 +62,7 @@ impl InputSpec for Phone {
     fn minlength() -> Option<u32> {
         Some(10) // Minimum for most standard formats
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -91,7 +93,7 @@ impl InputSpec for TelCountryCode {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -122,14 +124,14 @@ impl InputSpec for TelNational {
     fn minlength() -> Option<u32> {
         Some(7) // Minimum for standard formats without country code
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
             // This validation focuses on finding sufficient digits
             let digits: String = value.chars().filter(|c| c.is_ascii_digit()).collect();
             if digits.len() >= 7 {
-                Check::Valid
+                ValidationState::Valid
             } else {
-                Check::Invalid("Please enter a valid phone number without country code".into())
+                ValidationState::Invalid("Please enter a valid phone number without country code".into())
             }
         }))
     }
@@ -161,7 +163,7 @@ impl InputSpec for TelExtension {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A monetary transaction amount.
-struct TransactionAmount;
+pub struct TransactionAmount;
 
 /// Implementation of `InputSpec` for `TransactionAmount` type.
 ///
@@ -34,7 +36,7 @@ impl InputSpec for TransactionAmount {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

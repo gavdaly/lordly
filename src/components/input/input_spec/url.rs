@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A URL, such as a home page or company website address as appropriate given the context of the other fields in the form.
-struct Url;
+pub struct Url;
 
 impl InputSpec for Url {
     fn input_mode() -> &'static str {
@@ -27,7 +29,7 @@ impl InputSpec for Url {
     fn minlength() -> Option<u32> {
         Some(10)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

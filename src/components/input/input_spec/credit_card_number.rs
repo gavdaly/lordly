@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A credit card number.
-struct CreditCardNumber;
+pub struct CreditCardNumber;
 
 /// Implementation of `InputSpec` for `CreditCardNumber` type.
 ///
@@ -35,7 +37,7 @@ impl InputSpec for CreditCardNumber {
     fn minlength() -> Option<u32> {
         Some(13)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

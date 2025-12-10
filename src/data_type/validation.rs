@@ -1,6 +1,10 @@
-use std::fmt::{Display, Formatter, Result as FmtResult};
-use std::result::Result;
-use std::str::FromStr;
+use alloc::format;
+
+use alloc::string::String;
+
+use core::fmt::{Display, Formatter, Result as FmtResult};
+use core::result::Result;
+use core::str::FromStr;
 
 #[derive(Clone)]
 pub enum ValidationState {
@@ -30,7 +34,7 @@ impl Display for ValidationState {
             ValidationState::Empty => "empty",
             ValidationState::Dirty => "dirty",
             ValidationState::Valid => "valid",
-            ValidationState::Invalid(_reason) => "invalid",
+            ValidationState::Invalid(reason) => &reason,
         };
         write!(f, "{}", state_str)
     }

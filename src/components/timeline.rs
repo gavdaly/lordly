@@ -1,3 +1,7 @@
+use alloc::string::ToString;
+
+use alloc::string::String;
+
 use crate::data_type::Color;
 use leptos::prelude::*;
 

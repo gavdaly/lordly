@@ -1,3 +1,7 @@
+use alloc::vec::Vec;
+
+use alloc::string::String;
+
 use leptos::prelude::*;
 
 /// A list of tags with checkboxes.

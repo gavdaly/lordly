@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A generic text input.
-struct Text;
+pub struct Text;
 
 /// Implementation of `InputSpec` for `Text` type.
 ///
@@ -33,10 +35,10 @@ impl InputSpec for Text {
     fn minlength() -> Option<u32> {
         None
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|_value| {
             // Basic validation - could be customized per use case
-            Check::Valid
+            ValidationState::Valid
         }))
     }
 }

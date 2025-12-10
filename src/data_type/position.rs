@@ -1,8 +1,9 @@
-use leptos::{
-    attr::{any_attribute::*, custom::*, *},
-    prelude::*,
-};
-use std::fmt::Display;
+use alloc::string::ToString;
+
+use alloc::string::String;
+
+use leptos::attr::{any_attribute::*, custom::*, *};
+use core::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub enum Position {
@@ -59,7 +60,7 @@ impl From<&str> for Position {
 
 /// Converts a `Position` to a string.
 impl Display for Position {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         write!(f, "{}", self.as_str())
     }
 }

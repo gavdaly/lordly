@@ -3,7 +3,7 @@ use leptos::prelude::*;
 
 #[component]
 pub fn Modal(
-    #[prop(optional, into)] style: Option<Color>,
+    #[prop(optional, into)] _style: Option<Color>,
     children: Children,
     modal: AnyView,
 ) -> impl IntoView {

@@ -8,6 +8,9 @@ opt-level = 'z'
 codegen-units = 1
 lto = true
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
 console_error_panic_hook = "0.1"
 leptos = { version = "0.8", features = ["csr"] }

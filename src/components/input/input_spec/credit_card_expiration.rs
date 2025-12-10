@@ -1,9 +1,13 @@
+use alloc::vec::Vec;
+
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::components::input::input_spec::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A credit card expiration date.
-struct CreditCardExpiration;
+pub struct CreditCardExpiration;
 
 /// Implementation of `InputSpec` for `CreditCardExpiration` type.
 ///
@@ -34,7 +38,7 @@ impl InputSpec for CreditCardExpiration {
     fn minlength() -> Option<u32> {
         Some(5)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
             // Basic MM/YY validation - more complex validation would check against current date
             if value.len() == 5 && value.chars().nth(2) == Some('/') {
@@ -43,12 +47,12 @@ impl InputSpec for CreditCardExpiration {
                     if let (Ok(month), Ok(_year)) = (parts[0].parse::<u8>(), parts[1].parse::<u8>())
                     {
                         if month >= 1 && month <= 12 {
-                            return Check::Valid;
+                            return ValidationState::Valid;
                         }
                     }
                 }
             }
-            Check::Invalid("Use MM/YY format".into())
+            ValidationState::Invalid("Use MM/YY format".into())
         }))
     }
 }

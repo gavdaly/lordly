@@ -1,3 +1,7 @@
+use alloc::string::ToString;
+
+use alloc::string::String;
+
 use crate::data_type::{Color, Shape};
 use leptos::prelude::*;
 
@@ -7,9 +11,9 @@ use leptos::prelude::*;
 /// - `children`: The content/label of the breadcrumb item
 #[component]
 pub fn BreadcrumbItem(
-    #[prop(into, optional)] href: Option<String>,
+    #[prop(into, optional)] _href: Option<String>,
     #[prop(optional)] active: bool,
-    children: Children,
+    _children: Children,
 ) -> impl IntoView {
     view! {
         <li class="breadcrumb-item" data-active={active.to_string()}>
@@ -31,8 +35,8 @@ pub fn BreadcrumbItem(
 /// - `children`: The BreadcrumbItem components
 #[component]
 pub fn Breadcrumb(
-    #[prop(into, optional)] color: Option<Color>,
-    #[prop(into, optional)] shape: Option<Shape>,
+    #[prop(into, optional)] _color: Option<Color>,
+    #[prop(into, optional)] _shape: Option<Shape>,
     #[prop(into, optional)] separator: Option<String>,
     children: Children,
 ) -> impl IntoView {

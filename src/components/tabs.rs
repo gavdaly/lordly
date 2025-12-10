@@ -1,6 +1,10 @@
+use alloc::string::ToString;
+
+use alloc::vec::Vec;
+
+
 use crate::data_type::{Color, Shape};
 use leptos::prelude::*;
-use std::collections::HashMap;
 
 #[component]
 pub fn Tabs(

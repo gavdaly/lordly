@@ -1,3 +1,7 @@
+use alloc::vec::Vec;
+
+use alloc::string::String;
+
 use leptos::ev::*;
 use leptos::prelude::*;
 

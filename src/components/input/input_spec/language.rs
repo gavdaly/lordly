@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A language preference.
-struct Language;
+pub struct Language;
 
 /// Implementation of `InputSpec` for `Language` type.
 ///
@@ -33,7 +35,7 @@ impl InputSpec for Language {
     fn minlength() -> Option<u32> {
         None
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

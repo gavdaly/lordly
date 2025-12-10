@@ -1,7 +1,11 @@
+use alloc::string::ToString;
+
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
 use leptos::prelude::*;
-use std::fmt;
+use crate::data_type::ValidationState;
+use core::fmt;
 
 /// Defines the type of address (Standard, Billing, Shipping)
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -115,7 +119,7 @@ impl InputSpec for StreetAddress {
     fn minlength() -> Option<u32> {
         Some(5) // Most addresses should be at least a few chars
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -151,7 +155,7 @@ impl InputSpec for BillingStreetAddress {
     fn minlength() -> Option<u32> {
         Some(5)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -187,7 +191,7 @@ impl InputSpec for ShippingStreetAddress {
     fn minlength() -> Option<u32> {
         Some(5)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -219,7 +223,7 @@ impl InputSpec for AddressLine1 {
     fn minlength() -> Option<u32> {
         None
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -246,7 +250,7 @@ impl InputSpec for BillingAddressLine1 {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -273,7 +277,7 @@ impl InputSpec for ShippingAddressLine1 {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -305,7 +309,7 @@ impl InputSpec for AddressLine2 {
     fn minlength() -> Option<u32> {
         None // Line 2 is optional
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None // No specific validation needed for line 2
     }
 }
@@ -332,7 +336,7 @@ impl InputSpec for BillingAddressLine2 {
     fn minlength() -> Option<u32> {
         None // Line 2 is optional
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None // No specific validation needed for line 2
     }
 }
@@ -359,7 +363,7 @@ impl InputSpec for ShippingAddressLine2 {
     fn minlength() -> Option<u32> {
         None // Line 2 is optional
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None // No specific validation needed for line 2
     }
 }
@@ -391,7 +395,7 @@ impl InputSpec for AddressLine3 {
     fn minlength() -> Option<u32> {
         None // Line 3 is optional
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None // No specific validation needed for line 3
     }
 }
@@ -418,7 +422,7 @@ impl InputSpec for BillingAddressLine3 {
     fn minlength() -> Option<u32> {
         None // Line 3 is optional
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None // No specific validation needed for line 3
     }
 }
@@ -445,7 +449,7 @@ impl InputSpec for ShippingAddressLine3 {
     fn minlength() -> Option<u32> {
         None // Line 3 is optional
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None // No specific validation needed for line 3
     }
 }
@@ -477,7 +481,7 @@ impl InputSpec for AddressLevel1 {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String,  ValidationState>> {
         None
     }
 }
@@ -504,7 +508,7 @@ impl InputSpec for BillingAddressLevel1 {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -531,7 +535,7 @@ impl InputSpec for ShippingAddressLevel1 {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -563,7 +567,7 @@ impl InputSpec for AddressLevel2 {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -590,7 +594,7 @@ impl InputSpec for BillingAddressLevel2 {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -617,7 +621,7 @@ impl InputSpec for ShippingAddressLevel2 {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -649,7 +653,7 @@ impl InputSpec for PostalCode {
     fn minlength() -> Option<u32> {
         Some(3)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -676,12 +680,12 @@ impl InputSpec for BillingPostalCode {
     fn minlength() -> Option<u32> {
         Some(3)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
             if value.trim().len() >= 3 {
-                Check::Valid
+                ValidationState::Valid
             } else {
-                Check::Invalid("Please enter a valid billing postal code".to_string())
+                ValidationState::Invalid("Please enter a valid billing postal code".to_string())
             }
         }))
     }
@@ -709,7 +713,7 @@ impl InputSpec for ShippingPostalCode {
     fn minlength() -> Option<u32> {
         Some(3)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -741,7 +745,7 @@ impl InputSpec for Country {
     fn minlength() -> Option<u32> {
         Some(2)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -768,7 +772,7 @@ impl InputSpec for BillingCountry {
     fn minlength() -> Option<u32> {
         Some(2)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -795,7 +799,7 @@ impl InputSpec for ShippingCountry {
     fn minlength() -> Option<u32> {
         Some(2)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -827,7 +831,7 @@ impl InputSpec for CountryName {
     fn minlength() -> Option<u32> {
         Some(2)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -854,7 +858,7 @@ impl InputSpec for BillingCountryName {
     fn minlength() -> Option<u32> {
         Some(2)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }
@@ -881,7 +885,7 @@ impl InputSpec for ShippingCountryName {
     fn minlength() -> Option<u32> {
         Some(2)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

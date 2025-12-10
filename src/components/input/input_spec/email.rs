@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// An email address.
-struct Email;
+pub struct Email;
 
 /// Implementation of `InputSpec` for `Email` type.
 ///
@@ -35,12 +37,12 @@ impl InputSpec for Email {
     fn minlength() -> Option<u32> {
         Some(5)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
             if value.contains('@') {
-                Check::Valid
+                ValidationState::Valid
             } else {
-                Check::Invalid("Invalid email address".into())
+                ValidationState::Invalid("Invalid email address".into())
             }
         }))
     }

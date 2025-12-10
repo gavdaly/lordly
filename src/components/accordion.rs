@@ -1,3 +1,7 @@
+use alloc::string::ToString;
+
+use alloc::string::String;
+
 use crate::data_type::{Color, Shape};
 use leptos::prelude::*;
 
@@ -42,8 +46,8 @@ pub fn AccordionItem(
 /// - `children`: The AccordionItem components
 #[component]
 pub fn Accordion(
-    #[prop(into, optional)] color: Option<Color>,
-    #[prop(into, optional)] shape: Option<Shape>,
+    #[prop(into, optional)] _color: Option<Color>,
+    #[prop(into, optional)] _shape: Option<Shape>,
     #[prop(optional)] allow_multiple: bool,
     children: Children,
 ) -> impl IntoView {
