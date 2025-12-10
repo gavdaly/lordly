@@ -16,7 +16,7 @@ pub fn TextArea(
     #[prop(optional, into)] _summary_class: Option<String>,
     #[prop(optional, into)] _error_class: Option<String>,
     #[prop(optional, into)] _validation_children: Option<AnyView>,
-    #[prop(optional, into)] validation: Option<Callback<String, Result<(), String>>>,
+    #[prop(optional, into)] validation: Option<Callback<String, Result<(), &'static str>>>,
 ) -> impl IntoView {
     let (_state, set_state) = signal(ValidationState::Empty);
     let validate = move |ev: FocusEvent| {
@@ -28,7 +28,7 @@ pub fn TextArea(
             return;
         };
         let Some(value) = target.value_of().as_string() else {
-            set_state.set(ValidationState::Invalid("Failed to validate".into()));
+            set_state.set(ValidationState::Invalid("Failed to validate"));
             return;
         };
         match valid.run(value) {

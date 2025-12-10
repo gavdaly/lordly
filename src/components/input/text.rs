@@ -1,11 +1,6 @@
-use alloc::string::ToString;
-
 use alloc::format;
-
 use alloc::string::String;
-
 use crate::data_type::ValidationState;
-
 use leptos::ev::FocusEvent;
 use leptos::prelude::*;
 
@@ -14,12 +9,12 @@ use leptos::prelude::*;
 #[component]
 pub fn Input(
     #[prop(into)] name: String,
-    #[prop(into)] label: String,
+    #[prop(into)] label: &'static str,
     #[prop(into, optional)] summary: Option<String>,
     #[prop(into, optional)] placeholder: Option<String>,
-    #[prop(default=Callback::new(|_|{Ok(())}), into)] validation: Callback<
+    #[prop(default=Callback::new(|_|{ValidationState::Valid}), into)] validation: Callback<
         String,
-        Result<(), String>,
+        ValidationState,
     >,
     #[prop(default="".into(), into)] wrapper_class: String,
     #[prop(default="".into(), into)] input_class: String,
@@ -37,7 +32,7 @@ pub fn Input(
                     Ok(_) => set_state.set(ValidationState::Valid),
                     Err(err) => set_state.set(ValidationState::Invalid(err)),
                 },
-                None => set_state.set(ValidationState::Invalid("Failed to get value".into())),
+                None => set_state.set(ValidationState::Invalid("Failed to get value")),
             }
         }
     };

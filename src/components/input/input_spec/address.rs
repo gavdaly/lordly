@@ -1,4 +1,4 @@
-use alloc::string::ToString;
+
 
 use alloc::string::String;
 
@@ -685,7 +685,7 @@ impl InputSpec for BillingPostalCode {
             if value.trim().len() >= 3 {
                 ValidationState::Valid
             } else {
-                ValidationState::Invalid("Please enter a valid billing postal code".to_string())
+                ValidationState::Invalid("Please enter a valid billing postal code")
             }
         }))
     }
