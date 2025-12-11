@@ -16,8 +16,7 @@ pub fn Drawer(
     #[prop(default={Anchor::Left}, into)] anchor: Anchor,
 ) -> impl IntoView {
     view! {
-        <dialog id=id data-anchor=anchor
-        >
+        <dialog id=id data-anchor=anchor>
             {children()}
         </dialog>
     }

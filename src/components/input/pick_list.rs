@@ -20,14 +20,15 @@ pub fn PickList(
             <For
                 each=move || list.clone()
                 key=|item| item.1.clone()
-                    children=|(name, label)| { view!{
+                children=|(name, label)| {
+                    view! {
                         <div class="tag-toggle">
-                            <input type="radio" name id=name.clone() value=name.clone()/>
+                            <input type="radio" name id=name.clone() value=name.clone() />
                             <label for=name.clone()>{label}</label>
                         </div>
-                    }}
-            >
-            </For>
+                    }
+                }
+            ></For>
 
         </fieldset>
     }

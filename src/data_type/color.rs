@@ -1,7 +1,3 @@
-use alloc::string::ToString;
-
-use alloc::string::String;
-
 use leptos::attr::{any_attribute::*, custom::*, *};
 use core::fmt::Display;
 
@@ -17,7 +13,7 @@ pub enum Color {
 }
 
 impl Color {
-    pub fn as_str(&self) -> &str {
+    pub fn as_str(&self) -> &'static str {
         match self {
             Color::Primary => "primary",
             Color::Secondary => "secondary",
@@ -29,9 +25,9 @@ impl Color {
     }
 }
 
-impl From<Color> for String {
+impl From<Color> for &'static str {
     fn from(val: Color) -> Self {
-        val.as_str().to_string()
+        val.as_str()
     }
 }
 
@@ -62,8 +58,8 @@ impl IntoAnyAttribute for Color {
 }
 
 impl IntoAttributeValue for Color {
-    type Output = String;
+    type Output = &'static str;
     fn into_attribute_value(self) -> Self::Output {
-        self.to_string()
+        self.as_str()
     }
 }

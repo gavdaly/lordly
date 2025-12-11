@@ -17,9 +17,7 @@ pub fn Badge(
     #[prop(default={Position::TopRight}, into)] position: Position,
 ) -> impl IntoView {
     view! {
-        <span class="badge" data-color=color data-shape=shape data-fill=fill
-        data-position=position
-        >
+        <span class="badge" data-color=color data-shape=shape data-fill=fill data-position=position>
             {children()}
         </span>
     }

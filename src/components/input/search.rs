@@ -28,17 +28,23 @@ pub fn SearchBody(
     view! {
         <>
             <label for="search">"Search"</label>
-            <input type="search" id="search" name="q" on:change=changed/>
+            <input type="search" id="search" name="q" on:change=changed />
             <button type="submit">{button}</button>
-            <Show
-                when=move || auto_complete.get().is_some()
-            >
+            <Show when=move || auto_complete.get().is_some()>
                 <ul>
                     {move || {
                         if let Some(hints) = auto_complete.get() {
-                            hints.into_iter()
-                                .map(|hint| view! { <li><a href={hint.url}>{hint.text}</a></li> })
-                                .collect_view().into_any()
+                            hints
+                                .into_iter()
+                                .map(|hint| {
+                                    view! {
+                                        <li>
+                                            <a href=hint.url>{hint.text}</a>
+                                        </li>
+                                    }
+                                })
+                                .collect_view()
+                                .into_any()
                         } else {
                             view! {}.into_any()
                         }

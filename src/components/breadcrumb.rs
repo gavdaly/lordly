@@ -16,14 +16,13 @@ pub fn BreadcrumbItem(
     _children: Children,
 ) -> impl IntoView {
     view! {
-        <li class="breadcrumb-item" data-active={active.to_string()}>
-            // {move || {
-            //     match (active, href.is_some()) {
-            //         (true, _) => view! { <span class="breadcrumb-text">{children()}</span> }.into_any(),
-            //         (_, true) => view! { <a href={href.unwrap()} class="breadcrumb-link">{children()}</a> }.into_any(),
-            //         (_, _) => view! { <span class="breadcrumb-text">{children()}</span> }.into_any(),
-            //     }
-            // }}
+        <li class="breadcrumb-item" data-active=active.to_string()>// {move || {
+        // match (active, href.is_some()) {
+        // (true, _) => view! { <span class="breadcrumb-text">{children()}</span> }.into_any(),
+        // (_, true) => view! { <a href={href.unwrap()} class="breadcrumb-link">{children()}</a> }.into_any(),
+        // (_, _) => view! { <span class="breadcrumb-text">{children()}</span> }.into_any(),
+        // }
+        // }}
         </li>
     }
 }
@@ -47,9 +46,9 @@ pub fn Breadcrumb(
         <nav aria-label="Breadcrumb navigation">
             <ol
                 class="breadcrumb"
-                //data-color=color
-                //data-shape=shape
-                data-separator={separator}
+                // data-color=color
+                // data-shape=shape
+                data-separator=separator
             >
                 {children()}
             </ol>

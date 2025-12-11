@@ -16,23 +16,10 @@ pub fn Card(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div class="card"
-            data-color=color
-            data-shape=shape
-        >
-            {header.map(|header| view! {
-                <div class="card-header">
-                    {header()}
-                </div>
-            })}
-            <div class="card-body">
-                {children()}
-            </div>
-            {footer.map(|footer| view! {
-                <div class="card-footer">
-                    {footer()}
-                </div>
-            })}
+        <div class="card" data-color=color data-shape=shape>
+            {header.map(|header| view! { <div class="card-header">{header()}</div> })}
+            <div class="card-body">{children()}</div>
+            {footer.map(|footer| view! { <div class="card-footer">{footer()}</div> })}
         </div>
     }
 }

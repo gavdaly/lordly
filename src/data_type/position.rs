@@ -1,7 +1,3 @@
-use alloc::string::ToString;
-
-use alloc::string::String;
-
 use leptos::attr::{any_attribute::*, custom::*, *};
 use core::fmt::Display;
 
@@ -20,7 +16,7 @@ pub enum Position {
 
 impl Position {
     /// Returns the string representation of a `Position`.
-    fn as_str(&self) -> &str {
+    fn as_str(&self) -> &'static str {
         match self {
             Self::TopLeft => "top-left",
             Self::TopCenter => "top-center",
@@ -35,9 +31,9 @@ impl Position {
 }
 
 /// Converts a `Position` to a string.
-impl From<Position> for String {
+impl From<Position> for &'static str {
     fn from(val: Position) -> Self {
-        val.as_str().to_string()
+        val.as_str()
     }
 }
 
@@ -72,8 +68,8 @@ impl IntoAnyAttribute for Position {
 }
 
 impl IntoAttributeValue for Position {
-    type Output = String;
+    type Output = &'static str;
     fn into_attribute_value(self) -> Self::Output {
-        self.to_string()
+        self.as_str()
     }
 }

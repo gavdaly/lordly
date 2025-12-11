@@ -1,5 +1,5 @@
 use alloc::format;
-use alloc::string::String;
+use alloc::string::{String, ToString};
 use crate::data_type::ValidationState;
 use leptos::ev::FocusEvent;
 use leptos::prelude::*;
@@ -28,10 +28,7 @@ pub fn Input(
     let validate = move |ev: FocusEvent| {
         if let Some(target) = ev.target() {
             match target.value_of().as_string() {
-                Some(v) => match validation.run(v) {
-                    Ok(_) => set_state.set(ValidationState::Valid),
-                    Err(err) => set_state.set(ValidationState::Invalid(err)),
-                },
+                Some(v) => set_state.set(validation.run(v)),
                 None => set_state.set(ValidationState::Invalid("Failed to get value")),
             }
         }

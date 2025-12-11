@@ -13,8 +13,7 @@ pub fn Popover(
     #[prop(default={Anchor::Top}, into)] anchor: Anchor,
 ) -> impl IntoView {
     view! {
-        <div id=id popover data-anchor=anchor
-        >
+        <div id=id popover data-anchor=anchor>
             {children()}
         </div>
     }

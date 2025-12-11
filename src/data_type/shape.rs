@@ -1,8 +1,5 @@
-use alloc::string::ToString;
-
-use alloc::string::String;
-
 use leptos::attr::{any_attribute::*, custom::*, *};
+use alloc::string::{String, ToString};
 use core::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -15,7 +12,7 @@ pub enum Shape {
 }
 
 impl Shape {
-    fn as_str(&self) -> &str {
+    fn as_str(&self) -> &'static str {
         match self {
             Self::Pill => "pill",
             Self::Rounded => "rounded",
@@ -56,8 +53,8 @@ impl IntoAnyAttribute for Shape {
 }
 
 impl IntoAttributeValue for Shape {
-    type Output = String;
+    type Output = &'static str;
     fn into_attribute_value(self) -> Self::Output {
-        self.to_string()
+        self.as_str()
     }
 }

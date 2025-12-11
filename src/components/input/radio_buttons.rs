@@ -18,12 +18,15 @@ pub fn RadioButtons(
     view! {
         <fieldset>
             <legend>{label.get()}</legend>
-            <For each=move || options.get() key=|(name, _)| name.clone() children = move |(name, label)| {
-                let name = name.clone();
-                view!{
-                    <div class="input">
-                        <input type="radio" name=name.clone() id=name.clone() value=name/>
-                        <label for="name">{label}</label>
+            <For
+                each=move || options.get()
+                key=|(name, _)| name.clone()
+                children=move |(name, label)| {
+                    let name = name.clone();
+                    view! {
+                        <div class="input">
+                            <input type="radio" name=name.clone() id=name.clone() value=name />
+                            <label for="name">{label}</label>
                         </div>
                     }
                 }

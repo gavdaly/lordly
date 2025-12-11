@@ -6,7 +6,5 @@ pub fn Toast(
     children: Children,
     #[prop(default={Color::Primary}, into)] color: Color,
 ) -> impl IntoView {
-    view! { <div
-        data-color=color
-    >{children()}</div> }
+    view! { <div data-color=color>{children()}</div> }
 }

@@ -114,14 +114,18 @@ pub fn DropArea(
 
     view! {
         <div class="input drop">
-            <div
-                class="dropzone"
-                id=drop_zone_id
-                on:drop=on_drop
-            >
+            <div class="dropzone" id=drop_zone_id on:drop=on_drop>
                 <div>
                     <label for=name.get()>"Drop files here"</label>
-                    <input type="file" id=name.get() name=name.get() accept multiple=multiple on:change=on_input_change node_ref=input_ref/>
+                    <input
+                        type="file"
+                        id=name.get()
+                        name=name.get()
+                        accept
+                        multiple=multiple
+                        on:change=on_input_change
+                        node_ref=input_ref
+                    />
                 </div>
             </div>
             {move || {
@@ -130,20 +134,22 @@ pub fn DropArea(
                 } else {
                     view! {
                         <ul class="file-list">
-                            {files.get()
+                            {files
+                                .get()
                                 .into_iter()
                                 .map(|file| {
                                     let size_mb = (file.size / 1_048_576.0).round() / 100.0;
                                     view! {
                                         <li>
                                             {file.name} " (" {size_mb} " MB)"
-                                            <span class="text-gray-500"> " - " {file.type_}</span>
+                                            <span class="text-gray-500">" - " {file.type_}</span>
                                         </li>
                                     }
                                 })
                                 .collect_view()}
                         </ul>
-                    }.into_any()
+                    }
+                        .into_any()
                 }
             }}
         </div>

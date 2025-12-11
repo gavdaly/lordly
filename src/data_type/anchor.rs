@@ -1,7 +1,3 @@
-use alloc::string::ToString;
-
-use alloc::string::String;
-
 use leptos::attr::{any_attribute::*, custom::*, *};
 use core::fmt::Display;
 
@@ -15,7 +11,7 @@ pub enum Anchor {
 }
 
 impl Anchor {
-    fn as_str(&self) -> &str {
+    fn as_str(&self) -> &'static str {
         match self {
             Self::Top => "top",
             Self::Right => "right",
@@ -25,9 +21,9 @@ impl Anchor {
     }
 }
 
-impl From<Anchor> for String {
+impl From<Anchor> for &'static str {
     fn from(val: Anchor) -> Self {
-        val.as_str().to_string()
+        val.as_str()
     }
 }
 
@@ -56,8 +52,8 @@ impl IntoAnyAttribute for Anchor {
 }
 
 impl IntoAttributeValue for Anchor {
-    type Output = String;
+    type Output = &'static str;
     fn into_attribute_value(self) -> Self::Output {
-        self.to_string()
+        self.as_str()
     }
 }

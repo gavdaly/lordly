@@ -27,7 +27,7 @@ pub fn Rate(
             </Show>
             <aside class="rating-container">
                 <For
-                    each=move || 1..=max 
+                    each=move || 1..=max
                     key=|index| *index
                     children=move |index| {
                         let input_id = format!("{}-{}", name.get(), index);
@@ -46,7 +46,12 @@ pub fn Rate(
                                     class="rating-label"
                                     class:selected=move || index <= selected.get()
                                 >
-                                    <Show when=move || {index <= selected.get()} fallback=move || {view!{ "⭐️" }}>
+                                    <Show
+                                        when=move || { index <= selected.get() }
+                                        fallback=move || {
+                                            view! { "⭐️" }
+                                        }
+                                    >
                                         {"🌟"}
                                     </Show>
                                 </label>

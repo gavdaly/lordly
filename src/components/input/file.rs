@@ -20,7 +20,7 @@ pub fn File(
     view! {
         <div>
             <label for=name.get()>Select files</label>
-            <input type="file" id=name.get() name=name.get() accept multiple/>
+            <input type="file" id=name.get() name=name.get() accept multiple />
         </div>
     }
 }

@@ -1,7 +1,3 @@
-use alloc::string::ToString;
-
-use alloc::string::String;
-
 use leptos::attr::{any_attribute::*, custom::*, *};
 use core::fmt::Display;
 
@@ -14,7 +10,7 @@ pub enum ButtonType {
 }
 
 impl ButtonType {
-    fn as_str(&self) -> &str {
+    fn as_str(&self) -> &'static str {
         match self {
             Self::Button => "button",
             Self::Submit => "submit",
@@ -23,9 +19,9 @@ impl ButtonType {
     }
 }
 
-impl From<ButtonType> for String {
+impl From<ButtonType> for &'static str {
     fn from(val: ButtonType) -> Self {
-        val.as_str().to_string()
+        val.as_str()
     }
 }
 
@@ -33,7 +29,7 @@ impl From<&str> for ButtonType {
     fn from(s: &str) -> Self {
         match s {
             "button" => Self::Button,
-            "subit" => Self::Submit,
+            "submit" => Self::Submit,
             "reset" => Self::Reset,
             _ => Self::Button,
         }
@@ -53,8 +49,8 @@ impl IntoAnyAttribute for ButtonType {
 }
 
 impl IntoAttributeValue for ButtonType {
-    type Output = String;
+    type Output = &'static str;
     fn into_attribute_value(self) -> Self::Output {
-        self.to_string()
+        self.as_str()
     }
 }

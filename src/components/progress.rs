@@ -30,19 +30,17 @@ pub fn ProgressBar(
     });
 
     view! {
-        <div
-            class="progress"
+        <div class="progress">
             // aria_role="progressbar"
             // aria-valuemin="0"
             // aria-valuemax="100"
             // aria-valuenow={move || bounded_value.get().to_string()}
-        >
             <div
                 class="progress-bar"
                 data-color=color
-                data-striped={striped.to_string()}
-                data-animated={animated.to_string()}
-                style:width={move || format!("{:.1}%", bounded_value.get())}
+                data-striped=striped.to_string()
+                data-animated=animated.to_string()
+                style:width=move || format!("{:.1}%", bounded_value.get())
             >
                 {move || label.clone().map(|l| view! { <span class="progress-label">{l}</span> })}
             </div>
@@ -84,17 +82,17 @@ pub fn Spinner(
     view! {
         <svg
             class="spinner"
-            width={size.to_string()}
-            height={size.to_string()}
+            width=size.to_string()
+            height=size.to_string()
             viewBox="0 0 100 100"
             data-color=color
-            data-indeterminate={bounded_value().is_none().to_string()}
+            data-indeterminate=bounded_value().is_none().to_string()
         >
             <circle
                 class="spinner-track"
                 cx="50"
                 cy="50"
-                r={radius.to_string()}
+                r=radius.to_string()
                 fill="none"
                 stroke-width="8"
             />
@@ -102,11 +100,11 @@ pub fn Spinner(
                 class="spinner-progress"
                 cx="50"
                 cy="50"
-                r={radius.to_string()}
+                r=radius.to_string()
                 fill="none"
                 stroke-width="8"
-                stroke-dasharray={circumference.to_string()}
-                stroke-dashoffset={move || stroke_dashoffset().to_string()}
+                stroke-dasharray=circumference.to_string()
+                stroke-dashoffset=move || stroke_dashoffset().to_string()
                 transform="rotate(-90 50 50)"
             />
         </svg>

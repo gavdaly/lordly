@@ -60,11 +60,24 @@ pub fn ComboBox(
                 }
                 prop:value=move || value.get()
             >
-                {placeholder.map(|p| view! { <option value="" disabled selected=move || value.get().is_empty()>{p}</option> })}
-                <For each=move || options.clone() key=|k| k.0.clone() children=move |(id, name)| {view!{<option value=id>{name}</option> }} />
+                {placeholder
+                    .map(|p| {
+                        view! {
+                            <option value="" disabled selected=move || value.get().is_empty()>
+                                {p}
+                            </option>
+                        }
+                    })}
+                <For
+                    each=move || options.clone()
+                    key=|k| k.0.clone()
+                    children=move |(id, name)| {
+                        view! { <option value=id>{name}</option> }
+                    }
+                />
 
             </select>
-            // {error.map(|err| view! { <div class="error-message">{err}</div> })}
+        // {error.map(|err| view! { <div class="error-message">{err}</div> })}
         </fieldset>
     }
 }

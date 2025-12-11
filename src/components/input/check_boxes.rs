@@ -48,7 +48,7 @@ pub fn CheckBoxes(
                 each=move || options.clone()
                 key=|item| item.0.clone()
                 children=move |(id, display_text)| {
-                    let id = Memo::new(move|_| id.clone());
+                    let id = Memo::new(move |_| id.clone());
                     let is_checked = Memo::new(move |_| {
                         let values = selected_values.get();
                         values.contains(&id.get())

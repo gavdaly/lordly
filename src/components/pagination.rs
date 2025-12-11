@@ -33,13 +33,9 @@ pub fn Pagination(
     view! {
         <aside class="pagination">
             {if prev() {
-                view! {
-                    <a href=format!("{}{}", url_base(), current - 1)>"prev"</a>
-                }.into_any()
+                view! { <a href=format!("{}{}", url_base(), current - 1)>"prev"</a> }.into_any()
             } else {
-                view! {
-                    <i>"prev"</i>
-                }.into_any()
+                view! { <i>"prev"</i> }.into_any()
             }}
             <ul>
                 {window()
@@ -51,19 +47,16 @@ pub fn Pagination(
                                 <li data-active=false>
                                     <a href=format!("{}{}", url_base(), i)>{i}</a>
                                 </li>
-                            }.into_any()
+                            }
+                                .into_any()
                         }
                     })
                     .collect_view()}
             </ul>
             {if next() {
-                view! {
-                    <a href=format!("{}{}", url_base(), current + 1)>"next"</a>
-                }.into_any()
+                view! { <a href=format!("{}{}", url_base(), current + 1)>"next"</a> }.into_any()
             } else {
-                view! {
-                    <i>"next"</i>
-                }.into_any()
+                view! { <i>"next"</i> }.into_any()
             }}
         </aside>
     }

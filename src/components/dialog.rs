@@ -14,9 +14,5 @@ pub fn Dia(children: Children, open: ReadSignal<bool>) -> impl IntoView {
         }
     });
 
-    view! {
-        <dialog node_ref=d>
-            {children()}
-        </dialog>
-    }
+    view! { <dialog node_ref=d>{children()}</dialog> }
 }

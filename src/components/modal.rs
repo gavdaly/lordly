@@ -8,8 +8,8 @@ pub fn Modal(
     modal: AnyView,
 ) -> impl IntoView {
     view! {
-        <div //data-style=style
-        >{children()}</div>
+        // data-style=style
+        <div>{children()}</div>
         <dialog>{modal}</dialog>
     }
 }
