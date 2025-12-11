@@ -12,24 +12,22 @@ lto = true
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-console_error_panic_hook = "0.1"
 leptos = { version = "0.8", features = ["csr"] }
 leptos_meta = { version = "0.8" }
 leptos_router = { version = "0.8" }
-wasm-bindgen = { version = "0.2.95", features = ["serde"] }
-web-sys = { version = "0.3", features = [
+wasm-bindgen = { version = "0.2.106", features = ["serde"] }
+web-sys = { version = "0.3.83", features = [
     "DragEvent",
     "DataTransfer",
     "File",
     "FileList",
     "HtmlInputElement",
 ] }
-thiserror = "1"
-http = "1"
+thiserror = "2"
 regex = "1"
-log = "0.4"
-console_log = "1.0"
-wasm-bindgen-futures = "0.4"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
+console_error_panic_hook = "0.1"
+log = "0.4"
+console_log = "1"
