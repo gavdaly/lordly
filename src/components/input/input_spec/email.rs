@@ -42,7 +42,7 @@ impl InputSpec for Email {
             if value.contains('@') {
                 ValidationState::Valid
             } else {
-                ValidationState::Invalid("Invalid email address")
+                ValidationState::Invalid(String::from("Invalid email address"))
             }
         }))
     }

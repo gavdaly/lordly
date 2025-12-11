@@ -1,4 +1,4 @@
-use leptos::attr::{any_attribute::*, custom::*, *};
+use leptos::attr::{any_attribute::{IntoAnyAttribute, AnyAttribute}, custom::custom_attribute, IntoAttributeValue};
 use core::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -28,7 +28,6 @@ impl From<ButtonType> for &'static str {
 impl From<&str> for ButtonType {
     fn from(s: &str) -> Self {
         match s {
-            "button" => Self::Button,
             "submit" => Self::Submit,
             "reset" => Self::Reset,
             _ => Self::Button,

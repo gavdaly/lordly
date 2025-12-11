@@ -44,7 +44,7 @@ impl InputSpec for BirthdayYear {
                     return ValidationState::Valid;
                 }
             }
-            ValidationState::Invalid("Year must be a valid 4-digit year")
+            ValidationState::Invalid(String::from("Year must be a valid 4-digit year"))
         }))
     }
 }

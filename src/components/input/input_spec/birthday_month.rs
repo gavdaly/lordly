@@ -42,7 +42,7 @@ impl InputSpec for BirthdayMonth {
                 && (1..=12).contains(&month) {
                     return ValidationState::Valid;
                 }
-            ValidationState::Invalid("Month must be between 1-12")
+            ValidationState::Invalid(String::from("Month must be between 1-12"))
         }))
     }
 }

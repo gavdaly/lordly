@@ -28,12 +28,12 @@ pub fn TextArea(
             return;
         };
         let Some(value) = target.value_of().as_string() else {
-            set_state.set(ValidationState::Invalid("Failed to validate"));
+            set_state.set(ValidationState::Invalid(String::from("Failed to validate")));
             return;
         };
         match valid.run(value) {
             Ok(_) => set_state.set(ValidationState::Valid),
-            Err(err) => set_state.set(ValidationState::Invalid(err)),
+            Err(err) => set_state.set(ValidationState::Invalid(String::from(err))),
         }
     };
     view! {

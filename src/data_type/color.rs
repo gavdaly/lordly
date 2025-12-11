@@ -1,4 +1,4 @@
-use leptos::attr::{any_attribute::*, custom::*, *};
+use leptos::attr::{any_attribute::{IntoAnyAttribute, AnyAttribute}, custom::custom_attribute, IntoAttributeValue};
 use core::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -39,7 +39,6 @@ impl From<&str> for Color {
             "success" => Color::Success,
             "danger" => Color::Danger,
             "warning" => Color::Warning,
-            "info" => Color::Info,
             _ => Color::Info,
         }
     }

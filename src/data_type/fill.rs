@@ -1,16 +1,16 @@
-use leptos::attr::{any_attribute::*, custom::*, *};
+use leptos::attr::{any_attribute::{IntoAnyAttribute, AnyAttribute}, custom::custom_attribute, IntoAttributeValue};
 use core::fmt::Display;
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub enum Fill {
+    Ghost,
     #[default]
     Solid,
-    Ghost,
     Text,
 }
 
 impl Fill {
-    fn as_str(&self) -> &'static str {
+    const fn as_str(&self) -> &'static str {
         match self {
             Self::Solid => "solid",
             Self::Ghost => "ghost",
@@ -28,7 +28,6 @@ impl From<Fill> for &'static str {
 impl From<&str> for Fill {
     fn from(s: &str) -> Self {
         match s {
-            "solid" => Self::Solid,
             "ghost" => Self::Ghost,
             "text" => Self::Text,
             _ => Self::Solid,

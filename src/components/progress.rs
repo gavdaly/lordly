@@ -67,15 +67,15 @@ pub fn Spinner(
     };
 
     // Calculate SVG parameters for circular progress
-    let radius = 42;
-    let circumference = 2.0 * core::f64::consts::PI * radius as f64;
+    let radius = 42_f64;
+    let circumference = 2.0_f64 * core::f64::consts::PI * radius;
 
     let stroke_dashoffset = move || {
         if let Some(val) = bounded_value() {
-            let percent_complete = val / 100.0;
-            circumference * (1.0 - percent_complete)
+            let percent_complete = val / 100.0_f64;
+            circumference * (1.0_f64 - percent_complete)
         } else {
-            0.0 // For indeterminate state
+            0.0_f64
         }
     };
 

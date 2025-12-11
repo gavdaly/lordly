@@ -47,7 +47,7 @@ impl InputSpec for CurrentPassword {
             if is_valid_password(&value) {
                 ValidationState::Valid
             } else {
-                ValidationState::Invalid("Invalid password")
+                ValidationState::Invalid(String::from("Invalid password"))
             }
         }))
     }
@@ -80,7 +80,7 @@ impl InputSpec for NewPassword {
             if is_valid_password(&value) {
                 ValidationState::Valid
             } else {
-                ValidationState::Invalid("Invalid password")
+                ValidationState::Invalid(String::from("Invalid password"))
             }
         }))
     }
@@ -113,7 +113,7 @@ impl InputSpec for ConfirmPassword {
             if is_valid_password(&value) {
                 ValidationState::Valid
             } else {
-                ValidationState::Invalid("Invalid password")
+                ValidationState::Invalid(String::from("Invalid password"))
             }
         }))
     }

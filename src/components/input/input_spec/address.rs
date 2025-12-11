@@ -685,7 +685,7 @@ impl InputSpec for BillingPostalCode {
             if value.trim().len() >= 3 {
                 ValidationState::Valid
             } else {
-                ValidationState::Invalid("Please enter a valid billing postal code")
+                ValidationState::Invalid(String::from("Please enter a valid billing postal code"))
             }
         }))
     }

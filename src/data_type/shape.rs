@@ -1,18 +1,24 @@
-use leptos::attr::{any_attribute::*, custom::*, *};
-use alloc::string::{String, ToString};
+use leptos::attr::{
+    any_attribute::{AnyAttribute, IntoAnyAttribute},
+    custom::custom_attribute,
+    IntoAttributeValue,
+};
+use alloc::borrow::ToOwned as _;
+use alloc::string::String;
 use core::fmt::Display;
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[non_exhaustive]
 pub enum Shape {
+    Circular,
     Pill,
     Rounded,
     #[default]
     Square,
-    Circular,
 }
 
 impl Shape {
-    fn as_str(&self) -> &'static str {
+    const fn as_str(&self) -> &'static str {
         match self {
             Self::Pill => "pill",
             Self::Rounded => "rounded",
@@ -24,7 +30,7 @@ impl Shape {
 
 impl From<Shape> for String {
     fn from(val: Shape) -> Self {
-        val.as_str().to_string()
+        val.as_str().to_owned()
     }
 }
 
@@ -33,7 +39,6 @@ impl From<&str> for Shape {
         match s {
             "pill" => Self::Pill,
             "rounded" => Self::Rounded,
-            "square" => Self::Square,
             "circular" => Self::Circular,
             _ => Self::Square,
         }

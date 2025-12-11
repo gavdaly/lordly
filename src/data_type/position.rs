@@ -1,22 +1,22 @@
-use leptos::attr::{any_attribute::*, custom::*, *};
+use leptos::attr::{any_attribute::{IntoAnyAttribute, AnyAttribute}, custom::custom_attribute, IntoAttributeValue};
 use core::fmt::Display;
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[non_exhaustive]
 pub enum Position {
-    TopLeft,
-    #[default]
-    TopCenter,
-    TopRight,
+    BottomCenter,
+    BottomLeft,
+    BottomRight,
     MiddleLeft,
     MiddleRight,
-    BottomLeft,
-    BottomCenter,
-    BottomRight,
+    #[default]
+    TopCenter,
+    TopLeft,
+    TopRight,
 }
 
 impl Position {
-    /// Returns the string representation of a `Position`.
-    fn as_str(&self) -> &'static str {
+    const fn as_str(&self) -> &'static str {
         match self {
             Self::TopLeft => "top-left",
             Self::TopCenter => "top-center",
@@ -30,26 +30,18 @@ impl Position {
     }
 }
 
-/// Converts a `Position` to a string.
-impl From<Position> for &'static str {
-    fn from(val: Position) -> Self {
-        val.as_str()
-    }
-}
-
-/// Converts a string to a `Position`.
+#[allow(clippy::fallible_impl_from, clippy::panic)]
 impl From<&str> for Position {
     fn from(s: &str) -> Self {
         match s.to_lowercase().as_str() {
             "top-left" | "tl" | "nw" => Self::TopLeft,
-            "top-center" | "tc" | "n" => Self::TopCenter,
             "top-right" | "tr" | "ne" => Self::TopRight,
             "middle-left" | "ml" | "l" | "w" => Self::MiddleLeft,
             "middle-right" | "mr" | "r" | "e" => Self::MiddleRight,
             "bottom-left" | "bl" | "sw" => Self::BottomLeft,
             "bottom-center" | "bc" | "s" => Self::BottomCenter,
             "bottom-right" | "br" | "se" => Self::BottomRight,
-            _ => panic!("Invalid `Position`"),
+            _ => Self::TopCenter,
         }
     }
 }

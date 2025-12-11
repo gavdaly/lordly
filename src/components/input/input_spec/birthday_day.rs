@@ -42,7 +42,7 @@ impl InputSpec for BirthdayDay {
                 && (1..=31).contains(&day) {
                     return ValidationState::Valid;
                 }
-            ValidationState::Invalid("Day must be between 1-31")
+            ValidationState::Invalid(String::from("Day must be between 1-31"))
         }))
     }
 }

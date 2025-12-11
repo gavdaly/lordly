@@ -1,13 +1,14 @@
-use leptos::attr::{any_attribute::*, custom::*, *};
+use leptos::attr::{any_attribute::{IntoAnyAttribute, AnyAttribute}, custom::custom_attribute, IntoAttributeValue};
 use core::fmt::Display;
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[non_exhaustive]
 pub enum Anchor {
-    Top,
-    #[default]
-    Right,
     Bottom,
     Left,
+    #[default]
+    Right,
+    Top,
 }
 
 impl Anchor {
@@ -31,10 +32,9 @@ impl From<&str> for Anchor {
     fn from(s: &str) -> Self {
         match s {
             "top" => Self::Top,
-            "right" => Self::Right,
             "bottom" => Self::Bottom,
             "left" => Self::Left,
-            _ => panic!("Invalid `Anchor`"),
+            _ => Self::Right,
         }
     }
 }

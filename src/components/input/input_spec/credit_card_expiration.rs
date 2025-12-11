@@ -49,7 +49,7 @@ impl InputSpec for CreditCardExpiration {
                             return ValidationState::Valid;
                         }
             }
-            ValidationState::Invalid("Use MM/YY format")
+            ValidationState::Invalid(String::from("Use MM/YY format"))
         }))
     }
 }

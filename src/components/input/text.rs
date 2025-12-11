@@ -29,7 +29,7 @@ pub fn Input(
         if let Some(target) = ev.target() {
             match target.value_of().as_string() {
                 Some(v) => set_state.set(validation.run(v)),
-                None => set_state.set(ValidationState::Invalid("Failed to get value")),
+                None => set_state.set(ValidationState::Invalid(String::from("Failed to get value"))),
             }
         }
     };

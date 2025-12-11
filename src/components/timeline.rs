@@ -23,9 +23,9 @@ pub fn TimelineItem(
     view! {
         <li data-color=color class="timeline-item">
             // <Show when=move || icon.is_some()>
-            <div class="timeline-point">// <div class="timeline-icon">{icon}</div>
+            // <div class="timeline-icon">{icon}</div>
             // </Show>
-            </div>
+            <div class="timeline-point"></div>
             <div class="timeline-content">
                 <Show when=move || has_date.get()>
                     <div class="timeline-date">{date_memo.get()}</div>
