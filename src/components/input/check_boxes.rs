@@ -59,8 +59,8 @@ pub fn CheckBoxes(
                             <input
                                 type="checkbox"
                                 id=id
-                                name=id.clone()
-                                value=id.clone()
+                                name=id
+                                value=id
                                 checked=is_checked.get()
                                 disabled=disabled
                                 on:change=move |ev| {

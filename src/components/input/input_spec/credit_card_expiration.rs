@@ -43,16 +43,13 @@ impl InputSpec for CreditCardExpiration {
             // Basic MM/YY validation - more complex validation would check against current date
             if value.len() == 5 && value.chars().nth(2) == Some('/') {
                 let parts: Vec<&str> = value.split('/').collect();
-                if parts.len() == 2 {
-                    if let (Ok(month), Ok(_year)) = (parts[0].parse::<u8>(), parts[1].parse::<u8>())
-                    {
-                        if month >= 1 && month <= 12 {
+                if parts.len() == 2
+                    && let (Ok(month), Ok(_year)) = (parts[0].parse::<u8>(), parts[1].parse::<u8>())
+                        && (1..=12).contains(&month) {
                             return ValidationState::Valid;
                         }
-                    }
-                }
             }
-            ValidationState::Invalid("Use MM/YY format".into())
+            ValidationState::Invalid("Use MM/YY format")
         }))
     }
 }

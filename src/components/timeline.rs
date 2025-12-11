@@ -22,8 +22,8 @@ pub fn TimelineItem(
     let has_date = Memo::new(move |_| date_clone.is_some());
     view! {
         <li data-color=color class="timeline-item">
-            <div class="timeline-point">// <Show when=move || icon.is_some()>
-            // <div class="timeline-icon">{icon}</div>
+            // <Show when=move || icon.is_some()>
+            <div class="timeline-point">// <div class="timeline-icon">{icon}</div>
             // </Show>
             </div>
             <div class="timeline-content">

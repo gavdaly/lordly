@@ -38,12 +38,11 @@ impl InputSpec for BirthdayDay {
     }
     fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
-            if let Ok(day) = value.parse::<u8>() {
-                if day >= 1 && day <= 31 {
+            if let Ok(day) = value.parse::<u8>()
+                && (1..=31).contains(&day) {
                     return ValidationState::Valid;
                 }
-            }
-            ValidationState::Invalid("Day must be between 1-31".into())
+            ValidationState::Invalid("Day must be between 1-31")
         }))
     }
 }

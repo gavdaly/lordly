@@ -105,11 +105,10 @@ pub fn DropArea(
     };
 
     Effect::new(move |_| {
-        if let Some(err) = error.get() {
-            if let Some(on_error) = on_error {
+        if let Some(err) = error.get()
+            && let Some(on_error) = on_error {
                 on_error.run(err);
             }
-        }
     });
 
     view! {

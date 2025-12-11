@@ -26,7 +26,7 @@ pub fn ProgressBar(
     // Ensure value stays between 0-100
     let bounded_value = Signal::derive(move || {
         let val = value.get();
-        val.max(0.0).min(100.0)
+        val.clamp(0.0, 100.0)
     });
 
     view! {
@@ -62,7 +62,7 @@ pub fn Spinner(
     let bounded_value = move || {
         value.map(|v| {
             let val = v.get();
-            val.max(0.0).min(100.0)
+            val.clamp(0.0, 100.0)
         })
     };
 

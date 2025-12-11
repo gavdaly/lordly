@@ -131,7 +131,7 @@ impl InputSpec for TelNational {
             if digits.len() >= 7 {
                 ValidationState::Valid
             } else {
-                ValidationState::Invalid("Please enter a valid phone number without country code".into())
+                ValidationState::Invalid("Please enter a valid phone number without country code")
             }
         }))
     }

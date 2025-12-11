@@ -18,7 +18,7 @@ pub fn SearchBody(
             return;
         };
         let value = event_target_value(&ev);
-        if value.len() == 0 {
+        if value.is_empty() {
             return;
         };
         let possible_hints = hints.run(value);
@@ -46,7 +46,7 @@ pub fn SearchBody(
                                 .collect_view()
                                 .into_any()
                         } else {
-                            view! {}.into_any()
+                            ().into_any()
                         }
                     }}
 

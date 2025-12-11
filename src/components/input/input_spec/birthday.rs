@@ -40,7 +40,7 @@ impl InputSpec for Birthday {
             if true {
                 ValidationState::Valid
             } else {
-                ValidationState::Invalid("Invalid birth date".into())
+                ValidationState::Invalid("Invalid birth date")
             }
         }))
     }

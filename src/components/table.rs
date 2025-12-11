@@ -25,7 +25,7 @@ pub fn Table<'a>(
                         view! {
                             <tr>
                                 {row
-                                    .into_iter()
+                                    .iter()
                                     .map(|f| view! { <td>{f.into_any()}</td> })
                                     .collect_view()}
                             </tr>

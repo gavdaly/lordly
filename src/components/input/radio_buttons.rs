@@ -14,7 +14,6 @@ pub fn RadioButtons(
     #[prop(into)] label: Signal<String>,
     #[prop(into)] options: Signal<Vec<(String, String)>>,
 ) -> impl IntoView {
-    let options = options.clone();
     view! {
         <fieldset>
             <legend>{label.get()}</legend>

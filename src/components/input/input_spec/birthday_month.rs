@@ -38,12 +38,11 @@ impl InputSpec for BirthdayMonth {
     }
     fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
-            if let Ok(month) = value.parse::<u8>() {
-                if month >= 1 && month <= 12 {
+            if let Ok(month) = value.parse::<u8>()
+                && (1..=12).contains(&month) {
                     return ValidationState::Valid;
                 }
-            }
-            ValidationState::Invalid("Month must be between 1-12".into())
+            ValidationState::Invalid("Month must be between 1-12")
         }))
     }
 }
