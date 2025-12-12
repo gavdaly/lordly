@@ -1,11 +1,24 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 pub struct CurrentPassword;
 pub struct NewPassword;
 pub struct ConfirmPassword;
 pub struct OneTimeCode;
+
+fn is_valid_password(val: &str) -> bool {
+    let has_len = val.len() >= 8;
+    let has_lower = val.chars().any(|c| c.is_ascii_lowercase());
+    let has_upper = val.chars().any(|c| c.is_ascii_uppercase());
+    let has_digit = val.chars().any(|c| c.is_ascii_digit());
+    let has_special = val.chars().any(|c| "@$!%*?&".contains(c));
+    let all_allowed = val.chars().all(|c| c.is_ascii_alphanumeric() || "@$!%*?&".contains(c));
+    
+    has_len && has_lower && has_upper && has_digit && has_special && all_allowed
+}
 
 impl InputSpec for CurrentPassword {
     fn input_type() -> &'static str {
@@ -29,16 +42,12 @@ impl InputSpec for CurrentPassword {
     fn minlength() -> Option<u32> {
         Some(8)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
-            let pattern = regex::Regex::new(
-                r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
-            )
-            .unwrap();
-            if pattern.is_match(&value) {
-                Check::Valid
+            if is_valid_password(&value) {
+                ValidationState::Valid
             } else {
-                Check::Invalid("Invalid password".into())
+                ValidationState::Invalid(String::from("Invalid password"))
             }
         }))
     }
@@ -66,16 +75,12 @@ impl InputSpec for NewPassword {
     fn minlength() -> Option<u32> {
         Some(8)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
-            let pattern = regex::Regex::new(
-                r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
-            )
-            .unwrap();
-            if pattern.is_match(&value) {
-                Check::Valid
+            if is_valid_password(&value) {
+                ValidationState::Valid
             } else {
-                Check::Invalid("Invalid password".into())
+                ValidationState::Invalid(String::from("Invalid password"))
             }
         }))
     }
@@ -103,16 +108,12 @@ impl InputSpec for ConfirmPassword {
     fn minlength() -> Option<u32> {
         Some(8)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
-            let pattern = regex::Regex::new(
-                r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
-            )
-            .unwrap();
-            if pattern.is_match(&value) {
-                Check::Valid
+            if is_valid_password(&value) {
+                ValidationState::Valid
             } else {
-                Check::Invalid("Invalid password".into())
+                ValidationState::Invalid(String::from("Invalid password"))
             }
         }))
     }
@@ -140,7 +141,7 @@ impl InputSpec for OneTimeCode {
     fn minlength() -> Option<u32> {
         None
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

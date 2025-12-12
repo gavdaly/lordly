@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A job title or position within an organization.
-struct OrganizationTitle;
+pub struct OrganizationTitle;
 
 /// Implementation of `InputSpec` for `OrganizationTitle` type.
 ///
@@ -33,7 +35,7 @@ impl InputSpec for OrganizationTitle {
     fn minlength() -> Option<u32> {
         Some(2)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

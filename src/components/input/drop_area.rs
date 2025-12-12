@@ -1,8 +1,15 @@
-use std::collections::VecDeque;
+use alloc::vec;
+
+use alloc::format;
+
+use alloc::vec::Vec;
+
+use alloc::string::String;
+
 
 use leptos::prelude::*;
 use leptos::tachys::html::event::DragEvent;
-use web_sys::{DataTransfer, File, FileList};
+use web_sys::FileList;
 
 /// A component that allows users to upload files through drag and drop or file input.
 ///
@@ -16,8 +23,8 @@ use web_sys::{DataTransfer, File, FileList};
 #[component]
 pub fn DropArea(
     #[prop(into)] name: Signal<String>,
-    #[prop(default = "".into(), into)] accept: Signal<String>,
-    #[prop(default= false.into(), into)] disabled: Signal<bool>,
+    #[prop(default = "".into(), into)] _accept: Signal<String>,
+    #[prop(default= false.into(), into)] _disabled: Signal<bool>,
     #[prop(default = true)] multiple: bool,
     #[prop(optional)] on_files_change: Option<Callback<Vec<FileInfo>>>,
     #[prop(optional)] on_error: Option<Callback<&'static str>>,
@@ -78,7 +85,7 @@ pub fn DropArea(
             return;
         };
 
-        let Some(input_elem) = input_ref.get() else {
+        let Some(_input_elem) = input_ref.get() else {
             if let Some(on_error) = on_error {
                 on_error.run("Failed to get input element reference");
             }
@@ -98,23 +105,26 @@ pub fn DropArea(
     };
 
     Effect::new(move |_| {
-        if let Some(err) = error.get() {
-            if let Some(on_error) = on_error {
+        if let Some(err) = error.get()
+            && let Some(on_error) = on_error {
                 on_error.run(err);
             }
-        }
     });
 
     view! {
         <div class="input drop">
-            <div
-                class="dropzone"
-                id=drop_zone_id
-                on:drop=on_drop
-            >
+            <div class="dropzone" id=drop_zone_id on:drop=on_drop>
                 <div>
                     <label for=name.get()>"Drop files here"</label>
-                    <input type="file" id=name.get() name=name.get() accept multiple=multiple on:change=on_input_change node_ref=input_ref/>
+                    <input
+                        type="file"
+                        id=name.get()
+                        name=name.get()
+                        accept
+                        multiple=multiple
+                        on:change=on_input_change
+                        node_ref=input_ref
+                    />
                 </div>
             </div>
             {move || {
@@ -123,20 +133,22 @@ pub fn DropArea(
                 } else {
                     view! {
                         <ul class="file-list">
-                            {files.get()
+                            {files
+                                .get()
                                 .into_iter()
                                 .map(|file| {
                                     let size_mb = (file.size / 1_048_576.0).round() / 100.0;
                                     view! {
                                         <li>
                                             {file.name} " (" {size_mb} " MB)"
-                                            <span class="text-gray-500"> " - " {file.type_}</span>
+                                            <span class="text-gray-500">" - " {file.type_}</span>
                                         </li>
                                     }
                                 })
                                 .collect_view()}
                         </ul>
-                    }.into_any()
+                    }
+                        .into_any()
                 }
             }}
         </div>

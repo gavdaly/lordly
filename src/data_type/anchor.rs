@@ -1,20 +1,18 @@
-use leptos::{
-    attr::{any_attribute::*, custom::*, *},
-    prelude::*,
-};
-use std::fmt::Display;
+use leptos::attr::{any_attribute::{IntoAnyAttribute, AnyAttribute}, custom::custom_attribute, IntoAttributeValue};
+use core::fmt::Display;
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[non_exhaustive]
 pub enum Anchor {
-    Top,
-    #[default]
-    Right,
     Bottom,
     Left,
+    #[default]
+    Right,
+    Top,
 }
 
 impl Anchor {
-    fn as_str(&self) -> &str {
+    fn as_str(&self) -> &'static str {
         match self {
             Self::Top => "top",
             Self::Right => "right",
@@ -24,9 +22,9 @@ impl Anchor {
     }
 }
 
-impl From<Anchor> for String {
+impl From<Anchor> for &'static str {
     fn from(val: Anchor) -> Self {
-        val.as_str().to_string()
+        val.as_str()
     }
 }
 
@@ -34,16 +32,15 @@ impl From<&str> for Anchor {
     fn from(s: &str) -> Self {
         match s {
             "top" => Self::Top,
-            "right" => Self::Right,
             "bottom" => Self::Bottom,
             "left" => Self::Left,
-            _ => panic!("Invalid `Anchor`"),
+            _ => Self::Right,
         }
     }
 }
 
 impl Display for Anchor {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         write!(f, "{}", self.as_str())
     }
 }
@@ -55,8 +52,8 @@ impl IntoAnyAttribute for Anchor {
 }
 
 impl IntoAttributeValue for Anchor {
-    type Output = String;
+    type Output = &'static str;
     fn into_attribute_value(self) -> Self::Output {
-        self.to_string()
+        self.as_str()
     }
 }

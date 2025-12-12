@@ -9,14 +9,10 @@ pub fn Dia(children: Children, open: ReadSignal<bool>) -> impl IntoView {
             if open.get() {
                 let _ = dialog.show_modal();
             } else {
-                let _ = dialog.close();
+                dialog.close();
             }
         }
     });
 
-    view! {
-        <dialog node_ref=d>
-            {children()}
-        </dialog>
-    }
+    view! { <dialog node_ref=d>{children()}</dialog> }
 }

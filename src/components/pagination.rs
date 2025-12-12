@@ -1,3 +1,7 @@
+use alloc::format;
+
+use alloc::string::String;
+
 use leptos::prelude::*;
 
 /// Created a pagination component with the current page's property set to `data-active='true'`
@@ -17,25 +21,22 @@ pub fn Pagination(
         let start = if current <= half_visible {
             1
         } else {
-            current - half_visible
+            current.saturating_sub(half_visible)
         };
         let end = if current + half_visible > total {
             total
         } else {
-            current + half_visible
+            current.saturating_add(half_visible)
         };
         start..=end
     };
     view! {
         <aside class="pagination">
             {if prev() {
-                view! {
-                    <a href=format!("{}{}", url_base(), current - 1)>"prev"</a>
-                }.into_any()
+                view! { <a href=format!("{}{}", url_base(), current.saturating_sub(1))>"prev"</a> }
+                    .into_any()
             } else {
-                view! {
-                    <i>"prev"</i>
-                }.into_any()
+                view! { <i>"prev"</i> }.into_any()
             }}
             <ul>
                 {window()
@@ -47,19 +48,17 @@ pub fn Pagination(
                                 <li data-active=false>
                                     <a href=format!("{}{}", url_base(), i)>{i}</a>
                                 </li>
-                            }.into_any()
+                            }
+                                .into_any()
                         }
                     })
                     .collect_view()}
             </ul>
             {if next() {
-                view! {
-                    <a href=format!("{}{}", url_base(), current + 1)>"next"</a>
-                }.into_any()
+                view! { <a href=format!("{}{}", url_base(), current.saturating_add(1))>"next"</a> }
+                    .into_any()
             } else {
-                view! {
-                    <i>"next"</i>
-                }.into_any()
+                view! { <i>"next"</i> }.into_any()
             }}
         </aside>
     }

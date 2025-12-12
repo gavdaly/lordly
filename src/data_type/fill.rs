@@ -1,19 +1,16 @@
-use leptos::{
-    attr::{any_attribute::*, custom::*, *},
-    prelude::*,
-};
-use std::fmt::Display;
+use leptos::attr::{any_attribute::{IntoAnyAttribute, AnyAttribute}, custom::custom_attribute, IntoAttributeValue};
+use core::fmt::Display;
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub enum Fill {
+    Ghost,
     #[default]
     Solid,
-    Ghost,
     Text,
 }
 
 impl Fill {
-    fn as_str(&self) -> &str {
+    const fn as_str(&self) -> &'static str {
         match self {
             Self::Solid => "solid",
             Self::Ghost => "ghost",
@@ -22,17 +19,16 @@ impl Fill {
     }
 }
 
-impl From<Fill> for String {
+impl From<Fill> for &'static str {
     fn from(val: Fill) -> Self {
-        val.as_str().to_string()
+        val.as_str()
     }
 }
 
 impl From<&str> for Fill {
     fn from(s: &str) -> Self {
         match s {
-            "solid" => Self::Solid,
-            "gost" => Self::Ghost,
+            "ghost" => Self::Ghost,
             "text" => Self::Text,
             _ => Self::Solid,
         }
@@ -40,7 +36,7 @@ impl From<&str> for Fill {
 }
 
 impl Display for Fill {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         write!(f, "{}", self.as_str())
     }
 }
@@ -52,8 +48,8 @@ impl IntoAnyAttribute for Fill {
 }
 
 impl IntoAttributeValue for Fill {
-    type Output = String;
+    type Output = &'static str;
     fn into_attribute_value(self) -> Self::Output {
-        self.to_string()
+        self.as_str()
     }
 }

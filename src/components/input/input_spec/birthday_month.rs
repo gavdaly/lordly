@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A birthday month component.
-struct BirthdayMonth;
+pub struct BirthdayMonth;
 
 /// Implementation of `InputSpec` for `BirthdayMonth` type.
 ///
@@ -34,14 +36,13 @@ impl InputSpec for BirthdayMonth {
     fn minlength() -> Option<u32> {
         Some(1)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
-            if let Ok(month) = value.parse::<u8>() {
-                if month >= 1 && month <= 12 {
-                    return Check::Valid;
+            if let Ok(month) = value.parse::<u8>()
+                && (1..=12).contains(&month) {
+                    return ValidationState::Valid;
                 }
-            }
-            Check::Invalid("Month must be between 1-12".into())
+            ValidationState::Invalid(String::from("Month must be between 1-12"))
         }))
     }
 }

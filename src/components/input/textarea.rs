@@ -1,4 +1,6 @@
-use crate::data_type::{validation, ValidationState};
+use alloc::string::String;
+
+use crate::data_type::ValidationState;
 use leptos::ev::FocusEvent;
 use leptos::prelude::*;
 
@@ -7,16 +9,16 @@ pub fn TextArea(
     #[prop(optional, into)] label: String,
     #[prop(into)] name: String,
     #[prop(optional, into)] placeholder: Option<String>,
-    #[prop(optional, into)] summary: Option<String>,
+    #[prop(optional, into)] _summary: Option<String>,
     #[prop(optional, into)] wrapper_class: Option<String>,
     #[prop(optional, into)] input_class: Option<String>,
-    #[prop(optional, into)] label_class: Option<String>,
-    #[prop(optional, into)] summary_class: Option<String>,
-    #[prop(optional, into)] error_class: Option<String>,
-    #[prop(optional, into)] validation_children: Option<AnyView>,
-    #[prop(optional, into)] validation: Option<Callback<String, Result<(), String>>>,
+    #[prop(optional, into)] _label_class: Option<String>,
+    #[prop(optional, into)] _summary_class: Option<String>,
+    #[prop(optional, into)] _error_class: Option<String>,
+    #[prop(optional, into)] _validation_children: Option<AnyView>,
+    #[prop(optional, into)] validation: Option<Callback<String, Result<(), &'static str>>>,
 ) -> impl IntoView {
-    let (state, set_state) = signal(ValidationState::Empty);
+    let (_state, set_state) = signal(ValidationState::Empty);
     let validate = move |ev: FocusEvent| {
         let Some(valid) = validation else {
             return;
@@ -26,12 +28,12 @@ pub fn TextArea(
             return;
         };
         let Some(value) = target.value_of().as_string() else {
-            set_state.set(ValidationState::Invalid("Failed to validate".into()));
+            set_state.set(ValidationState::Invalid(String::from("Failed to validate")));
             return;
         };
         match valid.run(value) {
             Ok(_) => set_state.set(ValidationState::Valid),
-            Err(err) => set_state.set(ValidationState::Invalid(err)),
+            Err(err) => set_state.set(ValidationState::Invalid(String::from(err))),
         }
     };
     view! {

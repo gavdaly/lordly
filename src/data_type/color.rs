@@ -1,8 +1,5 @@
-use leptos::{
-    attr::{any_attribute::*, custom::*, *},
-    prelude::*,
-};
-use std::fmt::Display;
+use leptos::attr::{any_attribute::{IntoAnyAttribute, AnyAttribute}, custom::custom_attribute, IntoAttributeValue};
+use core::fmt::Display;
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub enum Color {
@@ -16,7 +13,7 @@ pub enum Color {
 }
 
 impl Color {
-    pub fn as_str(&self) -> &str {
+    pub fn as_str(&self) -> &'static str {
         match self {
             Color::Primary => "primary",
             Color::Secondary => "secondary",
@@ -28,9 +25,9 @@ impl Color {
     }
 }
 
-impl From<Color> for String {
+impl From<Color> for &'static str {
     fn from(val: Color) -> Self {
-        val.as_str().to_string()
+        val.as_str()
     }
 }
 
@@ -42,14 +39,13 @@ impl From<&str> for Color {
             "success" => Color::Success,
             "danger" => Color::Danger,
             "warning" => Color::Warning,
-            "info" => Color::Info,
             _ => Color::Info,
         }
     }
 }
 
 impl Display for Color {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         write!(f, "{}", self.as_str())
     }
 }
@@ -61,8 +57,8 @@ impl IntoAnyAttribute for Color {
 }
 
 impl IntoAttributeValue for Color {
-    type Output = String;
+    type Output = &'static str;
     fn into_attribute_value(self) -> Self::Output {
-        self.to_string()
+        self.as_str()
     }
 }

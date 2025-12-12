@@ -17,8 +17,7 @@ pub fn Button(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <button type=type_ data-shape=shape data-color=color data-fill=fill
-        >
+        <button type=type_ data-shape=shape data-color=color data-fill=fill>
             {children()}
         </button>
     }

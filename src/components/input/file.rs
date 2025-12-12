@@ -1,5 +1,6 @@
+use alloc::string::String;
+
 use leptos::prelude::*;
-use leptos::tachys::html::event::DragEvent;
 
 /// A component that allows users to upload files.
 ///
@@ -10,16 +11,16 @@ use leptos::tachys::html::event::DragEvent;
 #[component]
 pub fn File(
     #[prop(into)] name: String,
-    #[prop(default = false)] drop_area: bool,
-    #[prop(default = "".into(), into)] accept: String,
-    #[prop(default = false)] multiple: bool,
+    #[prop(default = false)] _drop_area: bool,
+    #[prop(default = "".into(), into)] _accept: String,
+    #[prop(default = false)] _multiple: bool,
 ) -> impl IntoView {
     let name = Signal::derive(move || name.clone());
 
     view! {
         <div>
             <label for=name.get()>Select files</label>
-            <input type="file" id=name.get() name=name.get() accept multiple/>
+            <input type="file" id=name.get() name=name.get() accept multiple />
         </div>
     }
 }

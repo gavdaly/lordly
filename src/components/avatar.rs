@@ -1,3 +1,9 @@
+use alloc::string::ToString;
+
+use alloc::format;
+
+use alloc::string::String;
+
 use crate::data_type::Shape;
 use leptos::prelude::*;
 
@@ -7,6 +13,7 @@ use leptos::prelude::*;
 ///
 /// ```rust
 /// use leptos::prelude::*;
+/// use lordly::Avatar;
 /// #[component]
 /// fn Example() -> impl IntoView {
 ///     view! {
@@ -32,6 +39,5 @@ pub fn Avatar(
         Some(name) => format!("Avatar for {name}",),
         None => "avatar image for unknown user".to_string(),
     };
-    view! { <img data-shape=shape
-    src=src alt=alt width=width/> }
+    view! { <img data-shape=shape src=src alt=alt width=width /> }
 }

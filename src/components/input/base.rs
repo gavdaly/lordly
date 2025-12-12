@@ -1,8 +1,12 @@
+use alloc::string::ToString;
+
+use alloc::format;
+
+use alloc::string::String;
+
 use super::input_spec::*;
-use crate::check::Check;
 use crate::data_type::ValidationState;
 use core::marker::PhantomData;
-use leptos::ev::FocusEvent;
 use leptos::prelude::*;
 
 /// A reusable input component that provides validation, error handling, and accessibility features.
@@ -15,7 +19,7 @@ pub fn Input<T: InputSpec + 'static>(
     #[prop(into, optional)] type_override: Option<String>,
     #[prop(into, optional)] summary: Option<String>,
     #[prop(into, optional)] placeholder: Option<&'static str>,
-    #[prop(optional)] validation: Option<Callback<String, Check<T>>>,
+    #[prop(optional)] _validation: Option<Callback<ValidationState>>,
     #[prop(default="".into(), into)] wrapper_class: String,
     #[prop(default="".into(), into)] input_class: String,
     #[prop(default="".into(), into)] label_class: String,
@@ -38,7 +42,7 @@ pub fn Input<T: InputSpec + 'static>(
     //     }
     // };
     //
-    let autocomplete = T::autocomplete();
+    let _autocomplete = T::autocomplete();
 
     let focused = move |_| set_state.set(ValidationState::Dirty);
     let is_invalid = move |state| matches!(state, ValidationState::Invalid(_));

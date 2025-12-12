@@ -1,3 +1,7 @@
+use alloc::string::ToString;
+
+use alloc::string::String;
+
 use crate::data_type::{Color, Shape};
 use leptos::prelude::*;
 
@@ -16,18 +20,18 @@ pub fn AccordionItem(
     let toggle = move |_| set_is_open.update(|open| *open = !*open);
 
     view! {
-        <div class="accordion-item" data-open={move || is_open.get().to_string()}>
+        <div class="accordion-item" data-open=move || is_open.get().to_string()>
             <button
                 class="accordion-header"
                 on:click=toggle
-                aria-expanded={move || is_open.get().to_string()}
+                aria-expanded=move || is_open.get().to_string()
             >
                 <span class="accordion-title">{title}</span>
                 <span class="accordion-icon"></span>
             </button>
             <div
                 class="accordion-content"
-                style:display={move || if is_open.get() { "block" } else { "none" }}
+                style:display=move || if is_open.get() { "block" } else { "none" }
             >
                 {children()}
             </div>
@@ -42,17 +46,17 @@ pub fn AccordionItem(
 /// - `children`: The AccordionItem components
 #[component]
 pub fn Accordion(
-    #[prop(into, optional)] color: Option<Color>,
-    #[prop(into, optional)] shape: Option<Shape>,
+    #[prop(into, optional)] _color: Option<Color>,
+    #[prop(into, optional)] _shape: Option<Shape>,
     #[prop(optional)] allow_multiple: bool,
     children: Children,
 ) -> impl IntoView {
     view! {
         <div
             class="accordion"
-            //data-color=color
+            // data-color=color
             // data-shape=shape
-            data-allow-multiple={allow_multiple.to_string()}
+            data-allow-multiple=allow_multiple.to_string()
         >
             {children()}
         </div>

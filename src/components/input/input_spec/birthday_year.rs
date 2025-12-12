@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A birthday year component.
-struct BirthdayYear;
+pub struct BirthdayYear;
 
 /// Implementation of `InputSpec` for `BirthdayYear` type.
 ///
@@ -34,15 +36,15 @@ impl InputSpec for BirthdayYear {
     fn minlength() -> Option<u32> {
         Some(4)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         Some(Callback::new(|value: String| {
             if let Ok(year) = value.parse::<u16>() {
                 let current_year = 2023; // This should ideally be dynamic
                 if year >= 1900 && year <= current_year {
-                    return Check::Valid;
+                    return ValidationState::Valid;
                 }
             }
-            Check::Invalid("Year must be a valid 4-digit year".into())
+            ValidationState::Invalid(String::from("Year must be a valid 4-digit year"))
         }))
     }
 }

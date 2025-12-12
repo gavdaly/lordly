@@ -1,3 +1,7 @@
+use alloc::vec::Vec;
+
+use alloc::string::String;
+
 use leptos::prelude::*;
 
 #[component]
@@ -18,7 +22,14 @@ pub fn Table<'a>(
                 {body
                     .iter()
                     .map(|row| {
-                        view! { <tr>{row.into_iter().map(|f| view!{ <td>{f.into_any()}</td>}).collect_view()}</tr> }
+                        view! {
+                            <tr>
+                                {row
+                                    .iter()
+                                    .map(|f| view! { <td>{f.into_any()}</td> })
+                                    .collect_view()}
+                            </tr>
+                        }
                     })
                     .collect_view()}
             </tbody>

@@ -1,3 +1,9 @@
+
+
+use alloc::format;
+
+use alloc::string::String;
+
 use crate::data_type::Color;
 use leptos::prelude::*;
 
@@ -34,7 +40,7 @@ pub fn Alert(
     }
     view! {
         // data-color=color
-        <div class=format!("alert {wrapper_class}") >
+        <div data-color=color class=format!("alert {wrapper_class}")>
             <span class="alert_title">{title}</span>
             <span class=format!("alert_body {class}")>{children()}</span>
             <Show when=move || has_closer>
@@ -48,17 +54,15 @@ pub fn Alert(
 mod tests {
     use super::*;
     use wasm_bindgen_test::*;
+    use alloc::vec;
+    use alloc::string::ToString;
 
     wasm_bindgen_test_configure!(run_in_browser);
 
     #[wasm_bindgen_test]
     fn test_alert_renders_with_title() {
         // Arrange: Create an alert with a title
-        let alert = view! {
-            <Alert title="Test Alert">
-                "This is the alert content"
-            </Alert>
-        };
+        let alert = view! { <Alert title="Test Alert">"This is the alert content"</Alert> };
 
         leptos::mount::mount_to_body(move || alert);
         // Act: Mount the alert to the document
@@ -71,11 +75,7 @@ mod tests {
     #[wasm_bindgen_test]
     fn test_alert_renders_with_children() {
         // Arrange: Create an alert with children
-        let alert = view! {
-            <Alert title="Test Alert">
-                "Child content"
-            </Alert>
-        };
+        let alert = view! { <Alert title="Test Alert">"Child content"</Alert> };
 
         // Act: Mount the alert to the document
         leptos::mount::mount_to_body(move || alert);

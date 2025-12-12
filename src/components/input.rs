@@ -1,8 +1,9 @@
+
 mod check_boxes;
 mod combo_box;
 mod drop_area;
 mod file;
-mod input;
+mod base;
 mod input_spec;
 mod pick_list;
 mod radio_buttons;
@@ -10,14 +11,15 @@ mod rate;
 mod search;
 mod switch;
 mod tag_list;
-mod text;
+pub mod text;
 mod textarea;
 
 pub use check_boxes::CheckBoxes;
 pub use combo_box::ComboBox;
 pub use drop_area::DropArea;
 pub use file::File;
-pub use input::*;
+pub use base::*;
+pub use input_spec::*;
 pub use pick_list::PickList;
 pub use radio_buttons::RadioButtons;
 pub use rate::Rate;

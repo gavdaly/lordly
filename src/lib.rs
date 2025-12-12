@@ -1,9 +1,9 @@
-#![allow(dead_code)]
-#![allow(unused_imports)]
-#![allow(unused_variables)]
+#![no_std]
 
-pub mod check;
+extern crate alloc;
+
 pub mod components;
 pub mod data_type;
 
 pub use components::*;
+pub use data_type::*;

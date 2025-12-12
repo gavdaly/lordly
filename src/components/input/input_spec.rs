@@ -1,32 +1,31 @@
+use alloc::string::String;
+
 use leptos::prelude::*;
 
-mod address;
-mod birthday;
-mod birthday_day;
-mod birthday_month;
-mod birthday_year;
-mod credit_card_expiration;
-mod credit_card_name;
-mod credit_card_number;
-mod credit_card_security_code;
-mod email;
-mod language;
-mod name;
-mod nickname;
-mod organization;
-mod organization_title;
-mod password;
-mod phone;
-mod photo;
-mod sex;
-mod text;
-mod transaction_amount;
-mod transaction_currency;
-mod url;
+pub mod address;
+pub mod birthday;
+pub mod birthday_day;
+pub mod birthday_month;
+pub mod birthday_year;
+pub mod credit_card_expiration;
+pub mod credit_card_name;
+pub mod credit_card_number;
+pub mod credit_card_security_code;
+pub mod email;
+pub mod language;
+pub mod name;
+pub mod nickname;
+pub mod organization;
+pub mod organization_title;
+pub mod password;
+pub mod phone;
+pub mod photo;
+pub mod sex;
+pub mod text;
+pub mod transaction_amount;
+pub mod transaction_currency;
+pub mod url;
 
-use crate::check::Check;
-
-// Export all input spec types
 pub use address::*;
 pub use birthday::*;
 pub use birthday_day::*;
@@ -51,6 +50,10 @@ pub use transaction_amount::*;
 pub use transaction_currency::*;
 pub use url::*;
 
+use crate::data_type::ValidationState;
+
+// Export all input spec types
+
 // Trait to provide default HTML attributes.
 pub trait InputSpec {
     fn input_type() -> &'static str;
@@ -60,5 +63,5 @@ pub trait InputSpec {
     fn pattern() -> Option<&'static str>;
     fn maxlength() -> Option<u32>;
     fn minlength() -> Option<u32>;
-    fn validation() -> Option<Callback<String, Check<String>>>;
+    fn validation() -> Option<Callback<String, ValidationState>>;
 }

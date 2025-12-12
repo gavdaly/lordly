@@ -1,9 +1,11 @@
+use alloc::string::String;
+
 use super::InputSpec;
-use crate::check::Check;
+use crate::data_type::ValidationState;
 use leptos::prelude::*;
 
 /// A name, as a full name.
-struct Name;
+pub struct Name;
 
 impl InputSpec for Name {
     fn input_type() -> &'static str {
@@ -27,7 +29,7 @@ impl InputSpec for Name {
     fn minlength() -> Option<u32> {
         Some(5)
     }
-    fn validation() -> Option<Callback<String, Check<String>>> {
+    fn validation() -> Option<Callback<String, ValidationState>> {
         None
     }
 }

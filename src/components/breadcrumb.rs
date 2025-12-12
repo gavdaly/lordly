@@ -1,3 +1,7 @@
+use alloc::string::ToString;
+
+use alloc::string::String;
+
 use crate::data_type::{Color, Shape};
 use leptos::prelude::*;
 
@@ -7,19 +11,21 @@ use leptos::prelude::*;
 /// - `children`: The content/label of the breadcrumb item
 #[component]
 pub fn BreadcrumbItem(
-    #[prop(into, optional)] href: Option<String>,
+    #[prop(into, optional)] _href: Option<String>,
     #[prop(optional)] active: bool,
-    children: Children,
+    _children: Children,
 ) -> impl IntoView {
     view! {
-        <li class="breadcrumb-item" data-active={active.to_string()}>
-            // {move || {
-            //     match (active, href.is_some()) {
-            //         (true, _) => view! { <span class="breadcrumb-text">{children()}</span> }.into_any(),
-            //         (_, true) => view! { <a href={href.unwrap()} class="breadcrumb-link">{children()}</a> }.into_any(),
-            //         (_, _) => view! { <span class="breadcrumb-text">{children()}</span> }.into_any(),
-            //     }
-            // }}
+        // {move || {
+        <li
+            class="breadcrumb-item"
+            data-active=active.to_string()
+        >// match (active, href.is_some()) {
+        // (true, _) => view! { <span class="breadcrumb-text">{children()}</span> }.into_any(),
+        // (_, true) => view! { <a href={href.unwrap()} class="breadcrumb-link">{children()}</a> }.into_any(),
+        // (_, _) => view! { <span class="breadcrumb-text">{children()}</span> }.into_any(),
+        // }
+        // }}
         </li>
     }
 }
@@ -31,8 +37,8 @@ pub fn BreadcrumbItem(
 /// - `children`: The BreadcrumbItem components
 #[component]
 pub fn Breadcrumb(
-    #[prop(into, optional)] color: Option<Color>,
-    #[prop(into, optional)] shape: Option<Shape>,
+    #[prop(into, optional)] _color: Option<Color>,
+    #[prop(into, optional)] _shape: Option<Shape>,
     #[prop(into, optional)] separator: Option<String>,
     children: Children,
 ) -> impl IntoView {
@@ -43,9 +49,9 @@ pub fn Breadcrumb(
         <nav aria-label="Breadcrumb navigation">
             <ol
                 class="breadcrumb"
-                //data-color=color
-                //data-shape=shape
-                data-separator={separator}
+                // data-color=color
+                // data-shape=shape
+                data-separator=separator
             >
                 {children()}
             </ol>

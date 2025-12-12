@@ -1,3 +1,7 @@
+use alloc::format;
+
+use alloc::string::String;
+
 use leptos::ev::FocusEvent;
 use leptos::prelude::*;
 
@@ -26,7 +30,7 @@ pub fn Switch(
     view! {
         <div class=format!("input #{wrapper_class}")>
             <label class=label_class for=name.clone()></label>
-            <input class=class id=name name type="checkbox" on:blur=blured/>
+            <input class=class id=name name type="checkbox" on:blur=blured />
         </div>
     }
 }
